@@ -1,0 +1,11 @@
+🎧Music1 = http,106.52.127.72,19951
+🎧Music2 = http,3music.poetyin.me,100
+🎧Music3 = http,block4music.poetyin.me,39000
+🎧Music4 = http,taron.top,100
+🎧Music5 = http,music.griouges.cn,39000
+🎧Music6 = http,blockmusic2.poetyin.me,19951
+🎧Music7 = Shadowsocks,blockmusic.poetyin.me,30003,aes-128-gcm,"desperadoj.com_free_proxy_x80j"
+🎧Music8 = Shadowsocks,music.desperadoj.com,30001,aes-128-gcm,"desperadoj.com_free_proxy_emx2"
+🎧Music9 = Shadowsocks,music.desperadoj.com,30003,aes-128-gcm,"desperadoj.com_free_proxy_emx2"
+🎧Music10 = Shadowsocks,proxy.plusmedia.site,58080,rc4-md5,"ieG9l1nte5eo7IBZas84jLi"
+🎧Music11 = Shadowsocks,proxy.plusmedia.site,58081,rc4-md5,"ieG9l1nte5eo7IBZas84jLi"
