@@ -15,8 +15,9 @@
   **分流**
   
 使用
-@DivineEngine[神机大佬](https://github.com/DivineEngine/Profiles/tree/master)规则
-#Function
+[神机大佬](https://github.com/DivineEngine/Profiles/tree/master)规则
+
+###Function
 - [x] 规则修正
 - [x] 广告拦截
 - [x] 隐私保护
@@ -35,10 +36,8 @@
 - [x] Netsasemusic
 
 **重写**
-  
-规则使用
 
-#Function
+###Function
 - [x] BoxJS
 - [x] YOUTUBE去广告
 - [x] JS
@@ -50,21 +49,19 @@
 - [x] 解锁tiktok
 - [x] SNGX解锁VIP（keep/奥利给直播/录丸/vsco/2496音乐/dy去广告去水印/百度云解除倍速播放/爱美剧/酷我音乐/黄瓜视频/蜗牛读书/白描/大象冥想/蜗牛睡眠/小小影视）
 
-  **TASK**
-  
-  使用远程调用也可或者本地，请自己玩这一块
+  **TASK**使用远程调用也可或者本地，请自己玩这一块
   
   
   **Special thanks to**
-- [Orz-3](https://github.com/Orz-3/QuantumultX/master/)
-- [sngxpro](https://github.com/sngxpro/QuanX/master/)
-- [DivineEngine](https://github.com/DivineEngine/Profiles/tree/master)
-- [scomper / Surge](https://github.com/scomper/Surge)
-- [lhie1 / Rules](https://github.com/lhie1/Rules)
-- [KOP-XIAO / QuantumultX](https://github.com/KOP-XIAO/QuantumultX)
-- [Choler / Surge](https://github.com/Choler/Surge)
-- [yichahucha / surge](https://github.com/yichahucha/surge)
-- [onewayticket255 / Surge-Script](https://github.com/onewayticket255/Surge-Script)
-- [Koolson / Qure](https://github.com/Koolson/Qure)
-- [17mon / china_ip_list](https://github.com/17mon/china_ip_list)
-- [blackmatrix7 / ios_rule_script](https://github.com/blackmatrix7/ios_rule_script)
+ - [Orz-3](https://github.com/Orz-3/QuantumultX/master/)
+ - [sngxpro](https://github.com/sngxpro/QuanX/master/)
+ - [DivineEngine](https://github.com/DivineEngine/Profiles/tree/master)
+ - [scomper / Surge](https://github.com/scomper/Surge)
+ - [lhie1 / Rules](https://github.com/lhie1/Rules)
+ - [KOP-XIAO / QuantumultX](https://github.com/KOP-XIAO/QuantumultX)
+ - [Choler / Surge](https://github.com/Choler/Surge)
+ - [yichahucha / surge](https://github.com/yichahucha/surge)
+ - [onewayticket255 / Surge-Script](https://github.com/onewayticket255/Surge-Script)
+ - [Koolson / Qure](https://github.com/Koolson/Qure)
+ - [17mon / china_ip_list](https://github.com/17mon/china_ip_list)
+ - [blackmatrix7 / ios_rule_script](https://github.com/blackmatrix7/ios_rule_script)
