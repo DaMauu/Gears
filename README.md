@@ -1,4 +1,6 @@
-这个就够用了https://raw.githubusercontent.com/o7y0/Rules/1/Rules.conf
+# QuantumultX Shadowrocket小火箭 懒人配置（附UnblockNeteaseMusic）
+# 使用手册
+                                                              [懒人配置请在这里复制我](https://raw.githubusercontent.com/o7y0/Rules/1/Rules.conf)
 
 
   **订阅**
