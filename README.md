@@ -1,7 +1,9 @@
 这个就够用了https://raw.githubusercontent.com/o7y0/Rules/1/Rules.conf
 
+
   **订阅**
-  内置6条订阅+32条抓取源，测试可用后放在Subscribe Go
+  
+内置6条订阅+32条抓取源，测试可用后放在Subscribe Go
 
 [UnblockNeteaseMusic](https://raw.githubusercontent.com/o7y0/GeneralSubscribe/main/UnblockNeteaseMusic/UnblockNeteaseMusic.txt)
 [Subscribe Go](https://raw.githubusercontent.com/o7y0/GeneralSubscribe/main/Subscribe%20Go)
@@ -12,7 +14,8 @@
 
   **分流**
   
-使用@DivineEngine[神机大佬](https://github.com/DivineEngine/Profiles/tree/master)规则
+使用
+@DivineEngine[神机大佬](https://github.com/DivineEngine/Profiles/tree/master)规则
 #Function
 - [x] 规则修正
 - [x] 广告拦截
@@ -31,10 +34,9 @@
 - [x] ChinaIP
 - [x] Netsasemusic
 
-  **重写**
+**重写**
   
-规则使用[神机大佬](https://github.com/DivineEngine/Profiles/tree/master)
-[lhie1](https://github.com/lhie1/Rules/tree/master)
+规则使用
 
 #Function
 - [x] BoxJS
@@ -51,3 +53,18 @@
   **TASK**
   
   使用远程调用也可或者本地，请自己玩这一块
+  
+  
+  **Special thanks to**
+- [Orz-3](https://github.com/Orz-3/QuantumultX/master/)
+- [sngxpro](https://github.com/sngxpro/QuanX/master/)
+- [DivineEngine](https://github.com/DivineEngine/Profiles/tree/master)
+- [scomper / Surge](https://github.com/scomper/Surge)
+- [lhie1 / Rules](https://github.com/lhie1/Rules)
+- [KOP-XIAO / QuantumultX](https://github.com/KOP-XIAO/QuantumultX)
+- [Choler / Surge](https://github.com/Choler/Surge)
+- [yichahucha / surge](https://github.com/yichahucha/surge)
+- [onewayticket255 / Surge-Script](https://github.com/onewayticket255/Surge-Script)
+- [Koolson / Qure](https://github.com/Koolson/Qure)
+- [17mon / china_ip_list](https://github.com/17mon/china_ip_list)
+- [blackmatrix7 / ios_rule_script](https://github.com/blackmatrix7/ios_rule_script)
