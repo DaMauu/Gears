@@ -11,7 +11,7 @@
             
   +32条抓取源，测试可用后放在Subscribe Go
   分流使用@DivineEngine[神机大佬](https://github.com/DivineEngine/Profiles/tree/master)规则
-### Function
+#Function
 - [x] 规则修正
 - [x] 广告拦截
 - [x] 隐私保护
