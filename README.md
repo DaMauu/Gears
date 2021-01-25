@@ -16,7 +16,7 @@
   
 使用[神机大佬](https://github.com/DivineEngine/Profiles/tree/master)规则
 
-#Function
+### Function
 - [x] 规则修正
 - [x] 广告拦截
 - [x] 隐私保护
@@ -36,7 +36,7 @@
 
 **重写**
 
-#Function
+### Function
 - [x] BoxJS
 - [x] YOUTUBE去广告
 - [x] JS
