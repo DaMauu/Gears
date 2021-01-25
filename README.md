@@ -1,7 +1,6 @@
 # QuantumultX Shadowrocket小火箭 懒人配置（附UnblockNeteaseMusic）
 # 使用手册
-                                                              [懒人配置请在这里复制我](https://raw.githubusercontent.com/o7y0/Rules/1/Rules.conf)
-
+[懒人配置请在这里复制我](https://raw.githubusercontent.com/o7y0/Rules/1/Rules.conf)
 
   **订阅**
    内置6条订阅+32条抓取源，测试可用后放在Subscribe Go
