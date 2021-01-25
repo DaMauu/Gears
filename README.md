@@ -2,8 +2,7 @@
 
 
   **订阅**
-  
-内置6条订阅+32条抓取源，测试可用后放在Subscribe Go
+   内置6条订阅+32条抓取源，测试可用后放在Subscribe Go
 
 [UnblockNeteaseMusic](https://raw.githubusercontent.com/o7y0/GeneralSubscribe/main/UnblockNeteaseMusic/UnblockNeteaseMusic.txt)
 [Subscribe Go](https://raw.githubusercontent.com/o7y0/GeneralSubscribe/main/Subscribe%20Go)
@@ -13,8 +12,7 @@
 [第三弹](https://gooii.ml/ssr/sub)
 
   **分流**
-  
-使用[神机大佬](https://github.com/DivineEngine/Profiles/tree/master)规则
+   使用[神机大佬](https://github.com/DivineEngine/Profiles/tree/master)规则
 
 ### Function
 - [x] 规则修正
