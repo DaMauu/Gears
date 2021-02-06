@@ -16,36 +16,36 @@
    使用[神机大佬](https://github.com/DivineEngine/Profiles/tree/master)规则
 
 ### Function
-- [x] 规则修正
-- [x] 广告拦截
-- [x] 隐私保护
-- [x] 运营劫持
-- [x] 电报代理
-- [x] 声田音乐
-- [x] 网飞影视
-- [x] 海外抖音
-- [x] 动画疯
-- [x] 国际媒体
-- [x] 港台番剧
+- [x] 优酷
+- [x] 爱奇艺
+- [x] 腾讯视频
+- [x] Bilibili
 - [x] 全球加速
 - [x] 苹果服务
-- [x] 国内网站
-- [x] ChinaIP
-- [x] Netsasemusic
+- [x] 港台番剧
+- [x] 国际媒体
+- [x] 黑白名单
+- [x] 香港
+- [x] 台湾
+- [x] 日本
+- [x] 美国
+- [x] 新加坡
+- [x] 🎧Netsasemusic
 
 **重写**
 
 ### Function
+- [x] EMBYunblock
+- [x] Cookie
+- [x] Script
+- [x] Tiktok-JP
+- [x] Tiktok-TW
+- [x] Tiktok-US
 - [x] BoxJS
-- [x] YOUTUBE去广告
-- [x] JS
-- [x] JS_GETCOOLIE
-- [x] 神机重定向
-- [x] 神机去广告
 - [x] lhie1去广告
-- [x] ehpo1去广告
-- [x] 解锁tiktok
-- [x] SNGX解锁VIP（keep/奥利给直播/录丸/vsco/2496音乐/dy去广告去水印/百度云解除倍速播放/爱美剧/酷我音乐/黄瓜视频/蜗牛读书/白描/大象冥想/蜗牛睡眠/小小影视）
+- [x] 神机去广告
+- [x] 神机重定向
+- [x] 神机YouTube去广告(会员别启用)
 
 **TASK**使用远程调用也可或者本地，请自己玩这一块
   
