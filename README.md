@@ -24,9 +24,6 @@
 - [x] 神机去广告
 - [x] 神机重定向
 - [x] EMBYunblock
-- [x] Tiktok-JP
-- [x] Tiktok-TW
-- [x] Tiktok-US
 - [x] BoxJS
 **TASK**使用远程调用也可或者本地，请自己玩这一块
   
