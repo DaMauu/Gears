@@ -2,9 +2,6 @@
 # 使用手册
 [懒人配置请在这里复制我](https://raw.githubusercontent.com/o7y0/Rules/1/O7Y0.conf)
 
-  **订阅**
-   内置6条订阅+32条抓取源，测试可用后放在Subscribe Go
-
 [UnblockNeteaseMusic](https://raw.githubusercontent.com/o7y0/GeneralSubscribe/main/UnblockNeteaseMusic/UnblockNeteaseMusic.txt)
 [Subscribe Go](https://raw.githubusercontent.com/o7y0/GeneralSubscribe/main/Subscribe%20Go)
 
