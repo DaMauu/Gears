@@ -6,6 +6,7 @@
 [Subscribe Go](https://raw.githubusercontent.com/o7y0/GeneralSubscribe/main/Subscribe%20Go)
 
   **分流**
+  
    使用[神机大佬](https://github.com/DivineEngine/Profiles/tree/master)规则
 
 ### Function
