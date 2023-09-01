@@ -80,7 +80,7 @@ proxy-providers:
     
   wyy:
     <<: *a1
-    url: https://github.com/oiozi/Gears/raw/main/Package/Unblock/Node.txt
+    url: https://raw.githubusercontent.com/oiozi/Gears/main/Package/Unblock/Node.txt
     path: ./proxy_providers/wyy.yaml
     
 proxies: null
@@ -111,23 +111,23 @@ proxy-groups:
   
 # 分流规则
 rule-providers:
-  NetEaseMusic:    {<<: *a6, url: https://github.com/oiozi/Gears/raw/main/Rule/Clash/NeteaseMusic.yaml,                                           path: ./ruleset/NetEaseMusic.yaml     }
-  Direct:          {<<: *a5, url: https://github.com/blackmatrix7/ios_rule_script/raw/master/rule/Clash/Direct/Direct.yaml,                       path: ./ruleset/Direct.yaml           }
-  Lan:             {<<: *a6, url: https://github.com/blackmatrix7/ios_rule_script/raw/master/rule/Clash/Lan/Lan.yaml,                             path: ./ruleset/Lan.yaml              }
-  Download:        {<<: *a6, url: https://github.com/blackmatrix7/ios_rule_script/raw/master/rule/Clash/Download/Download.yaml,                   path: ./ruleset/Download.yaml         }
-  Ad:              {<<: *a5, url: https://github.com/privacy-protection-tools/anti-AD/raw/master/anti-ad-clash.yaml,                              path: ./ruleset/anti-ad-clash.yaml    }
-  OpenAi:          {<<: *a6, url: https://github.com/blackmatrix7/ios_rule_script/raw/master/rule/Clash/OpenAI/OpenAI.yaml,                       path: ./ruleset/OpenAi.yaml           }
-  Google:          {<<: *a6, url: https://github.com/blackmatrix7/ios_rule_script/raw/master/rule/Clash/Google/Google.yaml,                       path: ./ruleset/Google.yaml           }
-  Spotify:         {<<: *a6, url: https://github.com/blackmatrix7/ios_rule_script/raw/master/rule/Clash/Spotify/Spotify.yaml,                     path: ./ruleset/Spotify.yaml          } 
-  GlobalMedia:     {<<: *a6, url: https://github.com/blackmatrix7/ios_rule_script/raw/master/rule/Clash/GlobalMedia/GlobalMedia_Classical.yaml,   path: ./ruleset/GlobalMedia.yaml      }
-  Apple:           {<<: *a6, url: https://github.com/blackmatrix7/ios_rule_script/raw/master/rule/Clash/Apple/Apple_Classical.yaml,               path: ./ruleset/Apple.yaml            }
-  Github:          {<<: *a6, url: https://github.com/blackmatrix7/ios_rule_script/raw/master/rule/Clash/GitHub/GitHub.yaml,                       path: ./ruleset/Github.yaml           }
-  Microsoft:       {<<: *a6, url: https://github.com/blackmatrix7/ios_rule_script/raw/master/rule/Clash/Microsoft/Microsoft.yaml,                 path: ./ruleset/Microsoft.yaml        }
-  Telegram:        {<<: *a6, url: https://github.com/blackmatrix7/ios_rule_script/raw/master/rule/Clash/Telegram/Telegram.yaml,                   path: ./ruleset/Telegram.yaml         }
-  Twitter:         {<<: *a6, url: https://github.com/blackmatrix7/ios_rule_script/raw/master/rule/Clash/Twitter/Twitter.yaml,                     path: ./ruleset/Twitter.yaml          }
-  PrivateTracker:  {<<: *a6, url: https://github.com/oiozi/Gears@main/Rule/Clash/PrivateTracker.yaml,                                             path: ./ruleset/PrivateTracker.yaml   }
-  ChinaIP:         {<<: *a7, url: https://github.com/soffchen/GeoIP2-CN/raw/master/clash-rule-provider.yml,                                       path: ./ruleset/ChinaIP.yaml          }
-  ProxyLite:       {<<: *a6, url: https://github.com/blackmatrix7/ios_rule_script/raw/master/rule/Clash/ProxyLite/ProxyLite.yaml,                 path: ./ruleset/ProxyLite.yaml        }
+  NetEaseMusic:    {<<: *a6, url: https://raw.githubusercontent.com/oiozi/Gears/main/Rule/Clash/NeteaseMusic.yaml,                                      path: ./ruleset/NetEaseMusic.yaml     }
+  Direct:          {<<: *a5, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@release/rule/Clash/Direct/Direct.yaml,                       path: ./ruleset/Direct.yaml           }
+  Lan:             {<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@release/rule/Clash/Lan/Lan.yaml,                             path: ./ruleset/Lan.yaml              }
+  Download:        {<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@release/rule/Clash/Download/Download.yaml,                   path: ./ruleset/Download.yaml         }
+  Ad:              {<<: *a5, url: https://anti-ad.net/clash.yaml,                                                                                       path: ./ruleset/anti-ad-clash.yaml    }
+  OpenAi:          {<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@release/rule/Clash/OpenAI/OpenAI.yaml,                       path: ./ruleset/OpenAi.yaml           }
+  Google:          {<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@release/rule/Clash/Google/Google.yaml,                       path: ./ruleset/Google.yaml           }
+  Spotify:         {<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@release/rule/Clash/Spotify/Spotify.yaml,                     path: ./ruleset/Spotify.yaml          } 
+  GlobalMedia:     {<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@release/rule/Clash/GlobalMedia/GlobalMedia_Classical.yaml,   path: ./ruleset/GlobalMedia.yaml      }
+  Apple:           {<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@release/rule/Clash/Apple/Apple_Classical.yaml,               path: ./ruleset/Apple.yaml            }
+  Github:          {<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@release/rule/Clash/GitHub/GitHub.yaml,                       path: ./ruleset/Github.yaml           }
+  Microsoft:       {<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@release/rule/Clash/Microsoft/Microsoft.yaml,                 path: ./ruleset/Microsoft.yaml        }
+  Telegram:        {<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@release/rule/Clash/Telegram/Telegram.yaml,                   path: ./ruleset/Telegram.yaml         }
+  Twitter:         {<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@release/rule/Clash/Twitter/Twitter.yaml,                     path: ./ruleset/Twitter.yaml          }
+  PrivateTracker:  {<<: *a6, url: https://cdn.jsdelivr.net/gh/oiozi/Gears@main/Rule/Clash/PrivateTracker.yaml,                                          path: ./ruleset/PrivateTracker.yaml   }
+  ChinaIP:         {<<: *a7, url: https://cdn.jsdelivr.net/gh/soffchen/GeoIP2-CN@release/clash-rule-provider.yml,                                       path: ./ruleset/ChinaIP.yaml          }
+  ProxyLite:       {<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@release/rule/Clash/ProxyLite/ProxyLite.yaml,                 path: ./ruleset/ProxyLite.yaml        }
   
  # 分流Policy 
 rules:
