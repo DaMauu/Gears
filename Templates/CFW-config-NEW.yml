@@ -1,7 +1,7 @@
 # ------------------------------------------------
-# |          Clash Config Make by O7Y0           |
+# |          Clash Config Make by oiozi           |
 # |     TG Channel: https://t.me/REBIRTHOKAY     |
-# |       GitHub: https://github.com/O7Y0        |
+# |       GitHub: https://github.com/oiozi        |
 # |          Update Date: 2023.09.01             |
 # |                  enjoy                       |
 # ------------------------------------------------
@@ -80,7 +80,7 @@ proxy-providers:
     
   wyy:
     <<: *a1
-    url: https://raw.githubusercontent.com/O7Y0/Profiles/UnblockNeteaseMusic/core/UnblockNeteaseMusic.txt
+    url: https://raw.githubusercontent.com/oiozi/Gears/main/Package/Unblock/Node.txt
     path: ./proxy_providers/wyy.yaml
     
 proxies: null
@@ -111,7 +111,7 @@ proxy-groups:
   
 # 分流规则 
 rule-providers:
-  NeteaseMusic:    {<<: *a6, url: https://cdn.jsdelivr.net/gh/O7Y0/Profiles@UnblockNeteaseMusic/core/NeteaseMusic.yaml,                                 path: ./ruleset/NeteaseMusic.yaml     }
+  NeteaseMusic:    {<<: *a6, url: https://cdn.jsdelivr.net/gh/oiozi/Gears@main/Rule/Clash/NeteaseMusic.yaml,                                            path: ./ruleset/NeteaseMusic.yaml     }
   Direct:          {<<: *a5, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@release/rule/Clash/Direct/Direct.yaml,                       path: ./ruleset/Direct.yaml           }
   Lan:             {<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@release/rule/Clash/Lan/Lan.yaml,                             path: ./ruleset/Lan.yaml              }
   Download:        {<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@release/rule/Clash/Download/Download.yaml,                   path: ./ruleset/Download.yaml         }
@@ -125,7 +125,7 @@ rule-providers:
   Microsoft:       {<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@release/rule/Clash/Microsoft/Microsoft.yaml,                 path: ./ruleset/Microsoft.yaml        }
   Telegram:        {<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@release/rule/Clash/Telegram/Telegram.yaml,                   path: ./ruleset/Telegram.yaml         }
   Twitter:         {<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@release/rule/Clash/Twitter/Twitter.yaml,                     path: ./ruleset/Twitter.yaml          }
-  PrivateTracker:  {<<: *a6, url: https://cdn.jsdelivr.net/gh/O7Y0/Profiles@master/Clash/PrivateTracker.yaml,                                           path: ./ruleset/PrivateTracker.yaml   }
+  PrivateTracker:  {<<: *a6, url: https://cdn.jsdelivr.net/gh/oiozi/Gears@main/Rule/Clash/PrivateTracker.yaml,                                           path: ./ruleset/PrivateTracker.yaml   }
   ChinaIP:         {<<: *a7, url: https://cdn.jsdelivr.net/gh/soffchen/GeoIP2-CN@release/clash-rule-provider.yml,                                       path: ./ruleset/ChinaIP.yaml          }
   ProxyLite:       {<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@release/rule/Clash/ProxyLite/ProxyLite.yaml,                 path: ./ruleset/ProxyLite.yaml        }
   
