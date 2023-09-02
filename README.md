@@ -1,5 +1,4 @@
-1️⃣多平台配置文件：添加配置:复制对应蓝色软件名即刻复制配置链接
-
+# 1️⃣多平台配置文件
 <table>
     <tbody>
         <td rowspan="20"><center><b>o<br>i<br>o<br>z<br>i</center></b></td>
