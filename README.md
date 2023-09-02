@@ -1,3 +1,4 @@
+[![GitHub Stars](https://img.shields.io/github/stars/oiozi/Gears)](https://github.com/oiozi/Gears/stargazers)[![GitHub Fork](https://img.shields.io/github/forks/oiozi/Gears)](https://github.com/oiozi/Gears/network/members)[![GitHub Commit](https://img.shields.io/github/commit-activity/m/oiozi/Gears?label=Commits)](https://github.com/doiozi/Gears/commits/master)[![Telegram](https://img.shields.io/badge/Telegram-Channel-33A8E3)](https://t.me/REBIRTHOKAY)[![GitHub Issues](https://img.shields.io/github/issues/oiozi/Gears)](https://github.com/oiozi/Gears/issues)![GitHub License](https://img.shields.io/github/license/mashape/apistatus.svg)[![GitHub Followers](https://img.shields.io/github/followers/oiozi?label=follow&style=social)](https://github.com/oiozi)
 ## 1️⃣全平台配置文件：
 
 **`添加配置:复制对应蓝色软件名即刻复制配置链接`**
