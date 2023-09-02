@@ -66,7 +66,7 @@
             <td></td>
             <td></td>
 		</tr>
-        <td colspan="4"><center><b><font size="3">脚本任务</center></b></font></td>
+        <td colspan="4"><center><b><font size="3">脚本任务</b></font></center></td>
         <tr>
 			<td><a href="https://raw.githubusercontent.com/oiozi/Gears/main/Package/QuantumultX/Script%20Gallery%20Subscribe.json">Script Gallery Subscribe</a></td>
 			<td><a href="https://raw.githubusercontent.com/Peng-YM/QuanX/master/Tasks/task.json">QX.snippet</a></td>
