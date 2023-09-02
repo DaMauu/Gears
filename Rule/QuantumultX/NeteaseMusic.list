@@ -2,21 +2,16 @@
 # AUTHOR: oiozi
 # REPO: https://github.com/oiozi
 # UPDATED: 2023-09-02
-# USER-AGENT: 6
-# HOST: 2
-# HOST-SUFFIX: 13
-# DOMAIN-KEYWORD: 1
-# IP-CIDR: 19
-# TOTAL: 36
+# USER-AGENT: 7
+# HOST: 3
+# HOST-SUFFIX: 8
+# HOST-KEYWORD: 1
+# IP-CIDR: 18
+# TOTAL: 37
 
-# USER-AGENT
-USER-AGENT,%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90**,网易音乐
-USER-AGENT,%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90*,网易音乐
-USER-AGENT,%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90,网易音乐
-USER-AGENT,网易音乐**,网易音乐
-USER-AGENT,网易音乐*,网易音乐
-
-# HOST-SUFFIX
+HOST,iadmat.nosdn.127.net,网易音乐
+HOST,interface3.music.163.com.163jiasu.com,网易音乐
+HOST,netease.ugcvideoss.ourdvs.com,网易音乐
 HOST-SUFFIX,163yun.com,网易音乐
 HOST-SUFFIX,api.iplay.163.com,网易音乐
 HOST-SUFFIX,hz.netease.com,网易音乐
@@ -25,17 +20,18 @@ HOST-SUFFIX,music.126.com,网易音乐
 HOST-SUFFIX,music.126.net,网易音乐
 HOST-SUFFIX,music.163.com,网易音乐
 HOST-SUFFIX,music.163.com.163jiasu.com,网易音乐
-HOST-SUFFIX,yun-app.net,网易音乐
-HOST,iadmat.nosdn.127.net,网易音乐
-HOST,netease.ugcvideoss.ourdvs.com,网易音乐
 HOST-KEYWORD,netease,网易音乐
-
-#IP-CIDR
+USER-AGENT,%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90**,网易音乐
+USER-AGENT,%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90*,网易音乐
+USER-AGENT,%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90,网易音乐
+USER-AGENT,网易音乐**,网易音乐
+USER-AGENT,网易音乐**,网易音乐
+USER-AGENT,网易音乐*,网易音乐
+USER-AGENT,网易音乐*,网易音乐
 IP-CIDR,39.105.63.80/32,网易音乐
 IP-CIDR,39.105.175.128/32,网易音乐
 IP-CIDR,45.254.48.1/32,网易音乐
 IP-CIDR,47.100.127.239/32,网易音乐
-IP-CIDR,59.111.19.33/32,网易音乐
 IP-CIDR,59.111.21.14/31,网易音乐
 IP-CIDR,59.111.128.0/17,网易音乐
 IP-CIDR,101.71.154.241/32,网易音乐
