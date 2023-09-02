@@ -2,6 +2,6 @@ proxies:
   - {name: 🎧 TG@REBIRTHOKAY, server: 127.0.0.1, port: 443, type: http, tls: false, skip-cert-verify: false}
   - {name: 🎧 网易音乐 1, server: 155.248.169.205, port: 70, type: http, tls: false, skip-cert-verify: false}
   - {name: 🎧 网易音乐 2, server: 42.193.231.48, port: 70, type: http, tls: false, skip-cert-verify: false}
-  - {name: 🎧 网易音乐 3, server: 118.31.23.173, port: 55, type: ss, cipher: aes-128-gcm, password: Anmuhi}
+  - {name: 🎧 网易音乐 3, server: 101.132.79.113, port: 23333, type: ss, cipher: aes-128-gcm, password: music.leedsbypass.tk}
   - {name: 🎧 网易音乐 4, server: music.desperadoj.com, port: 30001, type: ss, cipher: aes-128-gcm, password: desperadoj.com_free_proxy_etg0}
   - {name: 🎧 网易音乐 5, server: music.desperadoj.com, port: 30003, type: ss, cipher: aes-128-gcm, password: desperadoj.com_free_proxy_etg0}
