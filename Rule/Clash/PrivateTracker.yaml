@@ -1,10 +1,10 @@
 # NAME: PrivateTracker
 # AUTHOR: oiozi
 # REPO: https://github.com/oiozi
-# UPDATED: 2023-09-02
+# UPDATED: 2023-09-03
 # DOMAIN-KEYWORD: 3
-# DOMAIN-SUFFIX: 543
-# TOTAL: 546
+# DOMAIN-SUFFIX: 545
+# TOTAL: 548
 payload:
 # Tracker URL
   - DOMAIN-KEYWORD,announce
@@ -409,6 +409,7 @@ payload:
   - DOMAIN-SUFFIX,rgfootball.net
   - DOMAIN-SUFFIX,ripstracker.com
   - DOMAIN-SUFFIX,rotorrent.ro
+  - DOMAIN-SUFFIX,rousi.zip
   - DOMAIN-SUFFIX,rptorrents.com
   - DOMAIN-SUFFIX,rustorka.com
   - DOMAIN-SUFFIX,s-f-p.dyndns.dk
@@ -463,6 +464,7 @@ payload:
   - DOMAIN-SUFFIX,thegeeks.click
   - DOMAIN-SUFFIX,themixingbowl.org
   - DOMAIN-SUFFIX,theoccult.click
+  - DOMAIN-SUFFIX,theoldschool.cc
   - DOMAIN-SUFFIX,theplace.click
   - DOMAIN-SUFFIX,thesceneplace.com
   - DOMAIN-SUFFIX,theshinning.me
