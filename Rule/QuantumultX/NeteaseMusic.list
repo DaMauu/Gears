@@ -3,25 +3,24 @@
 # REPO: https://github.com/oiozi
 # UPDATED: 2023-09-02
 # USER-AGENT: 7
-# DOMAIN: 3
-# DOMAIN-SUFFIX: 8
-# DOMAIN-KEYWORD: 1
+# HOST: 3
+# HOST-SUFFIX: 8
+# HOST-KEYWORD: 1
 # IP-CIDR: 18
 # TOTAL: 37
 
-DOMAIN, interface3.music.163.com.163jiasu.com, 网易音乐
-
-DOMAIN,iadmat.nosdn.127.net,网易音乐
-DOMAIN,netease.ugcvideoss.ourdvs.com,网易音乐
-DOMAIN-SUFFIX,163yun.com,网易音乐
-DOMAIN-SUFFIX,api.iplay.163.com,网易音乐
-DOMAIN-SUFFIX,hz.netease.com,网易音乐
-DOMAIN-SUFFIX,mam.netease.com,网易音乐
-DOMAIN-SUFFIX,music.126.com,网易音乐
-DOMAIN-SUFFIX,music.126.net,网易音乐
-DOMAIN-SUFFIX,music.163.com,网易音乐
-DOMAIN-SUFFIX,music.163.com.163jiasu.com,网易音乐
-DOMAIN-KEYWORD,netease,网易音乐
+HOST,interface3.music.163.com.163jiasu.com,网易音乐
+HOST,iadmat.nosdn.127.net,网易音乐
+HOST,netease.ugcvideoss.ourdvs.com,网易音乐
+HOST-SUFFIX,163yun.com,网易音乐
+HOST-SUFFIX,api.iplay.163.com,网易音乐
+HOST-SUFFIX,hz.netease.com,网易音乐
+HOST-SUFFIX,mam.netease.com,网易音乐
+HOST-SUFFIX,music.126.com,网易音乐
+HOST-SUFFIX,music.126.net,网易音乐
+HOST-SUFFIX,music.163.com,网易音乐
+HOST-SUFFIX,music.163.com.163jiasu.com,网易音乐
+HOST-KEYWORD,netease,网易音乐
 USER-AGENT,%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90**,网易音乐
 USER-AGENT,%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90*,网易音乐
 USER-AGENT,%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90,网易音乐
