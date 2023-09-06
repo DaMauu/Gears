@@ -33,6 +33,7 @@ payload:
   - DOMAIN-SUFFIX,animeworld.cx
   - DOMAIN-SUFFIX,ansktracker.net
   - DOMAIN-SUFFIX,anthelion.me
+  - DOMAIN-SUFFIX,ap.m-team.cc
   - DOMAIN-SUFFIX,appzuniverse.org
   - DOMAIN-SUFFIX,arabp2p.com
   - DOMAIN-SUFFIX,arenaelite.eu
@@ -540,6 +541,7 @@ payload:
   - DOMAIN-SUFFIX,xbt.puntotorrent.com
   - DOMAIN-SUFFIX,xbytesv2.li
   - DOMAIN-SUFFIX,xingtan.one
+  - DOMAIN-SUFFIX,xp.m-team.cc
   - DOMAIN-SUFFIX,xspeeds.eu
   - DOMAIN-SUFFIX,xthor.tk
   - DOMAIN-SUFFIX,xtremewrestlingtorrents.net
