@@ -46,7 +46,6 @@ payload:
   - DOMAIN-SUFFIX,yun-app.net
   - DOMAIN,iadmat.nosdn.127.net
   - DOMAIN,netease.ugcvideoss.ourdvs.com
-  - DOMAIN-KEYWORD,netease
 
 #IP-CIDR
   - IP-CIDR,101.71.154.241/32
