@@ -3,8 +3,8 @@
 # REPO: https://github.com/oiozi
 # UPDATED: 2023-09-03
 # DOMAIN-KEYWORD: 3
-# DOMAIN-SUFFIX: 545
-# TOTAL: 548
+# DOMAIN-SUFFIX: 549
+# TOTAL: 552
 payload:
 # Tracker URL
   - DOMAIN-KEYWORD,announce
@@ -245,6 +245,7 @@ payload:
   - DOMAIN-SUFFIX,icc2022.com
   - DOMAIN-SUFFIX,immortal-s.me
   - DOMAIN-SUFFIX,immortuos.life
+  - DOMAIN-SUFFIX,infire.si
   - DOMAIN-SUFFIX,inter-bt.net
   - DOMAIN-SUFFIX,iptorrents.com
   - DOMAIN-SUFFIX,irrenhaus.dyndns.dk
@@ -350,6 +351,7 @@ payload:
   - DOMAIN-SUFFIX,pandacd.io
   - DOMAIN-SUFFIX,pandapt.net
   - DOMAIN-SUFFIX,pandora-place.me
+  - DOMAIN-SUFFIX,partis.si
   - DOMAIN-SUFFIX,passthepopcorn.me
   - DOMAIN-SUFFIX,pb.wtf
   - DOMAIN-SUFFIX,peeratiko.org
