@@ -1,6 +1,6 @@
  /***
   [task_local]
-  event-interaction https://github.com/oiozi/Gears/raw/main/Package/QuantumultX/1.js, tag=1, img-url=location.fill.viewfinder.system
+  event-interaction https://raw.githubusercontent.com/oiozi/Gears/main/Package/QuantumultX/1.js, tag=1, img-url=location.fill.viewfinder.system
   
   @XIAO_KOP
 
