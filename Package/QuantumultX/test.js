@@ -6,6 +6,7 @@
 ***/
 
 var url = "https://api.ip.sb/geoip";
+var url = "https://api-ipv6.ip.sb/ip";
 var opts = {
   policy: $environment.params,
 };
