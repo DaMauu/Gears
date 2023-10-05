@@ -2,55 +2,60 @@
 # |          Clash Config Make by oiozi           |
 # |     TG Channel: https://t.me/REBIRTHOKAY     |
 # |       GitHub: https://github.com/oiozi        |
-# |          Update Date: 2023.09.01             |
+# |          Update Date: 2023.10.06             |
 # |                  enjoy                       |
 # ------------------------------------------------
-#port: 7890             # HTTP 代理端口
-#socks-port: 7891       # Socks 端口
-#redir-port: 7892       # Redir 端口
-mixed-port: 7890        # 混合端口
-allow-lan: true         # 允许局域网连接
-bind-address: "*"       # 地址绑定
-mode: rule              # 规则模式
-log-level: info         # 日志级别
-ipv6: true              # IPV6开关
-external-controller: 127.0.0.1:9090
-secret: 你的密钥
+#port: 7890                                         # HTTP 代理端口
+#socks-port: 7891                                   # Socks 端口
+#redir-port: 7892                                   # Redir 端口
+mixed-port: 7890                                    # 混合端口
+allow-lan: true                                     # 允许局域网连接
+bind-address: "*"                                   # 地址绑定
+mode: rule                                          # 规则模式
+log-level: info                                     # 日志级别
+ipv6: true                                          # IPV6开关
+external-controller: 127.0.0.1:9090                 # RESTful Web API监听地址
+secret:										        # RESTful API的密钥（可选）
 
 dns:
-  enable: true          # 不使用系统 DNS
-  listen: 0.0.0.0:53    # dns 监听
-  ipv6: true            # 关闭 IPV6
+  enable: true                                      # 不使用系统 DNS
+  listen: 0.0.0.0:53                                # dns 监听
+  ipv6: true                                        # 当为false时，对AAAA问题的响应将为空
   enhanced-mode: fake-ip
-  fake-ip-range: 198.18.0.1/16
-  fake-ip-filter:
-    - "*.lan"
+  fake-ip-range: 198.18.0.1/16                      # 虚假IP地址池CIDR
+  fake-ip-filter:                                   # 此列表中的主机名将不会使用虚假IP解析
+    - '*.lan'
     - localhost.ptlogin2.qq.com
-    - +.srv.nintendo.net
-    - +.stun.playstation.net
-    - +.msftconnecttest.com
-    - +.msftncsi.com
-    - +.xboxlive.com
-    - msftconnecttest.com
-    - xbox.*.microsoft.com
-    - "*.battlenet.com.cn"
-    - "*.battlenet.com"
-    - "*.blzstatic.cn"
-    - "*.battle.net"
-  nameserver:        # 默认 DNS 服务
-    - 119.29.29.29 
+    - '+.srv.nintendo.net'
+    - '+.stun.playstation.net'
+    - '+.msftconnecttest.com'
+    - '+.msftncsi.com'
+    - '+.xboxlive.com'
+    - 'msftconnecttest.com'
+    - 'xbox.*.microsoft.com'
+    - '*.battlenet.com.cn'
+    - '*.battlenet.com'
+    - '*.blzstatic.cn'
+    - '*.battle.net'
+  default-nameserver:                               # 这些域名服务器用于解析下面的DNS域名服务器主机名。
+    - 119.29.29.29
     - 223.5.5.5
-  fallback:          # 国外 DNS 服务器
-    - https://cloudflare-dns.com/dns-query
-    - https://dns.google/dns-query
+  nameserver:                                       # 所有DNS问题都直接发送到域名服务器，不涉及代理支持UDP、TCP、DoT、DoH。您可以指定要连接的端口。
     - https://dns.alidns.com/dns-query
-  fallback-filter:
-    geoip: true
-    geoip-code: CN
-    ipcidr:
-      - 240.0.0.0/4
-#========= 建立锚点 =========#
+    - https://cloudflare-dns.com/dns-query
+    - https://doh.pub/dns-query
+    - https://223.5.5.5/dns-query
+#  fallback:                                        # 当存在`fallback`时，DNS服务器将同时发送请求当GEOIP国家不是`CN`时，将使用回退服务器的答案。
+#    - https://cloudflare-dns.com/dns-query
+#    - https://dns.alidns.com/dns-query
+#    - https://223.5.5.5/dns-query
+#  fallback-filter:                                 # 当`fallback-filter.geoip`为true，并且IP地址的GEOIP为`CN`时，使用`nameserver`中的服务器解析的IP地址。
+#    geoip: true
+#    geoip-code: CN
+#    ipcidr:
+#      - 240.0.0.0/4
 
+#========= 建立锚点 =========#
 # 策略组引用
 pr:   &a3 {type: select,   proxies: [自动选择, 手动切换, 香港节点, 日本节点, 美国节点, 台湾节点, 狮城节点, DIRECT] }
 p:    &a1 {type: http,     interval: 86400,  health-check: {enable: true, url: http://www.gstatic.com/generate_204, interval: 1800} }
@@ -109,7 +114,7 @@ proxy-groups:
   - {name: 美国节点, <<: *a4, filter: "美|US|(?i)States|American"    	}       # a4更改为a2，即为手动选择
   - {name: 狮城节点, <<: *a4, filter: "新|坡|SG|(?i)Singapore"       	}       # a4更改为a2，即为手动选择
   
-# 分流规则
+#分流指引
 rule-providers:
   NetEaseMusic:    {<<: *a6, url: https://raw.githubusercontent.com/oiozi/Gears/main/Rule/Clash/NeteaseMusic.yaml,                                      path: ./ruleset/NetEaseMusic.yaml     }
   Direct:          {<<: *a5, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@release/rule/Clash/Direct/Direct.yaml,                       path: ./ruleset/Direct.yaml           }
@@ -129,8 +134,23 @@ rule-providers:
   ChinaIP:         {<<: *a7, url: https://cdn.jsdelivr.net/gh/soffchen/GeoIP2-CN@release/clash-rule-provider.yml,                                       path: ./ruleset/ChinaIP.yaml          }
   ProxyLite:       {<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@release/rule/Clash/ProxyLite/ProxyLite.yaml,                 path: ./ruleset/ProxyLite.yaml        }
   
- # 分流Policy 
+#分流规则 
 rules:
+  - DOMAIN-SUFFIX,challenges.cloudflare.com,全球加速
+  - DOMAIN-SUFFIX,larksuite.com,人工智能
+  - DOMAIN-SUFFIX,byr.pt,手动切换
+  - DOMAIN-SUFFIX,xwt-classics.net,美国节点
+  - DOMAIN-SUFFIX,xtremewrestlingtorrents.net,美国节点
+  - DOMAIN-SUFFIX,club.tgfcer.com,全球加速
+  - DOMAIN-SUFFIX,shadowflow.org,全球加速
+  - DOMAIN-SUFFIX,avistaz.to,全球加速
+  - DOMAIN-SUFFIX,fsm.name,全球加速
+  - DOMAIN-SUFFIX,zhuque.in,全球加速
+  - DOMAIN-SUFFIX,u2.dmhy.org,全球加速
+  - DOMAIN-SUFFIX,deepl.com,全球加速
+  - DOMAIN-SUFFIX,mozilla.org,全球加速
+  - DOMAIN-SUFFIX,internetdownloadmanager.com,广告屏蔽
+  - DOMAIN-SUFFIX,z142.cc,广告屏蔽
   - RULE-SET,Direct,DIRECT
   - RULE-SET,Lan,DIRECT
   - RULE-SET,Download,DIRECT
@@ -139,7 +159,7 @@ rules:
   - RULE-SET,Google,谷歌服务
   - RULE-SET,GlobalMedia,国际媒体
   - RULE-SET,Spotify,国外音乐
-  - RULE-SET,NeteaseMusic,网易音乐
+  - RULE-SET,NetEaseMusic,网易音乐
   - RULE-SET,Telegram,电报消息
   - RULE-SET,PrivateTracker,种子网站
   - RULE-SET,Apple,苹果服务
@@ -147,7 +167,7 @@ rules:
   - RULE-SET,Github,全球加速
   - RULE-SET,Microsoft, 全球加速
   - RULE-SET,ProxyLite,全球加速
-  - RULE-SET,ChinaIP,DIRECT
+  - RULE-SET,ChinaIP,DIRECT,no-resolve
   - GEOIP,CN,DIRECT
   - MATCH,黑白名单
 
