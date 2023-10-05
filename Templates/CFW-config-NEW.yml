@@ -136,21 +136,6 @@ rule-providers:
   
 #分流规则 
 rules:
-  - DOMAIN-SUFFIX,challenges.cloudflare.com,全球加速
-  - DOMAIN-SUFFIX,larksuite.com,人工智能
-  - DOMAIN-SUFFIX,byr.pt,手动切换
-  - DOMAIN-SUFFIX,xwt-classics.net,美国节点
-  - DOMAIN-SUFFIX,xtremewrestlingtorrents.net,美国节点
-  - DOMAIN-SUFFIX,club.tgfcer.com,全球加速
-  - DOMAIN-SUFFIX,shadowflow.org,全球加速
-  - DOMAIN-SUFFIX,avistaz.to,全球加速
-  - DOMAIN-SUFFIX,fsm.name,全球加速
-  - DOMAIN-SUFFIX,zhuque.in,全球加速
-  - DOMAIN-SUFFIX,u2.dmhy.org,全球加速
-  - DOMAIN-SUFFIX,deepl.com,全球加速
-  - DOMAIN-SUFFIX,mozilla.org,全球加速
-  - DOMAIN-SUFFIX,internetdownloadmanager.com,广告屏蔽
-  - DOMAIN-SUFFIX,z142.cc,广告屏蔽
   - RULE-SET,Direct,DIRECT
   - RULE-SET,Lan,DIRECT
   - RULE-SET,Download,DIRECT
