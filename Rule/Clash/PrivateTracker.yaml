@@ -3,8 +3,8 @@
 # REPO: https://github.com/oiozi
 # UPDATED: 2023-10-05
 # DOMAIN-KEYWORD: 3
-# DOMAIN-SUFFIX: 563
-# TOTAL: 566
+# DOMAIN-SUFFIX: 564
+# TOTAL: 567
 payload:
 # Tracker URL
   - DOMAIN-KEYWORD,announce
@@ -228,6 +228,7 @@ payload:
   - DOMAIN-SUFFIX,hdtime.org
   - DOMAIN-SUFFIX,hdtshare.com
   - DOMAIN-SUFFIX,hdturk.club
+  - DOMAIN-SUFFIX,hdvbits.com
   - DOMAIN-SUFFIX,hdvideo.one
   - DOMAIN-SUFFIX,hdzone.me
   - DOMAIN-SUFFIX,hebits.net
