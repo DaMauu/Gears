@@ -21,15 +21,16 @@ var myRequestV6 = {
 
 var message = "";
 const paras = ["ip", "isp", "country_code", "city"];
-const paran = ["IP", "ISP", "地区", "城市"];
+const paran = ["IPv4", "IPv6", "ISP", "地区", "城市"];
 var ipv4Info = "";
+var ipv6Info = "";
 
 // 请求 IPv4 地理位置信息
 $task.fetch(myRequestV4).then(responseV4 => {
   ipv4Info = responseV4 ? json2info(responseV4.body, paras) : "";
   // 请求 IPv6 地理位置信息
   $task.fetch(myRequestV6).then(responseV6 => {
-    const ipv6Info = responseV6 ? json2info(responseV6.body, paras) : "";
+    ipv6Info = responseV6 ? json2info(responseV6.body, paras) : "";
     // 合并 IPv4 和 IPv6 信息并显示
     message = ipv4Info + "</br>" + ipv6Info;
     $done({ "title": "🔎 IP 查询结果", "htmlMessage": message });
@@ -45,7 +46,7 @@ $task.fetch(myRequestV4).then(responseV4 => {
   ipv4Info = `<p style="text-align: center; font-family: -apple-system; font-size: large; font-weight: bold;">` + ipv4Info + `</p>`;
   // 只显示 IPv6 信息
   $task.fetch(myRequestV6).then(responseV6 => {
-    const ipv6Info = responseV6 ? json2info(responseV6.body, paras) : "";
+    ipv6Info = responseV6 ? json2info(responseV6.body, paras) : "";
     message = ipv4Info + "</br>" + ipv6Info;
     $done({ "title": "🔎 IP 查询结果", "htmlMessage": message });
   }, reason => {
