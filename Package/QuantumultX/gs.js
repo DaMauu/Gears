@@ -38,7 +38,7 @@ $task.fetch(myRequestV4).then(responseV4 => {
   $task.fetch(myRequestV6).then(responseV6 => {
     ipv6Info = responseV6 ? json2info(responseV6.body, paras) : "";
     // 合并 IPv4 和 IPv6 信息并显示
-    message = `<p style="text-align: center; font-family: -apple-system; font-size: large; font-weight: bold;">IP查询结果</p>` + ipv4Info +  ipv6Info;
+    message = `<p style="text-align: center; font-family: -apple-system; font-size: large; font-weight: bold;">IP查询结果</p>${ipv4Info}${ipv6Info}`;
     $done({ "title": "🔎 IP 查询结果", "htmlMessage": message });
   }, reason => {
     ipv6Info = "</br></br>🛑 IPv6 查询超时";
