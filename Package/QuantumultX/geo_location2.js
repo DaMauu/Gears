@@ -24,54 +24,74 @@ var myRequestV6 = {
   timeout: 4000
 };
 
-var message = "";
-const paras = ["ip", "isp", "country_code", "city"];
-const paran = ["IP", "ISP", "地区", "城市"];
 var ipv4Info = "";
 var ipv6Info = "";
 
 // 请求 IPv4 地理位置信息
 $task.fetch(myRequestV4).then(responseV4 => {
-  ipv4Info = responseV4 ? json2info(responseV4.body, paras) : "";
+  ipv4Info = responseV4 ? json2info(responseV4.body, "IPv4") : "IPv4 查询失败";
   // 请求 IPv6 地理位置信息
   $task.fetch(myRequestV6).then(responseV6 => {
-    ipv6Info = responseV6 ? json2info(responseV6.body, paras) : "";
+    ipv6Info = responseV6 ? json2info(responseV6.body, "IPv6") : "IPv6 查询失败";
     // 合并 IPv4 和 IPv6 信息并显示
-    message = `<p style="text-align: center; font-family: -apple-system; font-size: large; font-weight: bold;">IPv4 查询结果</p>` + ipv4Info + `<p style="text-align: center; font-family: -apple-system; font-size: large; font-weight: bold;">IPv6 查询结果</p>` + ipv6Info;
+    var message = `
+IP 查询结果
+------------------------------
+${ipv4Info}
+${ipv6Info}
+------------------------------
+节点 ➟ 国旗+节点名字
+    `;
     $done({ "title": "🔎 IP 查询结果", "htmlMessage": message });
   }, reason => {
-    ipv6Info = "</br></br>🛑 IPv6 查询超时";
-    ipv6Info = `<p style="text-align: center; font-family: -apple-system; font-size: large; font-weight: bold;">` + ipv6Info + `</p>`;
+    ipv6Info = "IPv6 查询超时";
     // 只显示 IPv4 信息
-    message = `<p style="text-align: center; font-family: -apple-system; font-size: large; font-weight: bold;">IPv4 查询结果</p>` + ipv4Info;
+    var message = `
+IP 查询结果
+------------------------------
+${ipv4Info}
+${ipv6Info}
+------------------------------
+节点 ➟ 国旗+节点名字
+    `;
     $done({ "title": "🔎 IP 查询结果", "htmlMessage": message });
   });
 }, reason => {
-  ipv4Info = "</br></br>🛑 IPv4 查询超时";
-  ipv4Info = `<p style="text-align: center; font-family: -apple-system; font-size: large; font-weight: bold;">` + ipv4Info + `</p>`;
-  // 只显示 IPv6 信息
+  ipv4Info = "IPv4 查询超时";
+  // 请求 IPv6 地理位置信息
   $task.fetch(myRequestV6).then(responseV6 => {
-    ipv6Info = responseV6 ? json2info(responseV6.body, paras) : "";
-    message = `<p style="text-align: center; font-family: -apple-system; font-size: large; font-weight: bold;">IPv6 查询结果</p>` + ipv6Info;
+    ipv6Info = responseV6 ? json2info(responseV6.body, "IPv6") : "IPv6 查询失败";
+    // 只显示 IPv6 信息
+    var message = `
+IP 查询结果
+------------------------------
+${ipv4Info}
+${ipv6Info}
+------------------------------
+节点 ➟ 国旗+节点名字
+    `;
     $done({ "title": "🔎 IP 查询结果", "htmlMessage": message });
   }, reason => {
-    ipv6Info = "</br></br>🛑 IPv6 查询超时";
-    ipv6Info = `<p style="text-align: center; font-family: -apple-system; font-size: large; font-weight: bold;">` + ipv6Info + `</p>`;
+    ipv6Info = "IPv6 查询超时";
     // 都查询超时
-    message = "<p style=\"text-align: center; font-family: -apple-system; font-size: large; font-weight: bold;\">IPv4 查询超时</p>" + "<p style=\"text-align: center; font-family: -apple-system; font-size: large; font-weight: bold;\">IPv6 查询超时</p>";
+    var message = `
+IP 查询结果
+------------------------------
+${ipv4Info}
+${ipv6Info}
+------------------------------
+节点 ➟ 国旗+节点名字
+    `;
     $done({ "title": "🔎 IP 查询结果", "htmlMessage": message });
   });
 });
 
-function json2info(cnt, paras) {
-  var res = "------------------------------";
+function json2info(cnt, ipVersion) {
   cnt = JSON.parse(cnt);
-  for (i = 0; i < paras.length; i++) {
-    cnt[paras[i]] = paras[i] == "country_code" ? cnt[paras[i]] + " ⟦" + flags.get(cnt[paras[i]].toUpperCase()) + "⟧" : cnt[paras[i]];
-    res = cnt[paras[i]] ? res + "</br><b>" + "<font  color=>" + paran[i] + "</font> : " + "</b>" + "<font  color=>" + cnt[paras[i]] + "</font></br>" : res;
-  }
-  res = res + "------------------------------" + "</br>" + "<font color=#6959CD>" + "<b>节点</b> ➟ " + $environment.params + "</font>";
-  res = `<p style="text-align: center; font-family: -apple-system; font-size: large; font-weight: thin">` + res + `</p>`;
+  var res = `${ipVersion}:\n`;
+  res += `ISP: ${cnt.isp}\n`;
+  res += `地区: ${cnt.region}\n`;
+  res += `城市: ${cnt.city}\n`;
   return res;
 }
 
