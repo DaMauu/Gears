@@ -8,7 +8,7 @@
 
 // var content= <p style="text-align: center; font-family: -apple-system; font-size: large; font-weight: bold"> + response.body + </p>;
 
-  var url = "https://api-ipv6.ip.sb/geoip"
+  var url = "https://api-ipv4.ip.sb/geoip"
   var opts = {
       policy: $environment.params
   };
