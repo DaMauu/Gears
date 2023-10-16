@@ -1,10 +1,10 @@
 # NAME: PrivateTracker
 # AUTHOR: oiozi
 # REPO: https://github.com/oiozi
-# UPDATED: 2023-10-05
+# UPDATED: 2023-10-16
 # DOMAIN-KEYWORD: 3
-# DOMAIN-SUFFIX: 564
-# TOTAL: 567
+# DOMAIN-SUFFIX: 566
+# TOTAL: 569
 payload:
 # Tracker URL
   - DOMAIN-KEYWORD,announce
@@ -47,6 +47,7 @@ payload:
   - DOMAIN-SUFFIX,avistaz.to
   - DOMAIN-SUFFIX,aystorrent.ro
   - DOMAIN-SUFFIX,azusa.wiki
+  - DOMAIN-SUFFIX,back-ups.me
   - DOMAIN-SUFFIX,baconbits.org
   - DOMAIN-SUFFIX,bakabt.me
   - DOMAIN-SUFFIX,bc-reloaded.net
@@ -552,6 +553,7 @@ payload:
   - DOMAIN-SUFFIX,world-of-tomorrow.eu
   - DOMAIN-SUFFIX,wukongwendao.top
   - DOMAIN-SUFFIX,www.ptlsp.com
+  - DOMAIN-SUFFIX,www.xrel.to
   - DOMAIN-SUFFIX,x-blade-den.com
   - DOMAIN-SUFFIX,x-files.me
   - DOMAIN-SUFFIX,x-ite.me
