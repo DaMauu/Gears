@@ -3,8 +3,8 @@
 # REPO: https://github.com/oiozi
 # UPDATED: 2023-10-16
 # DOMAIN-KEYWORD: 3
-# DOMAIN-SUFFIX: 570
-# TOTAL: 573
+# DOMAIN-SUFFIX: 571
+# TOTAL: 574
 payload:
 # Tracker URL
   - DOMAIN-KEYWORD,announce
@@ -557,6 +557,7 @@ payload:
   - DOMAIN-SUFFIX,wukongwendao.top
   - DOMAIN-SUFFIX,www.ptlsp.com
   - DOMAIN-SUFFIX,www.xrel.to
+  - DOMAIN-SUFFIX,wwww.leaves.red
   - DOMAIN-SUFFIX,x-blade-den.com
   - DOMAIN-SUFFIX,x-files.me
   - DOMAIN-SUFFIX,x-ite.me
