@@ -3,8 +3,8 @@
 # REPO: https://github.com/oiozi
 # UPDATED: 2023-10-16
 # DOMAIN-KEYWORD: 3
-# DOMAIN-SUFFIX: 569
-# TOTAL: 572
+# DOMAIN-SUFFIX: 570
+# TOTAL: 573
 payload:
 # Tracker URL
   - DOMAIN-KEYWORD,announce
@@ -576,6 +576,7 @@ payload:
   - DOMAIN-SUFFIX,zeus.hamsters.space
   - DOMAIN-SUFFIX,zhuque.in
   - DOMAIN-SUFFIX,zmpt.cc
+  - DOMAIN-SUFFIX,zmpt.club
   - DOMAIN-SUFFIX,zombtracker.the-zomb.com
   - DOMAIN-SUFFIX,zonaq.pwindex.php
   - DOMAIN-SUFFIX,ztracker.cc
