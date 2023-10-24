@@ -39,10 +39,14 @@ dns:
     - '*.battle.net'
   default-nameserver:                               # 这些域名服务器用于解析下面的DNS域名服务器主机名。
     - 119.29.29.29
-    - 223.5.5.5
+    - 114.114.114.114
+    - 1.0.0.1
   nameserver:                                       # 所有DNS问题都直接发送到域名服务器，不涉及代理支持UDP、TCP、DoT、DoH。您可以指定要连接的端口。
     - https://doh.pub/dns-query
+    - https://1.1.1.1/dns-query
+    - https://1.0.0.1/dns-query
     - https://120.53.53.53/dns-query
+    - https://cloudflare-dns.com/dns-query
 #  fallback:                                        # 当存在`fallback`时，DNS服务器将同时发送请求当GEOIP国家不是`CN`时，将使用回退服务器的答案。
 #    - https://doh.pub/dns-query
 #    - https://120.53.53.53/dns-query
