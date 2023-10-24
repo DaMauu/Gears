@@ -41,13 +41,12 @@ dns:
     - 119.29.29.29
     - 223.5.5.5
   nameserver:                                       # 所有DNS问题都直接发送到域名服务器，不涉及代理支持UDP、TCP、DoT、DoH。您可以指定要连接的端口。
-    - https://dns.alidns.com/dns-query
     - https://doh.pub/dns-query
-    - https://223.5.5.5/dns-query
+    - https://120.53.53.53/dns-query
 #  fallback:                                        # 当存在`fallback`时，DNS服务器将同时发送请求当GEOIP国家不是`CN`时，将使用回退服务器的答案。
+#    - https://doh.pub/dns-query
+#    - https://120.53.53.53/dns-query
 #    - https://cloudflare-dns.com/dns-query
-#    - https://dns.alidns.com/dns-query
-#    - https://223.5.5.5/dns-query
 #  fallback-filter:                                 # 当`fallback-filter.geoip`为true，并且IP地址的GEOIP为`CN`时，使用`nameserver`中的服务器解析的IP地址。
 #    geoip: true
 #    geoip-code: CN
