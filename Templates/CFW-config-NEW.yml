@@ -104,7 +104,7 @@ proxy-groups:
   - {name: 广告屏蔽, type: select, proxies: [REJECT]}
   - {name: 网易音乐, <<: *a2, filter: "网易|音|(?i)乐"               	}       # a4更改为a2，即为手动选择
   - {name: 香港节点, <<: *a4, filter: "港|HK|(?i)Hong"               	}       # a4更改为a2，即为手动选择
-  - {name: 日本节点, <<: *a4, filter: "日|东京|JP|(?i)Japan"         	}       # a4更改为a2，即为手动选择     
+  - {name: 日本节点, <<: *a4, filter: "日|东京|JP|(?i)Japan"         	}       # a4更改为a2，即为手动选择
   - {name: 台湾节点, <<: *a4, filter: "台|湾|TW|(?i)Taiwan"          	}       # a4更改为a2，即为手动选择
   - {name: 美国节点, <<: *a4, filter: "美|US|(?i)States|American"    	}       # a4更改为a2，即为手动选择
   - {name: 狮城节点, <<: *a4, filter: "新|坡|SG|(?i)Singapore"       	}       # a4更改为a2，即为手动选择
@@ -119,7 +119,7 @@ rule-providers:
   OpenAi:			{<<: *a6, url: https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/OpenAI/OpenAI.yaml,						path: ./ruleset/OpenAi.yaml					}
   Google:			{<<: *a6, url: https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Google/Google.yaml,						path: ./ruleset/Google.yaml					}
   Telegram:			{<<: *a6, url: https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Telegram/Telegram.yaml,					path: ./ruleset/Telegram.yaml				}
-  Spotify:			{<<: *a6, url: https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Spotify/Spotify.yaml,						path: ./ruleset/Spotify.yaml				} 
+  Spotify:			{<<: *a6, url: https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Spotify/Spotify.yaml,						path: ./ruleset/Spotify.yaml				}
   GlobalMedia:		{<<: *a6, url: https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GlobalMedia/GlobalMedia_Classical.yaml,	path: ./ruleset/GlobalMedia.yaml			}
   Apple:			{<<: *a6, url: https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Apple/Apple_Classical.yaml,				path: ./ruleset/Apple.yaml					}
   Github:			{<<: *a6, url: https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GitHub/GitHub.yaml,						path: ./ruleset/Github.yaml					}
@@ -150,10 +150,3 @@ rules:
   - RULE-SET,Global,全球加速
   - GEOIP,CN,DIRECT
   - MATCH,黑白名单
-
-
-# TUN模式是通过在操作系统上安装一个虚拟网卡来实现的，它可以接管所有的网络流量，并将流量转发至Clash，然后由Clash发出请求
-# Windows 系统中如何启用TUN模式
-# 1、运行 Clash For Windows, 确保使用规则模式，并可以联网
-# 2、点击 General中的Service Mode右侧的Manage按钮，在弹出窗口中选择schtasks，安装服务模式。安装完成后，应用程序会自动重启，Service Mode右侧的地球图标变为绿色表示安装成功
-# 3、点击 General中的TUN Mode右侧的开关以启动TUN模式
