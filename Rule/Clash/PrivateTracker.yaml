@@ -3,8 +3,8 @@
 # REPO: https://github.com/oiozi
 # UPDATED: 2023-10-16
 # DOMAIN-KEYWORD: 3
-# DOMAIN-SUFFIX: 572
-# TOTAL: 575
+# DOMAIN-SUFFIX: 577
+# TOTAL: 580
 payload:
 # Tracker URL
   - DOMAIN-KEYWORD,announce
@@ -52,6 +52,7 @@ payload:
   - DOMAIN-SUFFIX,bakabt.me
   - DOMAIN-SUFFIX,bc-reloaded.net
   - DOMAIN-SUFFIX,beitai.pt
+  - DOMAIN-SUFFIX,beload.org
   - DOMAIN-SUFFIX,bemaniso.ws
   - DOMAIN-SUFFIX,best-core.info
   - DOMAIN-SUFFIX,beyondhd.co
@@ -181,6 +182,7 @@ payload:
   - DOMAIN-SUFFIX,fuzer.me
   - DOMAIN-SUFFIX,gainbound.net
   - DOMAIN-SUFFIX,gamegamept.com
+  - DOMAIN-SUFFIX,gamerapt.link
   - DOMAIN-SUFFIX,gay-palace.club
   - DOMAIN-SUFFIX,gay-torrents.net
   - DOMAIN-SUFFIX,gay-torrents.org
@@ -276,6 +278,7 @@ payload:
   - DOMAIN-SUFFIX,kufei.org
   - DOMAIN-SUFFIX,kufirc.com
   - DOMAIN-SUFFIX,lakamera.haususer
+  - DOMAIN-SUFFIX,last-torrents.org
   - DOMAIN-SUFFIX,lastfiles.ro
   - DOMAIN-SUFFIX,lat-team.com
   - DOMAIN-SUFFIX,learnbits.me
@@ -320,6 +323,7 @@ payload:
   - DOMAIN-SUFFIX,movies-paleis.actieforum.com
   - DOMAIN-SUFFIX,moviesite.info.hu
   - DOMAIN-SUFFIX,moviesz.nl
+  - DOMAIN-SUFFIX,movieworld.pics
   - DOMAIN-SUFFIX,mteam.fr
   - DOMAIN-SUFFIX,musebootlegs.com
   - DOMAIN-SUFFIX,music-vid.com
@@ -568,6 +572,7 @@ payload:
   - DOMAIN-SUFFIX,xp.m-team.cc
   - DOMAIN-SUFFIX,xspeeds.eu
   - DOMAIN-SUFFIX,xthor.tk
+  - DOMAIN-SUFFIX,xtremebytes.net
   - DOMAIN-SUFFIX,xtremewrestlingtorrents.net
   - DOMAIN-SUFFIX,xwt-classics.net
   - DOMAIN-SUFFIX,yeeshkul.com
