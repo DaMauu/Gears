@@ -3,8 +3,8 @@
 # REPO: https://github.com/oiozi
 # UPDATED: 2023-10-16
 # DOMAIN-KEYWORD: 3
-# DOMAIN-SUFFIX: 577
-# TOTAL: 580
+# DOMAIN-SUFFIX: 578
+# TOTAL: 581
 payload:
 # Tracker URL
   - DOMAIN-KEYWORD,announce
