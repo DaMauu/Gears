@@ -3,8 +3,8 @@
 # REPO: https://github.com/oiozi
 # UPDATED: 2023-10-16
 # DOMAIN-KEYWORD: 3
-# DOMAIN-SUFFIX: 578
-# TOTAL: 581
+# DOMAIN-SUFFIX: 579
+# TOTAL: 582
 payload:
 # Tracker URL
   - DOMAIN-KEYWORD,announce
@@ -31,6 +31,7 @@ payload:
   - DOMAIN-SUFFIX,animetorrents.me
   - DOMAIN-SUFFIX,animetracker.cc
   - DOMAIN-SUFFIX,animeworld.cx
+  - DOMAIN-SUFFIX,anitoons.xyz
   - DOMAIN-SUFFIX,ansktracker.net
   - DOMAIN-SUFFIX,anthelion.me
   - DOMAIN-SUFFIX,ap.m-team.cc
@@ -588,4 +589,3 @@ payload:
   - DOMAIN-SUFFIX,zombtracker.the-zomb.com
   - DOMAIN-SUFFIX,zonaq.pwindex.php
   - DOMAIN-SUFFIX,ztracker.cc
-
