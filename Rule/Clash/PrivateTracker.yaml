@@ -3,8 +3,8 @@
 # REPO: https://github.com/oiozi
 # UPDATED: 2023-10-16
 # DOMAIN-KEYWORD: 3
-# DOMAIN-SUFFIX: 579
-# TOTAL: 582
+# DOMAIN-SUFFIX: 584
+# TOTAL: 587
 payload:
 # Tracker URL
   - DOMAIN-KEYWORD,announce
@@ -22,6 +22,7 @@ payload:
   - DOMAIN-SUFFIX,adamsfile.com
   - DOMAIN-SUFFIX,adbt.it.cx
   - DOMAIN-SUFFIX,aftershock-tracker.net
+  - DOMAIN-SUFFIX,agsvpt.com
   - DOMAIN-SUFFIX,aither.cc
   - DOMAIN-SUFFIX,alpharatio.cc
   - DOMAIN-SUFFIX,anime-torrents.ro
@@ -126,6 +127,7 @@ payload:
   - DOMAIN-SUFFIX,datatalli.net
   - DOMAIN-SUFFIX,deepbassnine.com
   - DOMAIN-SUFFIX,deildu.net
+  - DOMAIN-SUFFIX,demon-asylum.org
   - DOMAIN-SUFFIX,desireleasers.be
   - DOMAIN-SUFFIX,desitorrents.tv
   - DOMAIN-SUFFIX,destination.poker
@@ -191,6 +193,7 @@ payload:
   - DOMAIN-SUFFIX,gaytor.rent
   - DOMAIN-SUFFIX,gaytracker.ru
   - DOMAIN-SUFFIX,gazellegames.net
+  - DOMAIN-SUFFIX,generation-free.org
   - DOMAIN-SUFFIX,generation-free.org
   - DOMAIN-SUFFIX,gfxpeers.net
   - DOMAIN-SUFFIX,gigatorrents.ws
@@ -393,6 +396,7 @@ payload:
   - DOMAIN-SUFFIX,pt.eastgame.org
   - DOMAIN-SUFFIX,pt.gtk.pw
   - DOMAIN-SUFFIX,pt.hd4fans.org
+  - DOMAIN-SUFFIX,pt.hdarea.club
   - DOMAIN-SUFFIX,pt.hdbd.us
   - DOMAIN-SUFFIX,pt.hdpost.top
   - DOMAIN-SUFFIX,pt.hdupt.com
@@ -449,6 +453,7 @@ payload:
   - DOMAIN-SUFFIX,shadowthein.net
   - DOMAIN-SUFFIX,shareisland.org
   - DOMAIN-SUFFIX,sharewood.tv
+  - DOMAIN-SUFFIX,sharkpt.net
   - DOMAIN-SUFFIX,shnflac.net
   - DOMAIN-SUFFIX,sitedev.club
   - DOMAIN-SUFFIX,skipthecommericals.xyz
