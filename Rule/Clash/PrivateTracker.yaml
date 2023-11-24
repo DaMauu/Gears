@@ -3,8 +3,8 @@
 # REPO: https://github.com/oiozi
 # UPDATED: 2023-10-16
 # DOMAIN-KEYWORD: 3
-# DOMAIN-SUFFIX: 584
-# TOTAL: 587
+# DOMAIN-SUFFIX: 585
+# TOTAL: 588
 payload:
 # Tracker URL
   - DOMAIN-KEYWORD,announce
@@ -416,6 +416,7 @@ payload:
   - DOMAIN-SUFFIX,pterclub.com
   - DOMAIN-SUFFIX,ptfiles.net
   - DOMAIN-SUFFIX,pthome.net
+  - DOMAIN-SUFFIX,ptlsp.free.hr
   - DOMAIN-SUFFIX,ptneko.com
   - DOMAIN-SUFFIX,ptsbao.club
   - DOMAIN-SUFFIX,pttime.org
