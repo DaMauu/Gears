@@ -3,8 +3,8 @@
 # REPO: https://github.com/oiozi
 # UPDATED: 2023/11/25
 # DOMAIN-KEYWORD: 3
-# DOMAIN-SUFFIX: 610
-# TOTAL: 613
+# DOMAIN-SUFFIX: 612
+# TOTAL: 615
 payload:
 # Tracker URL
   - DOMAIN-KEYWORD,announce
@@ -16,6 +16,7 @@ payload:
   - DOMAIN-SUFFIX,420project.org
   - DOMAIN-SUFFIX,720pier.ru
   - DOMAIN-SUFFIX,abn.lol
+  - DOMAIN-SUFFIX,abroad.agsvpt.com
   - DOMAIN-SUFFIX,abtorrents.me
   - DOMAIN-SUFFIX,acervos.cc
   - DOMAIN-SUFFIX,acid-lounge.org.uk
@@ -594,6 +595,7 @@ payload:
   - DOMAIN-SUFFIX,world-in-hd.net
   - DOMAIN-SUFFIX,world-of-tomorrow.eu
   - DOMAIN-SUFFIX,wukongwendao.top
+  - DOMAIN-SUFFIX,www.agsvpt.com
   - DOMAIN-SUFFIX,x-blade-den.com
   - DOMAIN-SUFFIX,x-files.me
   - DOMAIN-SUFFIX,x-ite.me
