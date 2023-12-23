@@ -9,7 +9,7 @@
 # IP-CIDR: 18
 # TOTAL: 37
 
-HOST,interface3.music.163.com.163jiasu.com,网易音乐
+HOST,interface3.music.163.com,网易音乐
 HOST,iadmat.nosdn.127.net,网易音乐
 HOST,netease.ugcvideoss.ourdvs.com,网易音乐
 HOST-SUFFIX,163yun.com,网易音乐
