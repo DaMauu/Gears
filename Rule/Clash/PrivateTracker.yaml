@@ -3,8 +3,8 @@
 # REPO: https://github.com/oiozi
 # UPDATED: 2023/11/25
 # DOMAIN-KEYWORD: 3
-# DOMAIN-SUFFIX: 612
-# TOTAL: 615
+# DOMAIN-SUFFIX: 613
+# TOTAL: 616
 payload:
 # Tracker URL
   - DOMAIN-KEYWORD,announce
@@ -70,6 +70,7 @@ payload:
   - DOMAIN-SUFFIX,bitbr.cc
   - DOMAIN-SUFFIX,bithorlo.info
   - DOMAIN-SUFFIX,bithumen.be
+  - DOMAIN-SUFFIX,bithumen.net
   - DOMAIN-SUFFIX,bitpalace.cc
   - DOMAIN-SUFFIX,bitporn.eu
   - DOMAIN-SUFFIX,bitpt.cn
