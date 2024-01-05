@@ -3,8 +3,8 @@
 # REPO: https://github.com/oiozi
 # UPDATED: 2023/11/25
 # DOMAIN-KEYWORD: 3
-# DOMAIN-SUFFIX: 613
-# TOTAL: 616
+# DOMAIN-SUFFIX: 614
+# TOTAL: 617
 payload:
 # Tracker URL
   - DOMAIN-KEYWORD,announce
@@ -616,6 +616,7 @@ payload:
   - DOMAIN-SUFFIX,youiv.info
   - DOMAIN-SUFFIX,yubraca.net
   - DOMAIN-SUFFIX,zelka.org
+  - DOMAIN-SUFFIX,zeus.hamsters.space
   - DOMAIN-SUFFIX,zeus.hamsters.space
   - DOMAIN-SUFFIX,zhuque.in
   - DOMAIN-SUFFIX,zmpt.cc
