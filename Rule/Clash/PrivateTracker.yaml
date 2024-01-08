@@ -3,8 +3,8 @@
 # REPO: https://github.com/oiozi
 # UPDATED: 2023/11/25
 # DOMAIN-KEYWORD: 3
-# DOMAIN-SUFFIX: 614
-# TOTAL: 617
+# DOMAIN-SUFFIX: 615
+# TOTAL: 618
 payload:
 # Tracker URL
   - DOMAIN-KEYWORD,announce
@@ -443,6 +443,7 @@ payload:
   - DOMAIN-SUFFIX,ptsbao.club
   - DOMAIN-SUFFIX,pttime.org
   - DOMAIN-SUFFIX,ptvicomo.net
+  - DOMAIN-SUFFIX,public.ecustpt.eu.org
   - DOMAIN-SUFFIX,punck-tracker.net
   - DOMAIN-SUFFIX,pussytorrents.org
   - DOMAIN-SUFFIX,puur-hollands.org
