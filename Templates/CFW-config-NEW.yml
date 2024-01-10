@@ -102,12 +102,12 @@ proxy-groups:
   - {name: 黑白名单, <<: *a3}
 #节点分组
   - {name: 广告屏蔽, type: select, proxies: [REJECT]}
-  - {name: 网易音乐, <<: *a2, filter: "网易|音|(?i)乐"               	}       # a4更改为a2，即为手动选择
-  - {name: 香港节点, <<: *a4, filter: "港|HK|(?i)Hong"               	}       # a4更改为a2，即为手动选择
-  - {name: 日本节点, <<: *a4, filter: "日|东京|JP|(?i)Japan"         	}       # a4更改为a2，即为手动选择
-  - {name: 台湾节点, <<: *a4, filter: "台|湾|TW|(?i)Taiwan"          	}       # a4更改为a2，即为手动选择
-  - {name: 美国节点, <<: *a4, filter: "美|US|(?i)States|American"    	}       # a4更改为a2，即为手动选择
-  - {name: 狮城节点, <<: *a4, filter: "新|坡|SG|(?i)Singapore"       	}       # a4更改为a2，即为手动选择
+  - {name: 网易音乐, <<: *a2, filter: "网易|音|(?i)乐"               	                            }       # a4更改为a2，即为手动选择
+  - {name: 香港节点, <<: *a4, filter: "(?=.*(港|主|HK|(?i)Hong))^((?!(Gcore|3倍)).)*$"              }       # a4更改为a2，即为手动选择
+  - {name: 日本节点, <<: *a4, filter: "(?=.*(日|JP|(?i)Japan))^((?!(Gcore|3倍)).)*$"         	    }       # a4更改为a2，即为手动选择
+  - {name: 台湾节点, <<: *a4, filter: "(?=.*(台|TW|(?i)Taiwan))^((?!(Gcore|3倍)).)*$"          	    }       # a4更改为a2，即为手动选择
+  - {name: 美国节点, <<: *a4, filter: "(?=.*(美|US|(?i)States|American))^((?!(Gcore|3倍)).)*$"    	}       # a4更改为a2，即为手动选择
+  - {name: 狮城节点, <<: *a4, filter: "(?=.*(新|坡|SG|(?i)Singapore))^((?!(Gcore|3倍)).)*$"       	}       # a4更改为a2，即为手动选择
   
 #分流指引
 rule-providers:
