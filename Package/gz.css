@@ -56,7 +56,7 @@ html {
 
 body {
   width: 100%;
-  background-color: #deca92;
+  background-color: #ffffff;
   font-family: tahoma, helvetica, sans-serif;
   font-size: 8pt;
   color: #000;
@@ -209,7 +209,7 @@ ul.thin li {
 #header {
   width: 100%;
   padding: 0px 0 0 0;
-  background: #deca92;
+  background: #ffffff;
 }
 
 #content {
