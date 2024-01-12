@@ -379,6 +379,7 @@ ul.thin li {
   text-align: center;
   background-color: #29437d;
   padding: 4px 0px;
+  border-bottom: 1px solid #00302e;
 }
 
 #searchbars input {
