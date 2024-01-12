@@ -56,7 +56,7 @@ html {
 
 body {
   width: 100%;
-  background-color: #ffffff;
+  background-color: #fff;
   font-family: tahoma, helvetica, sans-serif;
   font-size: 8pt;
   color: #000;
@@ -209,7 +209,7 @@ ul.thin li {
 #header {
   width: 100%;
   padding: 0px 0 0 0;
-  background: #ffffff;
+  background: #1b2c52;
 }
 
 #content {
@@ -226,17 +226,74 @@ ul.thin li {
   padding: 1em 0;
 }
 
+/* Site Logo */
+#logo {
+    position: relative;
+    top: 0;
+    width: 100%;
+    max-width: -webkit-fit-content;
+    max-width: -moz-fit-content;
+    max-width: fit-content;
+    height: auto;
+    margin: 0 auto -1.4rem;
+}
+
+#logo>a:after {
+    font-family: "Bebas Neue", Helvetica, Tahoma, Geneva, sans-serif;
+    content: "DICMusic";
+    display: block;
+    margin: 0 auto;
+    font-size: 13rem;
+    text-align: center !important;
+    background-color: #4281da;
+    background-image: linear-gradient(90deg,
+            #e66534 4%,
+            #e69734 19%,
+            #e2d956 39%,
+            #62e080 60%,
+            #d195cb 80%,
+            #e646dd 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-filter: brightness(110%);
+    filter: brightness(110%);
+    text-shadow: 0 0 15px rgba(230, 101, 52, 0.55);
+    transition: all 0.3s;
+}
+
+#logo>a:hover:after {
+    text-shadow: 0 0 25px rgba(230, 101, 52, 0.72);
+    -webkit-filter: brightness(120%);
+    filter: brightness(120%);
+}
+
+#logo>a {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-top: 0rem;
+    border: none;
+}
+
+.site-logo,
+#logo>a,
+#logo>a:after {
+    word-wrap: normal;
+    white-space: nowrap;
+}
+
 #logo {
   width: 677px;
   height: 200px;
-  background: url("https://sofiaxu.github.io/whatnificent/logo.png") no-repeat
+  background: url("") no-repeat
     top left;
   margin: 0 auto;
 }
 
 #logo a {
   border: none;
-  width: 677px;
+  width: 800px;
   height: 200px;
   display: block;
 }
@@ -251,7 +308,7 @@ ul.thin li {
   width: 100%;
   padding: 0.6em 0;
   text-align: center;
-  background-color: #cc4e02;
+  background-color: #1b2c52;
   font-size: 10pt;
 }
 
@@ -277,8 +334,8 @@ ul.thin li {
 #userinfo {
   position: absolute;
   top: 258px;
-  background: #efec82;
-  color: #444;
+  background: #29437d;
+  color: #fff;
   padding: 4px 0px;
   width: 100%;
   text-align: center;
@@ -303,7 +360,7 @@ ul.thin li {
 }
 
 #userinfo a {
-  color: #222;
+  color: #fff;
 }
 #userinfo a:hover {
   text-decoration: underline;
@@ -320,7 +377,7 @@ ul.thin li {
   top: 199px;
   width: 100%;
   text-align: center;
-  background-color: #1a827e;
+  background-color: #29437d;
   padding: 4px 0px;
 }
 
@@ -329,12 +386,12 @@ ul.thin li {
   border: 1px solid #00302e;
   padding: 2px 2px 2px 4px;
   font-size: 0.9em;
-  background-color: #004f4c;
+  background-color: #1b2c52;
   color: #fff;
 }
 
 #searchbars input:hover {
-  background-color: #005f5b;
+  background-color: #1b2c52;
 }
 
 #searchbars ul {
@@ -355,8 +412,8 @@ ul.thin li {
   left: 0;
   z-index: 1000;
   border: 1px solid #00302e;
-  background: #004f4c;
-  color: #fff;
+  background: #1b2c52;
+  color: #1b2c52;
   width: 12em;
   margin-top: 12px;
 }
@@ -369,7 +426,7 @@ ul.thin li {
 }
 
 #searchbars ul li ul li.highlight {
-  background: #1a827e;
+  background: #29437d;
 }
 
 #searchbars ul li form {
@@ -777,7 +834,7 @@ table.forum_post {
 }
 
 table.forum_unread {
-  border: 2px solid #cc4e02;
+  border: 2px solid #1b2c52;
 }
 
 table.forum_post td {
@@ -941,8 +998,8 @@ ul .invitetree {
 }
 
 div[class~="tooltipster-base"] {
-  background-color: #1a827e;
-  border-color: #004f4c;
+  background-color: #29437d;
+  border-color: #1b2c52;
   color: #ffffff;
 }
 
