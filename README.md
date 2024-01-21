@@ -5,7 +5,7 @@
         <td rowspan="20"><center><b>o<br>i<br>o<br>z<br>i</center></b></td>
     	<td colspan="4"><center><b><font size="3">配置展示</center></b></font></td>
 		<tr>
-			<td><a href="https://raw.githubusercontent.com/oiozi/Gears/main/Templates/CFW-config-NEW.yml">Clashforwindows</a></td>
+			<td><a href="https://raw.githubusercontent.com/oiozi/Gears/main/Templates/CFW-config-NEW.yml">ClashfW</a></td>
 			<td><a href="https://raw.githubusercontent.com/oiozi/Gears/main/Templates/Quantumult%20X.conf">Quantumult X</a></td>
             <td><a href="https://raw.githubusercontent.com/oiozi/Gears/main/Templates/Shadowrocket.conf">Shadowrocket</a></td>
             <td><a href="https://raw.githubusercontent.com/oiozi/Gears/main/Templates/Surge4.conf">Surge4</a></td>
