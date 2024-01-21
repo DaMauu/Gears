@@ -1,0 +1,199 @@
+# ------------------------------------------------
+# |          Clash Config Make by oiozi          |
+# |       GitHub: https://github.com/oiozi       |
+# |          Update Date: 20240121               |
+# |                  enjoy                       |
+# ------------------------------------------------
+#port: 7890                                 # HTTP 代理端口
+#socks-port: 7890                           # Socks 端口
+#redir-port: 7890                           # Redir 端口
+mixed-port: 7890                            # 混合端口（HTTP、SOCKS5共用
+allow-lan: true                             # 允许局域网的连接（可用来共享代理）
+bind-address: "*"                           # 地址绑定（仅在将allow-lan设置为true时适用）
+mode: rule                                  # 规则模式
+log-level: info                             # 日志级别
+find-process-mode: strict                   # 匹配所有进程（always/strict/off）
+ipv6: true                                  # IPV6开关
+external-controller: 0.0.0.0:9090           # 外部控制器,可以使用 RESTful API控制clash 内核
+secret: f38a3a3e-da82-446b-8282-3099ad76de76 # RESTful API的密钥（可选）
+profile:
+  store-selected: true                      # 存储 select 选择记录
+  store-fake-ip: true                       # 持久化 fake-ip
+  
+sniffer:                                    # 嗅探域名 可选配置
+  enable: true
+  parse-pure-ip: true                       # 是否使用嗅探结果作为实际访问，默认 true
+  sniff:
+    TLS:                                    # TLS 默认嗅探 443
+      ports: [443, 8443]
+    HTTP:
+      ports: [80, 8080-8880]
+      override-destination: true
+    QUIC:
+      ports: [443, 8443]
+      
+tun:                                        # Tun 配置
+  enable: false
+  stack: system                             # 可选： system/gvisor/mixed；tun 模式堆栈,如无使用问题,建议使用 system 栈;MacOS 用户推荐 gvisor栈
+                                            # system 使用系统协议栈,可以提供更稳定/全面的 tun 体验,且占用相对其他堆栈更低。 
+                                            # gvisor 通过在用户空间中实现网络协议栈,可以提供更高的安全性和隔离性,同时可以避免操作系统内核和用户空间之间的切换,从而在特定情况下具有更好的网络处理性能
+                                            # mixed 混合堆栈,tcp使用 system栈,udp使用 gvisor栈,使用体验可能相对更好
+  dns-hijack: [any:53]                      # dns劫持,一般设置为 any:53 即可, 即劫持所有53端口的udp流量
+# strict_route: true                        # 将所有连接路由到tun来防止泄漏，但你的设备将无法其他设备被访问
+  auto-route: false                         # 自动设置全局路由，可以自动将全局流量路由进入tun网卡。
+  auto-detect-interface: false              # 自动识别出口网卡
+
+dns:                                        # DNS 配置
+  enable: true                              # 关闭将使用系统 DNS
+  ipv6: true                                # IPV6解析开关；如果为false，将返回ipv6结果为空
+  listen: 0.0.0.0:53                        # DNS监听地址
+  enhanced-mode: fake-ip                    # 模式：redir-host或fake-ip
+  fake-ip-range: 198.18.0.1/16              # Fake IP 地址池 CIDR
+  fake-ip-filter:                           # 此列表中的主机名将不会使用 Fake IP 解析 即, 对这些域名的请求将始终使用其真实 IP 地址进行响应
+    - "*.lan"
+    - localhost.ptlogin2.qq.com
+    - +.srv.nintendo.net
+    - +.stun.playstation.net
+    - +.msftconnecttest.com
+    - +.msftncsi.com
+    - +.xboxlive.com
+    - msftconnecttest.com
+    - xbox.*.microsoft.com
+    - "*.battlenet.com.cn"
+    - "*.battlenet.com"
+    - "*.blzstatic.cn"
+    - "*.battle.net"
+  default-nameserver:                       # 这些域名服务器用于解析下面的DNS域名服务器主机名
+    - 1.1.1.1
+    - 119.29.29.29
+    - 223.5.5.5
+  nameserver:                               # 使用第一个收到的响应作为 DNS 查询的结果.所有查询都直接发送到名称服务器无需代理，支持指定端口
+    - https://doh.pub/dns-query
+    - https://120.53.53.53/dns-query
+    - https://dns.alidns.com/dns-query
+#  fallback:                                # 当存在fallback时DNS服务器将向fallback和nameserver并发请求，当GEOIP国家不是CN时将使用回退服务器的答案。
+#    - https://doh.pub/dns-query
+#    - https://120.53.53.53/dns-query
+#  fallback-filter:                         # 当`fallback-filter.geoip`为true，并且IP地址的GEOIP为`CN`时，使用`nameserver`中的服务器解析的IP地址。
+#    geoip: true
+#    geoip-code: CN
+#    ipcidr:
+#      - 240.0.0.0/4
+
+# 通过特定的名称服务器查找域名
+# nameserver-policy:
+#   'www.baidu.com': '114.114.114.114'
+#   '+.internal.crop.com': '10.0.0.1'
+#========= 建立锚点 =========#
+
+# 策略组引用
+pr:   &a3 {type: select,   proxies: [自动选择, 手动切换, 香港节点, 日本节点, 美国节点, 台湾节点, 狮城节点, DIRECT] }
+p:    &a1 {type: http,     interval: 86400,  health-check: {enable: true, url: http://www.gstatic.com/generate_204, interval: 1800} }
+auto: &a4 {type: url-test, lazy: true,  url: http://www.gstatic.com/generate_204, interval: 900, use: [改这里1, 改这里2, 改这里3] }
+use:  &a2 {type: select,   use: [改这里1, 改这里2, 改这里3, wyy] }
+c:    &a6 {type: http,     behavior: classical, interval: 86400}
+d:    &a5 {type: http,     behavior: domain,    interval: 86400}
+i:    &a7 {type: http,     behavior: ipcidr,    interval: 86400}
+
+proxy-providers:
+  改这里1:
+    <<: *a1
+    url: 订阅链接1
+    # URL后面填写格式1[单一订阅]: 直接填写你的机场Clash订阅[推荐此种方式，避免订阅泄露]
+    # URL后面填写格式2[多个订阅]：https://api.nexconvert.com/sub?target=clash&url=请手动填入你的订阅(多机场订阅用|分割即可)&emoji=true&list=true&new_name=true&udp=false
+    path: ./proxy_providers/改这里1.yaml
+    
+  改这里2:
+    <<: *a1
+    url: 订阅链接2
+    path: ./proxy_providers/改这里2.yaml
+    
+  改这里3:
+    <<: *a1
+    url: 订阅链接3
+    path: ./proxy_providers/改这里3.yaml
+    
+  wyy:
+    <<: *a1
+    url: https://raw.githubusercontent.com/oiozi/Gears/main/Package/Unblock/Node.txt
+    path: ./proxy_providers/wyy.yaml
+    
+proxies:
+
+
+proxy-groups:
+#分流分组
+  - {name: 人工智能, type: select, proxies: [DIRECT, 亚洲大陆, 欧洲大陆, 北美大陆, ]}
+  - {name: 谷歌服务, type: select, proxies: [DIRECT, 亚洲大陆, 欧洲大陆, 北美大陆, ]}
+  - {name: 电报消息, type: select, proxies: [DIRECT, 亚洲大陆, 欧洲大陆, 北美大陆, ]}
+  - {name: 国际媒体, <<: *a3}
+  - {name: 苹果服务, <<: *a3}
+  - {name: 种子网站, <<: *a3}
+  - {name: 全球加速, <<: *a4, filter: "港|主|GG|MM|HK|(?i)Hongkong"           }
+  - {name: 黑白名单, <<: *a3}
+#节点分组
+  - {name: 亚洲大陆, <<: *a2, filter: "^(?=.*(中国|CN|印度|IN|印度尼西亚|ID|巴基斯坦|PK|孟加拉国|BD|日本|JP|菲律宾|PH|越南|VN|土耳其|TR|伊朗|IR|泰国|TH|缅甸|MM|韩国|KR|伊拉克|IQ|阿富汗|AF|沙特阿拉伯|SA|乌兹别克斯坦|UZ|马来西亚|MY|也门|YE|伯利兹|BZ|吉尔吉斯斯坦|KG|约旦|JO|阿联酋|AE|塔吉克斯坦|TJ|以色列|IL|黎巴嫩|LB|新加坡|SG|科威特|KW|东帝汶|TL(?i)Music))^((?!(俄罗斯|荷兰|英国|法国|GB|FR|NL|RU|TG|土|TR)).)*$"           }
+  - {name: 欧洲大陆, <<: *a2, filter: "^(?=.*(阿尔巴尼亚|AL|安道尔|AD|奥地利|AT|比利时|BE|波黑|BA|保加利亚|BG|克罗地亚|HR|塞浦路斯|CY|捷克|CZ|丹麦|DK|爱沙尼亚|EE|芬兰|FI|法国|FR|德国|DE|希腊|GR|匈牙利|HU|冰岛|IS|爱尔兰|IE|意大利|IT|科索沃|XK|拉脱维亚|LV|列支敦士登|LI|立陶宛|LT|卢森堡|LU|北马其顿|MK|马耳他|MT|摩尔多瓦|MD|摩纳哥|MC|黑山|ME|荷兰|NL|挪威|NO|波兰|PL|葡萄牙|PT|罗马尼亚|RO|俄罗斯|RU|圣马力诺|SM|塞尔维亚|RS|斯洛伐克|SK|斯洛文尼亚|SI|土耳其|TR|西班牙|ES|瑞典|SE|瑞士|CH|乌克兰|UA|英国|GB(?i)Music))^((?!(台|日|韩|新|美|香|加|TG|RES|港|HK|主|SG|TW|US|JP|MP|MY|HongKong|ISP|HOME|VLESS)).)*$"           }
+  - {name: 北美大陆, <<: *a2, filter: "^(?=.*(美国|US|加拿大|CA|墨西哥|MX|格陵兰|GL|百慕大|BM|波多黎各|PR|开曼群岛|KY|特克斯和凯科斯群岛|TC|安圭拉|AI|安提瓜和巴布达|AG|阿鲁巴|AW|巴哈马|BS|巴巴多斯|BB|伯利兹|BZ|多米尼克|DM|多米尼加共和国|DO|萨尔瓦多|SV|格林纳达|GD|危地马拉|GT|海地|HT|洪都拉斯|HN|牙买加|JM|尼加拉瓜|NI|巴拿马|PA|圣基茨和尼维斯|KN|圣卢西亚|LC|圣文森特和格林纳丁斯|VC|圣皮埃尔和密克隆群岛|PM|特立尼达和多巴哥|TT|荷属圣马丁|SX|英属维尔京群岛|VG|美属维尔京群岛|VI|马提尼克|MQ|蒙塞拉特|MS|波多黎各|PR|圣巴泰勒米|BL|圣马丁|MF|特克斯和凯科斯群岛|TC|安圭拉|AI|阿鲁巴|AW(?i)Music))^((?!(台|日|韩|新|香|HK|HongKong|SG|JP|TW|TG|lL|ISP|HOME|VLESS)).)*$"           }
+  - {name: 南美大陆, <<: *a4, filter: "^(?=.*(阿根廷|AR|巴西|BR|哥伦比亚|CO|智利|CL|厄瓜多尔|EC|Guyana|GY|巴拉圭|PY|秘鲁|PE|苏里南|SR|乌拉圭|UY|委内瑞拉|VE|法属圭亚那|GF|英属圭亚那|GY(?i)Music))^((?!(台|日|韩|新|香|TG|lL|ISP|HOME|VLESS)).)*$"           }
+  - {name: 非洲大陆, <<: *a4, filter: "(?=.*(阿尔及利亚|DZ|安哥拉|AO|贝宁|BJ|博茨瓦纳|BW|布基纳法索|BF|布隆迪|BI|佛得角|CV|喀麦隆|CM|中非共和国|CF|乍得|TD|科摩罗|KM|刚果（布）|CG|刚果（金）|CD|科特迪瓦|CI|吉布提|DJ|埃及|EG|赤道几内亚|GQ|厄立特里亚|ER|埃塞俄比亚|ET|加蓬|GA|冈比亚|GM|加纳|GH|几内亚|GN|几内亚比绍|GW|肯尼亚|KE|莱索托|LS|利比里亚|LR|利比亚|LY|马达加斯加|MG|马拉维|MW|马里|ML|毛里塔尼亚|MR|毛里求斯|MU|摩洛哥|MA|莫桑比克|MZ|纳米比亚|NA|尼日尔|NE|尼日利亚|NG|卢旺达|RW|圣多美和普林西比|ST|塞内加尔|SN|塞舌尔|SC|塞拉利昂|SL|索马里|SO|南非|ZA|南苏丹|SS|苏丹|SD|斯威士兰|SZ|坦桑尼亚|TZ|多哥|TG|突尼斯|TN|乌干达|UG|赞比亚|ZM|津巴布韦|ZW(?i)Music))^((?!(台|日|韩|新|香|JP|SG|HongKong|TW|HK|TR|US|lL|ISP|REB|CDN|HOME|VLESS|入口|HY)).)*$"           }
+  - {name: 大洋洲, <<: *a4, filter: "^(?=.*(南极洲|AQ|澳大利亚|AU(?i)Music))^((?!(TG@REBIRTHOKAY)).)*$"           }
+  - {name: 网易音乐, <<: *a2, filter: "网易|音|(?i)乐"               	}
+# 分流规则 
+rule-providers:
+  NetEaseMusic:		{<<: *a6, url: https://raw.githubusercontent.com/oiozi/Gears/main/Rule/Clash/NeteaseMusic.yaml,										path: ./ruleset/NetEaseMusic.yaml			}
+  Direct:			{<<: *a5, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Direct/Direct.yaml,						path: ./ruleset/Direct.yaml					}
+  Lan:				{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Lan/Lan.yaml,								path: ./ruleset/Lan.yaml					}
+  Download:			{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Download/Download.yaml,					path: ./ruleset/Download.yaml				}
+  Advertising:		{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Advertising/Advertising_Classical.yaml,	path: ./ruleset/Advertising_Classical.yaml	}
+  OpenAi:			{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/OpenAI/OpenAI.yaml,						path: ./ruleset/OpenAi.yaml					}
+  Google:			{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Google/Google.yaml,						path: ./ruleset/Google.yaml					}
+  TelegramSG:       {<<: *a6, url: https://cdn.jsdelivr.net/gh/oiozi/Gears@main/Rule/Clash/TelegramSG.yaml,                                             path: ./ruleset/TelegramSG.yaml             }
+  TelegramNL:       {<<: *a6, url: https://cdn.jsdelivr.net/gh/oiozi/Gears@main/Rule/Clash/TelegramNL.yaml,                                             path: ./ruleset/TelegramNL.yaml             }
+  TelegramUS:       {<<: *a6, url: https://cdn.jsdelivr.net/gh/oiozi/Gears@main/Rule/Clash/TelegramUS.yaml,                                             path: ./ruleset/TelegramUS.yaml             }
+  TelegramALL:      {<<: *a6, url: https://cdn.jsdelivr.net/gh/oiozi/Gears@main/Rule/Clash/TelegramALL.yaml,                                            path: ./ruleset/TelegramALL.yaml            }
+  Telegram:			{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Telegram/Telegram.yaml,					path: ./ruleset/Telegram.yaml				}
+  Spotify:			{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Spotify/Spotify.yaml,						path: ./ruleset/Spotify.yaml				}
+  GlobalMedia:		{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GlobalMedia/GlobalMedia_Classical.yaml,	path: ./ruleset/GlobalMedia.yaml			}
+  Apple:			{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Apple/Apple_Classical.yaml,				path: ./ruleset/Apple.yaml					}
+  Github:			{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GitHub/GitHub.yaml,						path: ./ruleset/Github.yaml					}
+  Microsoft:		{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Microsoft/Microsoft.yaml,					path: ./ruleset/Microsoft.yaml				}
+  Twitter:			{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Twitter/Twitter.yaml,						path: ./ruleset/Twitter.yaml				}
+  PrivateTracker:	{<<: *a6, url: https://cdn.jsdelivr.net/gh/oiozi/Gears@main/Rule/Clash/PrivateTracker.yaml,											path: ./ruleset/PrivateTracker.yaml			}
+  PayPal:           {<<: *a6, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/PayPal/PayPal.yaml,                 path: ./ruleset/PayPal.yaml		        	}
+  ChinaMax:			{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/ChinaMax/ChinaMax_Classical.yaml,			path: ./ruleset/ChinaMax_Classical.yaml		}
+  Global:			{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Global/Global_Classical.yaml,				path: ./ruleset/Global_Classical.yaml		}
+  
+ # 分流Policy 
+rules:
+  - RULE-SET,Direct,DIRECT
+  - RULE-SET,Lan,DIRECT
+  - RULE-SET,Download,DIRECT
+  - RULE-SET,Advertising,REJECT
+  - RULE-SET,OpenAi,人工智能
+  - RULE-SET,Google,谷歌服务
+  - RULE-SET,TelegramSG,亚洲大陆
+  - RULE-SET,TelegramNL,欧洲大陆
+  - RULE-SET,TelegramUS,北美大陆
+  - RULE-SET,TelegramALL,电报消息
+  - RULE-SET,Telegram,电报消息
+  - RULE-SET,GlobalMedia,国际媒体
+  - RULE-SET,Spotify,国际媒体
+  - RULE-SET,NetEaseMusic,网易音乐
+  - RULE-SET,PayPal,DIRECT
+  - RULE-SET,Twitter,北美大陆
+  - RULE-SET,Github,亚洲大陆
+  - RULE-SET,Microsoft,亚洲大陆
+  - RULE-SET,PrivateTracker,DIRECT
+  - RULE-SET,Apple,DIRECT
+  - RULE-SET,ChinaMax,DIRECT
+  - RULE-SET,Global,全球加速
+  - GEOIP,CN,DIRECT
+  - MATCH,黑白名单
+
+
+# TUN模式是通过在操作系统上安装一个虚拟网卡来实现的，它可以接管所有的网络流量，并将流量转发至Clash，然后由Clash发出请求
+# Windows 系统中如何启用TUN模式
+# 1、运行 Clash For Windows, 确保使用规则模式，并可以联网
+# 2、点击 General中的Service Mode右侧的Manage按钮，在弹出窗口中选择schtasks，安装服务模式。安装完成后，应用程序会自动重启，Service Mode右侧的地球图标变为绿色表示安装成功
+# 3、点击 General中的TUN Mode右侧的开关以启动TUN模式
