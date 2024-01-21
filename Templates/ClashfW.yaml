@@ -87,7 +87,7 @@ dns:                                        # DNS 配置
 #========= 建立锚点 =========#
 
 # 策略组引用
-pr:   &a3 {type: select,   proxies: [自动选择, 手动切换, 香港节点, 日本节点, 美国节点, 台湾节点, 狮城节点, DIRECT] }
+pr:   &a3 {type: select,   proxies: [DIRECT, 亚洲大陆, 欧洲大陆, 北美大陆, 南美大陆, 非洲大陆, 大洋洲际, CF-CND-LOL-US] }
 p:    &a1 {type: http,     interval: 86400,  health-check: {enable: true, url: http://www.gstatic.com/generate_204, interval: 1800} }
 auto: &a4 {type: url-test, lazy: true,  url: http://www.gstatic.com/generate_204, interval: 900, use: [改这里1, 改这里2, 改这里3] }
 use:  &a2 {type: select,   use: [改这里1, 改这里2, 改这里3, wyy] }
@@ -137,7 +137,7 @@ proxy-groups:
   - {name: 北美大陆, <<: *a2, filter: "^(?=.*(美国|US|加拿大|CA|墨西哥|MX|格陵兰|GL|百慕大|BM|波多黎各|PR|开曼群岛|KY|特克斯和凯科斯群岛|TC|安圭拉|AI|安提瓜和巴布达|AG|阿鲁巴|AW|巴哈马|BS|巴巴多斯|BB|伯利兹|BZ|多米尼克|DM|多米尼加共和国|DO|萨尔瓦多|SV|格林纳达|GD|危地马拉|GT|海地|HT|洪都拉斯|HN|牙买加|JM|尼加拉瓜|NI|巴拿马|PA|圣基茨和尼维斯|KN|圣卢西亚|LC|圣文森特和格林纳丁斯|VC|圣皮埃尔和密克隆群岛|PM|特立尼达和多巴哥|TT|荷属圣马丁|SX|英属维尔京群岛|VG|美属维尔京群岛|VI|马提尼克|MQ|蒙塞拉特|MS|波多黎各|PR|圣巴泰勒米|BL|圣马丁|MF|特克斯和凯科斯群岛|TC|安圭拉|AI|阿鲁巴|AW(?i)Music))^((?!(台|日|韩|新|香|HK|HongKong|SG|JP|TW|TG|lL|ISP|HOME|VLESS)).)*$"           }
   - {name: 南美大陆, <<: *a4, filter: "^(?=.*(阿根廷|AR|巴西|BR|哥伦比亚|CO|智利|CL|厄瓜多尔|EC|Guyana|GY|巴拉圭|PY|秘鲁|PE|苏里南|SR|乌拉圭|UY|委内瑞拉|VE|法属圭亚那|GF|英属圭亚那|GY(?i)Music))^((?!(台|日|韩|新|香|TG|lL|ISP|HOME|VLESS)).)*$"           }
   - {name: 非洲大陆, <<: *a4, filter: "(?=.*(阿尔及利亚|DZ|安哥拉|AO|贝宁|BJ|博茨瓦纳|BW|布基纳法索|BF|布隆迪|BI|佛得角|CV|喀麦隆|CM|中非共和国|CF|乍得|TD|科摩罗|KM|刚果（布）|CG|刚果（金）|CD|科特迪瓦|CI|吉布提|DJ|埃及|EG|赤道几内亚|GQ|厄立特里亚|ER|埃塞俄比亚|ET|加蓬|GA|冈比亚|GM|加纳|GH|几内亚|GN|几内亚比绍|GW|肯尼亚|KE|莱索托|LS|利比里亚|LR|利比亚|LY|马达加斯加|MG|马拉维|MW|马里|ML|毛里塔尼亚|MR|毛里求斯|MU|摩洛哥|MA|莫桑比克|MZ|纳米比亚|NA|尼日尔|NE|尼日利亚|NG|卢旺达|RW|圣多美和普林西比|ST|塞内加尔|SN|塞舌尔|SC|塞拉利昂|SL|索马里|SO|南非|ZA|南苏丹|SS|苏丹|SD|斯威士兰|SZ|坦桑尼亚|TZ|多哥|TG|突尼斯|TN|乌干达|UG|赞比亚|ZM|津巴布韦|ZW(?i)Music))^((?!(台|日|韩|新|香|JP|SG|HongKong|TW|HK|TR|US|lL|ISP|REB|CDN|HOME|VLESS|入口|HY)).)*$"           }
-  - {name: 大洋洲, <<: *a4, filter: "^(?=.*(南极洲|AQ|澳大利亚|AU(?i)Music))^((?!(TG@REBIRTHOKAY)).)*$"           }
+  - {name: 大洋洲际, <<: *a4, filter: "^(?=.*(南极洲|AQ|澳大利亚|AU(?i)Music))^((?!(TG@REBIRTHOKAY)).)*$"           }
   - {name: 网易音乐, <<: *a2, filter: "网易|音|(?i)乐"               	}
 # 分流规则 
 rule-providers:
