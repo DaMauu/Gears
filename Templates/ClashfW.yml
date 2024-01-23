@@ -89,29 +89,29 @@ dns:                                        # DNS 配置
 # 策略组引用
 pr:   &a3 {type: select,   proxies: [DIRECT, 亚洲大陆, 欧洲大陆, 北美大陆, 南美大陆, 非洲大陆, 大洋洲际] }
 p:    &a1 {type: http,     interval: 86400,  health-check: {enable: true, url: http://www.gstatic.com/generate_204, interval: 1800} }
-auto: &a4 {type: url-test, lazy: true,  url: http://www.gstatic.com/generate_204, interval: 900, use: [改这里1, 改这里2, 改这里3] }
-use:  &a2 {type: select,   use: [改这里1, 改这里2, 改这里3, wyy] }
+auto: &a4 {type: url-test, lazy: true,  url: http://www.gstatic.com/generate_204, interval: 900, use: [订阅名字1, 订阅名字2, 订阅名字3] }
+use:  &a2 {type: select,   use: [订阅名字1, 订阅名字2, 订阅名字3, wyy] }
 c:    &a6 {type: http,     behavior: classical, interval: 86400}
 d:    &a5 {type: http,     behavior: domain,    interval: 86400}
 i:    &a7 {type: http,     behavior: ipcidr,    interval: 86400}
 
 proxy-providers:
-  改这里1:
+  订阅名字1:
     <<: *a1
     url: 订阅链接1
     # URL后面填写格式1[单一订阅]: 直接填写你的机场Clash订阅[推荐此种方式，避免订阅泄露]
     # URL后面填写格式2[多个订阅]：https://api.nexconvert.com/sub?target=clash&url=请手动填入你的订阅(多机场订阅用|分割即可)&emoji=true&list=true&new_name=true&udp=false
-    path: ./proxy_providers/改这里1.yaml
+    path: ./proxy_providers/订阅名字1.yaml
     
-  改这里2:
-    <<: *a1
-    url: 订阅链接2
-    path: ./proxy_providers/改这里2.yaml
+#  订阅名字2:
+#    <<: *a1
+#    url: 订阅链接2
+#    path: ./proxy_providers/订阅名字2.yaml
     
-  改这里3:
-    <<: *a1
-    url: 订阅链接3
-    path: ./proxy_providers/改这里3.yaml
+#  订阅名字3:
+#    <<: *a1
+#    url: 订阅链接3
+#    path: ./proxy_providers/订阅名字3.yaml
     
   wyy:
     <<: *a1
