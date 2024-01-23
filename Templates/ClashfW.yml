@@ -15,7 +15,7 @@ log-level: info                             # 日志级别
 find-process-mode: strict                   # 匹配所有进程（always/strict/off）
 ipv6: true                                  # IPV6开关
 external-controller: 0.0.0.0:9090           # 外部控制器,可以使用 RESTful API控制clash 内核
-secret: f38a3a3e-da82-446b-8282-3099ad76de76 # RESTful API的密钥（可选）
+secret:  # RESTful API的密钥（可选）
 profile:
   store-selected: true                      # 存储 select 选择记录
   store-fake-ip: true                       # 持久化 fake-ip
@@ -87,7 +87,7 @@ dns:                                        # DNS 配置
 #========= 建立锚点 =========#
 
 # 策略组引用
-pr:   &a3 {type: select,   proxies: [DIRECT, 亚洲大陆, 欧洲大陆, 北美大陆, 南美大陆, 非洲大陆, 大洋洲际, CF-CND-LOL-US] }
+pr:   &a3 {type: select,   proxies: [DIRECT, 亚洲大陆, 欧洲大陆, 北美大陆, 南美大陆, 非洲大陆, 大洋洲际] }
 p:    &a1 {type: http,     interval: 86400,  health-check: {enable: true, url: http://www.gstatic.com/generate_204, interval: 1800} }
 auto: &a4 {type: url-test, lazy: true,  url: http://www.gstatic.com/generate_204, interval: 900, use: [改这里1, 改这里2, 改这里3] }
 use:  &a2 {type: select,   use: [改这里1, 改这里2, 改这里3, wyy] }
