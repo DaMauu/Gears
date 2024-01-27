@@ -165,16 +165,16 @@ rules:
   - RULE-SET,Lan,DIRECT
   - RULE-SET,Download,DIRECT
   - RULE-SET,Advertising,REJECT
-  - RULE-SET,OpenAi,谷歌服务
-  - RULE-SET,Google,谷歌服务
+  - RULE-SET,NetEaseMusic,网易音乐
   - RULE-SET,TelegramSG,电报服务
   - RULE-SET,TelegramNL,双栈连接
   - RULE-SET,TelegramUS,谷歌服务
   - RULE-SET,TelegramALL,电报服务
   - RULE-SET,Telegram,电报服务
+  - RULE-SET,OpenAi,谷歌服务
+  - RULE-SET,Google,谷歌服务
   - RULE-SET,GlobalMedia,国际媒体
   - RULE-SET,Spotify,国际媒体
-  - RULE-SET,NetEaseMusic,网易音乐
   - RULE-SET,PayPal,DIRECT
   - RULE-SET,Twitter,全球加速
   - RULE-SET,Github,全球加速
