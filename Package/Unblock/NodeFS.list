@@ -1,6 +1,8 @@
 🎧 TG@REBIRTHOKAY = http, 127.0.0.1, 70
 🎧 网易音乐 1 = http, 155.248.169.205, 70
 🎧 网易音乐 2 = http, 101.132.79.113, 23333
-🎧 网易音乐 3 = custom, 101.132.79.113, 23333, aes-128-gcm, password=music.leedsbypass.tk, http://example.com/
-🎧 网易音乐 4 = custom, music.desperadoj.com, 30001, aes-128-gcm, desperadoj.com_free_proxy_etg0, http://example.com/
-🎧 网易音乐 5 = ss, music.desperadoj.com, 30003, encrypt-method=aes-128-gcm, password=desperadoj.com_free_proxy_etg0
+🎧 网易音乐 3 = http, music.leedsbypass.tk, 3333
+🎧 网易音乐 4 = http, aimer.one, 3333
+🎧 网易音乐 5 = custom, 101.132.79.113, 23333, aes-128-gcm, password=music.leedsbypass.tk, http://example.com/
+🎧 网易音乐 6 = custom, music.desperadoj.com, 30001, aes-128-gcm, desperadoj.com_free_proxy_etg0, http://example.com/
+🎧 网易音乐 7 = ss, music.desperadoj.com, 30003, encrypt-method=aes-128-gcm, password=desperadoj.com_free_proxy_etg0
