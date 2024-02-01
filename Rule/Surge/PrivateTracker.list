@@ -5,7 +5,6 @@
 # DOMAIN-KEYWORD: 3
 # DOMAIN-SUFFIX: 615
 # TOTAL: 618
-payload:
 # Tracker URL
 DOMAIN-KEYWORD,announce
 DOMAIN-KEYWORD,torrent
