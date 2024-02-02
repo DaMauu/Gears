@@ -6,9 +6,7 @@
 </table></figure>
 <p>&nbsp;</p>
 
-
-[![GitHub Stars](https://img.shields.io/github/stars/DaMauu/Gears)](https://github.com/DaMauu/Gears/stargazers)[![GitHub Fork](https://img.shields.io/github/forks/DaMauu/Gears)](https://github.com/DaMauu/Gears/network/members)[![GitHub Commit](https://img.shields.io/github/commit-activity/m/DaMauu/Gears?label=Commits)](https://github.com/dDaMauu/Gears/commits/master)[![Telegram](https://img.shields.io/badge/Telegram-Channel-33A8E3)](https://t.me/REBIRTHOKAY)[![GitHub Issues](https://img.shields.io/github/issues/DaMauu/Gears)](https://github.com/DaMauu/Gears/issues)![GitHub License](https://img.shields.io/github/license/mashape/apistatus.svg)[![GitHub Followers](https://img.shields.io/github/followers/DaMauu?label=follow&style=social)](https://github.com/DaMauu)
-## Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=DaMauu/Gears&type=Timeline)](https://star-history.com/#DaMauu/Gears&Timeline)
-
+[![GitHub Followers](https://img.shields.io/github/followers/DaMauu?label=follow&style=social)](https://github.com/DaMauu)
+[![GitHub Fork](https://img.shields.io/github/forks/DaMauu/Gears)](https://github.com/DaMauu/Gears/network/members)
+[![GitHub Stars](https://img.shields.io/github/stars/DaMauu/Gears)](https://github.com/DaMauu/Gears/stargazers)
+[![Telegram](https://img.shields.io/badge/Telegram-Channel-33A8E3)](https://t.me/REBIRTHOKAY)
