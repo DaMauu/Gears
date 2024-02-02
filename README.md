@@ -5,7 +5,7 @@
 [![Telegram](https://img.shields.io/badge/Telegram-Channel-33A8E3)](https://t.me/REBIRTHOKAY)
 [![GitHub Commit](https://img.shields.io/github/commit-activity/m/DaMauu/Gears?label=Commits)](https://github.com/dDaMauu/Gears/commits/master)
 [![GitHub Issues](https://img.shields.io/github/issues/DaMauu/Gears)](https://github.com/DaMauu/Gears/issues)
-[![GitHub License](https://img.shields.io/github/license/mashape/apistatus.svg)]
+[![GitHub License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://img.shields.io/github/license/mashape/apistatus.svg)
 
 <figure class='table-figure'><table>
 <thead>
