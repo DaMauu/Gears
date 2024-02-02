@@ -1,9 +1,7 @@
-# ------------------------------------------------
-# |          Clash Config Make by oiozi          |
-# |       GitHub: https://github.com/oiozi       |
-# |          Update Date: 20240121               |
-# |                  enjoy                       |
-# ------------------------------------------------
+#Clash for windows by 大麻友友[DaMauu] 20240202
+#log：
+#1/排序策略 & 分流应对默认优先级....Done
+
 #port: 7890                                 # HTTP 代理端口
 #socks-port: 7890                           # Socks 端口
 #redir-port: 7890                           # Redir 端口
@@ -87,8 +85,8 @@ dns:                                        # DNS 配置
 #========= 建立锚点 =========#
 
 # 策略组引用
-pr:   &a3 {type: select,   proxies: [DIRECT, 双栈连接, 电报服务, 谷歌服务, 全球加速] }
-p:    &a1 {type: http,     interval: 86400,  health-check: {enable: true, url: http://www.gstatic.com/generate_204, interval: 1800} }
+pr:   &a3 {type: select,   proxies: [DIRECT, 全球加速, 香港节点, 日本节点, 台湾节点, 美国节点, 狮城节点, 欧洲节点] }
+p:    &a1 {type: http,     interval: 86400,  health-check: {enable: true, url: http://www.gstatic.com/generate_204, interval: 3600} 
 auto: &a4 {type: url-test, lazy: true,  url: http://www.gstatic.com/generate_204, interval: 900, use: [订阅名字1, 订阅名字2, 订阅名字3] }
 use:  &a2 {type: select,   use: [订阅名字1, 订阅名字2, 订阅名字3, wyy] }
 c:    &a6 {type: http,     behavior: classical, interval: 86400}
@@ -112,80 +110,87 @@ proxy-providers:
 #    <<: *a1
 #    url: 订阅链接3
 #    path: ./proxy_providers/订阅名字3.yaml
-    
+
   wyy:
     <<: *a1
-    url: https://raw.githubusercontent.com/oiozi/Gears/main/Package/Unblock/Node.txt
+    url: https://cdn.jsdelivr.net/gh/DaMauu/Gears@main/Package/Unblock/Node.txt
     path: ./proxy_providers/wyy.yaml
     
 proxies:
 
 proxy-groups:
-#分流分组
-
 #节点分组
   - {name: 网易音乐, <<: *a2, filter: "网易|音|(?i)乐"               	}
-  - {name: 双栈连接, <<: *a2, filter: "^(?=.*(AL|AD|AR|AM|AT|AZ|BS|BH|BD|BB|BY|BE|BA|BG|BR|BE|BA|BG|HR|CY|CZ|DK|EE|FI|FR|DE|GR|HU|IS|IE|IT|XK|LV|LI|LT|LU|MK|MT|MD|MC|ME|NL|NO|PL|PT|RO|RU|SM|RS|SK|SI|AQ|AU|阿尔巴尼亚|安道尔|阿根廷|亚美尼亚|奥地利|阿塞拜疆|巴哈马|巴林|孟加拉国|巴巴多斯|白俄罗斯|比利时|波黑|保加利亚|巴西|比利时|波黑|保加利亚|克罗地亚|塞浦路斯|捷克|丹麦|爱沙尼亚|芬兰|法国|德国|希腊|匈牙利|冰岛|爱尔兰|意大利|科索沃|拉脱维亚|列支敦士登|立陶宛|卢森堡|北马其顿|马耳他|摩尔多瓦|摩纳哥|黑山|荷兰|挪威|波兰|葡萄牙|罗马尼亚|俄罗斯|圣马力诺|塞尔维亚|斯洛伐克|斯洛文尼亚|南极洲|澳大利亚(?i)Music))^((?!(台|日|韩|新|美|香|加TG|RES|港|HK|主|SG|TW|US|JP|MP|MY|HongKong|ISP|HOME|VLESS)).)*$"           }
-  - {name: 电报服务, <<: *a2, filter: "^(?=.*(CN|JP|KR|KP|MN|VN|LA|KH|MM|TH|MY|SG|ID|BN|PH|TL|AF|BH|BD|BT|IN|IR|IQ|IL|JO|KW|LB|OM|PK|PS|QA|SA|SY|AE|YE|中国|日本|韩国|朝鲜|蒙古|越南|老挝|柬埔寨|缅甸|泰国|马来西亚|新加坡|印尼|文莱|菲律宾|东帝汶|阿富汗|巴林|孟加拉国|不丹|印度|伊朗|伊拉克|以色列|约旦|科威特|黎巴嫩|阿曼|巴基斯坦|巴勒斯坦|卡塔尔|沙特阿拉伯|叙利亚|阿联酋|也门|(?i)Music))^((?!(俄罗斯|荷兰|英国|法国|GB|FR|NL|RU|TG|土|TR)).)*$"           }
-  - {name: 谷歌服务, <<: *a2, filter: "^(?=.*(US|CA|MX|GL|BM|PR|KY|TC|AI|AG|AW|BS|BB|BZ|DM|DO|SV|GD|GT|HT|HN|JM|NI|PA|KN|LC|VC|PM|TT|SX|VG|VI|MQ|MS|PR|BL|MF|TC|AI|AW|美国|加拿大|墨西哥|格陵兰|百慕大|波多黎各|开曼群岛|特克斯和凯科斯群岛|安圭拉|安提瓜和巴布达|阿鲁巴|巴哈马|巴巴多斯|伯利兹|多米尼克|多米尼加共和国|萨尔瓦多|格林纳达|危地马拉|海地|洪都拉斯|牙买加|尼加拉瓜|巴拿马|圣基茨和尼维斯|圣卢西亚|圣文森特和格林纳丁斯|圣皮埃尔和密克隆群岛|特立尼达和多巴哥|荷属圣马丁|英属维尔京群岛|美属维尔京群岛|马提尼克|蒙塞拉特|波多黎各|圣巴泰勒米|圣马丁|特克斯和凯科斯群岛|安圭拉|阿鲁巴(?i)Music))^((?!(台|日|韩|新|香|TG|lL|ISP|HOME|VLESS)).)*$"           }
+  - {name: 国内媒体, <<: *a3}
   - {name: 国际媒体, <<: *a3}
-  - {name: 苹果服务, <<: *a3}
-  - {name: 种子网站, <<: *a3}
+  - {name: 谷歌服务, <<: *a2, filter: "^(?=.*(US|CA|MX|GL|BM|PR|KY|TC|AI|AG|AW|BS|BB|BZ|DM|DO|SV|GD|GT|HT|HN|JM|NI|PA|KN|LC|VC|PM|TT|SX|VG|VI|MQ|MS|PR|BL|MF|TC|AI|AW|美国|加拿大|墨西哥|格陵兰|百慕大|波多黎各|开曼群岛|特克斯和凯科斯群岛|安圭拉|安提瓜和巴布达|阿鲁巴|巴哈马|巴巴多斯|伯利兹|多米尼克|多米尼加共和国|萨尔瓦多|格林纳达|危地马拉|海地|洪都拉斯|牙买加|尼加拉瓜|巴拿马|圣基茨和尼维斯|圣卢西亚|圣文森特和格林纳丁斯|圣皮埃尔和密克隆群岛|特立尼达和多巴哥|荷属圣马丁|英属维尔京群岛|美属维尔京群岛|马提尼克|蒙塞拉特|波多黎各|圣巴泰勒米|圣马丁|特克斯和凯科斯群岛|安圭拉|阿鲁巴(?i)Music))^((?!(台|日|韩|新|香|TG|lL|ISP|HOME|VLESS)).)*$"           }
+  - {name: 种子直连, <<: *a2, filter: "^(?=.*(AL|AD|AR|AM|AT|AZ|BS|BH|BD|BB|BY|BE|BA|BG|BR|BE|BA|BG|HR|CY|CZ|DK|EE|FI|FR|DE|GR|HU|IS|IE|IT|XK|LV|LI|LT|LU|MK|MT|MD|MC|ME|NL|NO|PL|PT|RO|RU|SM|RS|SK|SI|AQ|AU|阿尔巴尼亚|安道尔|阿根廷|亚美尼亚|奥地利|阿塞拜疆|巴哈马|巴林|孟加拉国|巴巴多斯|白俄罗斯|比利时|波黑|保加利亚|巴西|比利时|波黑|保加利亚|克罗地亚|塞浦路斯|捷克|丹麦|爱沙尼亚|芬兰|法国|德国|希腊|匈牙利|冰岛|爱尔兰|意大利|科索沃|拉脱维亚|列支敦士登|立陶宛|卢森堡|北马其顿|马耳他|摩尔多瓦|摩纳哥|黑山|荷兰|挪威|波兰|葡萄牙|罗马尼亚|俄罗斯|圣马力诺|塞尔维亚|斯洛伐克|斯洛文尼亚|南极洲|澳大利亚(?i)Music))^((?!(台|日|韩|新|美|香|加TG|RES|港|HK|主|SG|TW|US|JP|MP|MY|HongKong|ISP|HOME|VLESS)).)*$"           }
+  - {name: 电报服务, <<: *a2, filter: "^(?=.*(CN|JP|KR|KP|MN|VN|LA|KH|MM|TH|MY|SG|ID|BN|PH|TL|AF|BH|BD|BT|IN|IR|IQ|IL|JO|KW|LB|OM|PK|PS|QA|SA|SY|AE|YE|中国|日本|韩国|朝鲜|蒙古|越南|老挝|柬埔寨|缅甸|泰国|马来西亚|新加坡|印尼|文莱|菲律宾|东帝汶|阿富汗|巴林|孟加拉国|不丹|印度|伊朗|伊拉克|以色列|约旦|科威特|黎巴嫩|阿曼|巴基斯坦|巴勒斯坦|卡塔尔|沙特阿拉伯|叙利亚|阿联酋|也门|(?i)Music))^((?!(俄罗斯|荷兰|英国|法国|GB|FR|NL|RU|TG|土|TR)).)*$"           }
   - {name: 全球加速, <<: *a4, filter: "^(?=.*(香港|香|港|主|GG|MM|HK|hk(?i)HongKong))^((?!(俄罗斯|荷兰|英国|法国|GB|FR|NL|RU|TG|土|TR)).)*$"           }
+  - {name: 苹果服务, <<: *a3}
   - {name: 黑白名单, <<: *a4}
+#节点分组
+  - {name: 自动选择, <<: *a4}
+  - {name: 香港节点, <<: *a4, filter: "港|HK|(?i)Hong"           }             # a4更改为a2，即为手动选择  
+  - {name: 台湾节点, <<: *a4, filter: "台|湾|TW|(?i)Taiwan"      }             # a4更改为a2，即为手动选择
+  - {name: 日本节点, <<: *a4, filter: "日|东京|JP|(?i)Japan"     }             # a4更改为a2，即为手动选择   
+  - {name: 狮城节点, <<: *a4, filter: "新|坡|SG|(?i)Singapore"    }            # a4更改为a2，即为手动选择
+  - {name: 美国节点, <<: *a4, filter: "美|US|(?i)States|American"}             # a4更改为a2，即为手动选择
+  - {name: 欧洲节点, <<: *a4, filter: "^(?=.*(AL|AD|AR|AM|AT|AZ|BS|BH|BD|BB|BY|BE|BA|BG|BR|BE|BA|BG|HR|CY|CZ|DK|EE|FI|FR|DE|GR|HU|IS|IE|IT|XK|LV|LI|LT|LU|MK|MT|MD|MC|ME|NL|NO|PL|PT|RO|RU|SM|RS|SK|SI|AQ|AU|阿尔巴尼亚|安道尔|阿根廷|亚美尼亚|奥地利|阿塞拜疆|巴哈马|巴林|孟加拉国|巴巴多斯|白俄罗斯|比利时|波黑|保加利亚|巴西|比利时|波黑|保加利亚|克罗地亚|塞浦路斯|捷克|丹麦|爱沙尼亚|芬兰|法国|德国|希腊|匈牙利|冰岛|爱尔兰|意大利|科索沃|拉脱维亚|列支敦士登|立陶宛|卢森堡|北马其顿|马耳他|摩尔多瓦|摩纳哥|黑山|荷兰|挪威|波兰|葡萄牙|罗马尼亚|俄罗斯|圣马力诺|塞尔维亚|斯洛伐克|斯洛文尼亚|南极洲|澳大利亚(?i)Music))^((?!(台|日|韩|新|美|香|加TG|RES|港|HK|主|SG|TW|US|JP|MP|MY|HongKong|ISP|HOME|VLESS)).)*$"    }            # a4更改为a2，即为手动选择
+  
 # 分流规则 
 rule-providers:
-  NetEaseMusic:		{<<: *a6, url: https://raw.githubusercontent.com/oiozi/Gears/main/Rule/Clash/NeteaseMusic.yaml,										path: ./ruleset/NetEaseMusic.yaml			}
+#直连服务
   Direct:			{<<: *a5, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Direct/Direct.yaml,						path: ./ruleset/Direct.yaml					}
   Lan:				{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Lan/Lan.yaml,								path: ./ruleset/Lan.yaml					}
   Download:			{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Download/Download.yaml,					path: ./ruleset/Download.yaml				}
+#屏蔽垃圾
   Advertising:		{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Advertising/Advertising_Classical.yaml,	path: ./ruleset/Advertising_Classical.yaml	}
-  OpenAi:			{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/OpenAI/OpenAI.yaml,						path: ./ruleset/OpenAi.yaml					}
-  Google:			{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Google/Google.yaml,						path: ./ruleset/Google.yaml					}
-  TelegramSG:       {<<: *a6, url: https://cdn.jsdelivr.net/gh/oiozi/Gears@main/Rule/Clash/TelegramSG.yaml,                                             path: ./ruleset/TelegramSG.yaml             }
-  TelegramNL:       {<<: *a6, url: https://cdn.jsdelivr.net/gh/oiozi/Gears@main/Rule/Clash/TelegramNL.yaml,                                             path: ./ruleset/TelegramNL.yaml             }
-  TelegramUS:       {<<: *a6, url: https://cdn.jsdelivr.net/gh/oiozi/Gears@main/Rule/Clash/TelegramUS.yaml,                                             path: ./ruleset/TelegramUS.yaml             }
-  TelegramALL:      {<<: *a6, url: https://cdn.jsdelivr.net/gh/oiozi/Gears@main/Rule/Clash/TelegramALL.yaml,                                            path: ./ruleset/TelegramALL.yaml            }
-  Telegram:			{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Telegram/Telegram.yaml,					path: ./ruleset/Telegram.yaml				}
+#娱乐服务
+  NetEaseMusic:		{<<: *a6, url: https://raw.githubusercontent.com/DaMauu/Gears/main/Rule/Clash/NeteaseMusic.yaml,									path: ./ruleset/NetEaseMusic.yaml		    }
+  BiliBili:         {<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/BiliBili/BiliBili.yaml,                   path: ./ruleset/BiliBili.yaml               }
+  Bahamut:          {<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Bahamut/Bahamut.yaml,                     path: ./ruleset/Bahamut.yaml                } 
   Spotify:			{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Spotify/Spotify.yaml,						path: ./ruleset/Spotify.yaml				}
   GlobalMedia:		{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GlobalMedia/GlobalMedia_Classical.yaml,	path: ./ruleset/GlobalMedia.yaml			}
-  Apple:			{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Apple/Apple_Classical.yaml,				path: ./ruleset/Apple.yaml					}
+#网络服务
   Github:			{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GitHub/GitHub.yaml,						path: ./ruleset/Github.yaml					}
+  Google:			{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Google/Google.yaml,						path: ./ruleset/Google.yaml					}
   Microsoft:		{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Microsoft/Microsoft.yaml,					path: ./ruleset/Microsoft.yaml				}
-  Twitter:			{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Twitter/Twitter.yaml,						path: ./ruleset/Twitter.yaml				}
-  PrivateTracker:	{<<: *a6, url: https://cdn.jsdelivr.net/gh/oiozi/Gears@main/Rule/Clash/PrivateTracker.yaml,											path: ./ruleset/PrivateTracker.yaml			}
+  OpenAi:			{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/OpenAI/OpenAI.yaml,						path: ./ruleset/OpenAi.yaml					}
   PayPal:           {<<: *a6, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/PayPal/PayPal.yaml,                 path: ./ruleset/PayPal.yaml		        	}
-  ChinaMax:			{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/ChinaMax/ChinaMax_Classical.yaml,			path: ./ruleset/ChinaMax_Classical.yaml		}
+  PrivateTracker:	{<<: *a6, url: https://cdn.jsdelivr.net/gh/DaMauu/Gears@main/Rule/Clash/PrivateTracker.yaml,										path: ./ruleset/PrivateTracker.yaml		    }
+  Telegram:			{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Telegram/Telegram.yaml,					path: ./ruleset/Telegram.yaml				}
+  Twitter:			{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Twitter/Twitter.yaml,						path: ./ruleset/Twitter.yaml				}
+#加速服务
   Global:			{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Global/Global_Classical.yaml,				path: ./ruleset/Global_Classical.yaml		}
-  
+#基础服务
+  Apple:			{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Apple/Apple_Classical.yaml,				path: ./ruleset/Apple.yaml					}
+  ChinaMax:			{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/ChinaMax/ChinaMax_Classical.yaml,			path: ./ruleset/ChinaMax_Classical.yaml		}
+
  # 分流Policy 
 rules:
-#---------------------------------------------------------
   - RULE-SET,Direct,DIRECT
   - RULE-SET,Lan,DIRECT
   - RULE-SET,Download,DIRECT
   - RULE-SET,Advertising,REJECT
   - RULE-SET,NetEaseMusic,网易音乐
-  - RULE-SET,TelegramSG,电报服务
-  - RULE-SET,TelegramNL,双栈连接
-  - RULE-SET,TelegramUS,谷歌服务
-  - RULE-SET,TelegramALL,电报服务
-  - RULE-SET,Telegram,电报服务
-  - RULE-SET,OpenAi,谷歌服务
-  - RULE-SET,Google,谷歌服务
-  - RULE-SET,GlobalMedia,国际媒体
+  - RULE-SET,BiliBili,国内媒体
+  - RULE-SET,Bahamut,国内媒体
   - RULE-SET,Spotify,国际媒体
+  - RULE-SET,GlobalMedia,国际媒体
+  - RULE-SET,Github,香港节点
+  - RULE-SET,Google,谷歌服务
+  - RULE-SET,Microsoft,香港节点
+  - RULE-SET,OpenAi,谷歌服务
   - RULE-SET,PayPal,DIRECT
+  - RULE-SET,PrivateTracker,种子直连
+  - RULE-SET,Telegram,电报服务
   - RULE-SET,Twitter,全球加速
-  - RULE-SET,Github,全球加速
-  - RULE-SET,Microsoft,全球加速
-  - RULE-SET,PrivateTracker,DIRECT
+  - RULE-SET,Global,全球加速
   - RULE-SET,Apple,DIRECT
   - RULE-SET,ChinaMax,DIRECT
-  - RULE-SET,Global,全球加速
   - GEOIP,CN,DIRECT
   - MATCH,黑白名单
-
 
 # TUN模式是通过在操作系统上安装一个虚拟网卡来实现的，它可以接管所有的网络流量，并将流量转发至Clash，然后由Clash发出请求
 # Windows 系统中如何启用TUN模式
