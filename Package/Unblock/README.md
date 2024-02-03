@@ -1,16 +1,16 @@
 # UnblockNeteaseMusic  Quantumult X + sh0d0wr0cket 
-**懒人配置：本[仓库](https://github.com/o7y0/Rules/tree/1)只是为了我个人使用而创建的一个配置仓，没分享无动力，所以大家可以订阅来使用，不用到处去搜集这么麻烦。（内含18条线路）**
+**懒人配置：本[仓库](https://github.com/DaMauu/Rules/tree/1)只是为了我个人使用而创建的一个配置仓，没分享无动力，所以大家可以订阅来使用，不用到处去搜集这么麻烦。（内含18条线路）**
 **提醒一下，节点已经集成一个通用订阅格式，quanx开启解析器解析(解析不成功请更新解析器或者直接用懒人配置)，小火箭直接就订阅，节点不会缺失，方便^.^**[解析器](https://raw.githubusercontent.com/KOP-XIAO/QuantumultX/master/Scripts/resource-parser.js)地址
 
 ios quanx
 
 1.打开Safari浏览器
   下载添加并信任
-  [CA证书](https://raw.githubusercontent.com/O7Y0/Profiles/UnblockNeteaseMusic/core/ca.crt)
+  [CA证书](https://raw.githubusercontent.com/DaMauu/Profiles/UnblockNeteaseMusic/core/ca.crt)
 
     进入苹果设置-通用-描述文件-UnblockNeteaseMusic Root（点击安装）-回到关于本机-证书信任-把刚刚添加的[CA]文件开启信任 
   
-2.[复制我到Quantumult X](https://raw.githubusercontent.com/O7Y0/Profiles/master/O7Y0-Quantumult%20X.conf)    下载Quantumult X 小白配置
+2.[复制我到Quantumult X](https://raw.githubusercontent.com/DaMauu/Profiles/master/DaMauu-Quantumult%20X.conf)    下载Quantumult X 小白配置
 
 3.安装好配置后在
  
@@ -24,11 +24,11 @@ ios sh0d0wr0cket
 
 1.添加并使用配置文件
 
-   [配置链接](https://raw.githubusercontent.com/O7Y0/Profiles/UnblockNeteaseMusic/core/SSRNeteaseCloudMusic.conf)
+   [配置链接](https://raw.githubusercontent.com/DaMauu/Profiles/UnblockNeteaseMusic/core/SSRNeteaseCloudMusic.conf)
 
 2.添加订阅
 
-   [配置链接](https://raw.githubusercontent.com/O7Y0/Profiles/UnblockNeteaseMusic/core/UnblockNeteaseMusic.txt)
+   [配置链接](https://raw.githubusercontent.com/DaMauu/Profiles/UnblockNeteaseMusic/core/UnblockNeteaseMusic.txt)
 	
 3.开启连接选择节点就可以使用
 
