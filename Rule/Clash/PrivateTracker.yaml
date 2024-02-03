@@ -1,10 +1,4 @@
-# NAME: PrivateTracker
-# AUTHOR: DaMauu
-# REPO: https://github.com/DaMauu
-# UPDATED: 20240204
-# DOMAIN-KEYWORD: 3
-# DOMAIN-SUFFIX: 652
-# TOTAL: 655
+#PrivateTracker by 大麻友友[DaMauu] 20240204
 payload:
 # Tracker URL
   - DOMAIN-KEYWORD,announce
