@@ -1,5 +1,5 @@
 proxies:
-  - {name: 🎧 TG@REBIRTHOKAY, server: 127.0.0.1, port: 443, type: http, tls: false, skip-cert-verify: false}
+  - {name: 🎧 TG@DaMaee, server: 127.0.0.1, port: 443, type: http, tls: false, skip-cert-verify: false}
   - {name: 🎧 网易音乐 1, server: 155.248.169.205, port: 70, type: http, tls: false, skip-cert-verify: false}
   - {name: 🎧 网易音乐 2, server: 101.132.79.113, port: 23333, type: http, tls: false, skip-cert-verify: false}
   - {name: 🎧 网易音乐 3, server: 101.132.79.113, port: 23333, type: ss, cipher: aes-128-gcm, password: music.leedsbypass.tk}
