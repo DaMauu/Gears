@@ -1,4 +1,4 @@
-#Stash by 大麻友友[DaMauu] 20240207
+#Stash by 大麻友友[DaMauu] 20240215
 proxy-providers:
   多订阅链接名1:
     url: 订阅链接
@@ -28,29 +28,11 @@ proxy-groups:
     use-url: null
     use:
       - WYY
-  # 功能分组
-  - # 用来给除了自用走的节点外的一个可选方案，比如谷歌服务用固定Ip
-    name: 手动选择
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Static.png
-    type: select
-    use:
-      - 多订阅链接名1
-      - 多订阅链接名2
-    proxies:
-      - DIRECT
-      - 香港节点
-      - 台湾节点
-      - 狮城节点
-      - 日本节点
-      - 美国节点
-    include-all: true
-    filter: ^((?!机场|官网|欢迎|返利|每月|流量|到期|更新|时间|订阅|重置|ISP：|.com|套餐|购买).)*$
   - name: 国内媒体
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/DomesticMedia.png
     proxies:
       - DIRECT
-      - 手动选择
       - 香港节点
       - 台湾节点
       - 狮城节点
@@ -62,19 +44,18 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/ForeignMedia.png
     proxies:
       - DIRECT
-      - 手动选择
       - 美国节点
       - 香港节点
       - 台湾节点
       - 狮城节点
       - 日本节点
       - 欧洲节点
+      - vless.cloudflare
   - name: 谷歌服务
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Google.png
     proxies:
       - DIRECT
-      - 手动选择
       - 香港节点
       - 台湾节点
       - 狮城节点
@@ -82,32 +63,12 @@ proxy-groups:
       - 美国节点
       - 欧洲节点
     include-all: null
-    use:
-      - 多订阅链接名1
-      - 多订阅链接名2
     filter: (?=.*(美国|US|usa))^((?!(俄罗斯|荷兰|英国|法国|GB|FR|NL|RU|TG|土|TR)).)*$
-  - name: 种子直连
-    type: select
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Direct.png
-    proxies:
-      - DIRECT
-      - 手动选择
-      - 香港节点
-      - 台湾节点
-      - 狮城节点
-      - 日本节点
-      - 美国节点
-      - 欧洲节点
-    use:
-      - 多订阅链接名1
-      - 多订阅链接名2
-    filter: (?=.*(AL|AD|AR|AM|AT|AZ|BS|BH|BD|BB|BY|BE|BA|BG|BR|BE|BA|BG|HR|CY|CZ|DK|EE|FI|FR|DE|GR|HU|IS|IE|IT|XK|LV|LI|LT|LU|MK|MT|MD|MC|ME|NL|NO|PL|PT|RO|RU|SM|RS|SK|SI|AQ|AU|阿尔巴尼亚|安道尔|阿根廷|亚美尼亚|奥地利|阿塞拜疆|巴哈马|巴林|孟加拉国|巴巴多斯|白俄罗斯|比利时|波黑|保加利亚|巴西|比利时|波黑|保加利亚|克罗地亚|塞浦路斯|捷克|丹麦|爱沙尼亚|芬兰|法国|德国|希腊|匈牙利|冰岛|爱尔兰|意大利|科索沃|拉脱维亚|列支敦士登|立陶宛|卢森堡|北马其顿|马耳他|摩尔多瓦|摩纳哥|黑山|荷兰|挪威|波兰|葡萄牙|罗马尼亚|俄罗斯|圣马力诺|塞尔维亚|斯洛伐克|斯洛文尼亚|南极洲|澳大利亚(?i)Music))^((?!(台|日|韩|新|美|香|加TG|RES|港|HK|主|SG|TW|US|JP|MP|MY|HongKong|ISP|HOME|VLESS)).)*$
   - name: 电报服务
     type: select
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Telegram.png
     proxies:
       - DIRECT
-      - 手动选择
       - 香港节点
       - 台湾节点
       - 狮城节点
@@ -118,7 +79,17 @@ proxy-groups:
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Global.png
     proxies:
       - DIRECT
-      - 手动选择
+      - 香港节点
+      - 台湾节点
+      - 狮城节点
+      - 日本节点
+      - 美国节点
+      - 欧洲节点
+  - name: 黑白名单
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Final.png
+    type: select
+    proxies:
+      - DIRECT
       - 香港节点
       - 台湾节点
       - 狮城节点
@@ -136,18 +107,18 @@ proxy-groups:
       - 美国节点
       - 欧洲节点
     type: select
-  - name: 黑白名单
-    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Final.png
+  - name: 种子直连
     type: select
+    icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/Direct.png
     proxies:
       - DIRECT
-      - 手动选择
       - 香港节点
       - 台湾节点
       - 狮城节点
       - 日本节点
       - 美国节点
       - 欧洲节点
+    filter: (?=.*(AL|AD|AR|AM|AT|AZ|BS|BH|BD|BB|BY|BE|BA|BG|BR|BE|BA|BG|HR|CY|CZ|DK|EE|FI|FR|DE|GR|HU|IS|IE|IT|XK|LV|LI|LT|LU|MK|MT|MD|MC|ME|NL|NO|PL|PT|RO|RU|SM|RS|SK|SI|AQ|AU|阿尔巴尼亚|安道尔|阿根廷|亚美尼亚|奥地利|阿塞拜疆|巴哈马|巴林|孟加拉国|巴巴多斯|白俄罗斯|比利时|波黑|保加利亚|巴西|比利时|波黑|保加利亚|克罗地亚|塞浦路斯|捷克|丹麦|爱沙尼亚|芬兰|法国|德国|希腊|匈牙利|冰岛|爱尔兰|意大利|科索沃|拉脱维亚|列支敦士登|立陶宛|卢森堡|北马其顿|马耳他|摩尔多瓦|摩纳哥|黑山|荷兰|挪威|波兰|葡萄牙|罗马尼亚|俄罗斯|圣马力诺|塞尔维亚|斯洛伐克|斯洛文尼亚|南极洲|澳大利亚(?i)Music))^((?!(台|日|韩|新|美|香|加TG|RES|港|HK|主|SG|TW|US|JP|MP|MY|HongKong|ISP|HOME|VLESS)).)*$
   # 基于地区分组
   - name: 香港节点
     filter: "(?=.*(澳门|香港|港|HK|主播|GG|MM|(?i)Hong))^((?!(台|日|韩|新|美|free机场|官网|欢迎|返利|每月|流量|到期|更新|时间|订阅|重置|ISP|com|套餐|购买)).)*$"
@@ -159,10 +130,9 @@ proxy-groups:
     include-all: true
     use:
       - 多订阅链接名1
-      - 多订阅链接名2
     hidden: null
   - name: 台湾节点
-    filter: (?=.*(台湾|台|湾|TW(?i)Taiwan))^((?!(港|日|韩|新|美|free机场|官网|欢迎|返利|每月|流量|到期|更新|时间|订阅|重置|ISP|com|套餐|购买)).)*$
+    filter: (?=.*(台湾|台|湾|TW|Tai|Wan(?i)Taiwan))^((?!(港|日|韩|新|美|free机场|官网|欢迎|返利|每月|流量|到期|更新|时间|订阅|重置|ISP|com|套餐|购买)).)*$
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/TW.png
     interval: 3600
     lazy: true
@@ -171,7 +141,6 @@ proxy-groups:
     include-all: true
     use:
       - 多订阅链接名1
-      - 多订阅链接名2
     hidden: null
   - name: 日本节点
     filter: (?=.*(日|JP|(?i)Japan))^((?!(DE|NG|港|台|韩|新|美|free机场|官网|欢迎|返利|每月|流量|到期|更新|时间|订阅|重置|ISP|com|套餐|购买)).)*$
@@ -183,7 +152,6 @@ proxy-groups:
     include-all: true
     use:
       - 多订阅链接名1
-      - 多订阅链接名2
     hidden: null
   - name: 狮城节点
     filter: (?=.*(新|狮|獅|SG|(?i)Singapore))^((?!(港|台|日|韩|兰|美|俄罗斯|荷兰|英国|法国|GB|FR|NL|RU|TG|土|TR|AU|机场|官网|欢迎|返利|每月|流量|到期|更新|时间|订阅|重置|ISP|com|套餐|购买)).)*$
@@ -195,7 +163,6 @@ proxy-groups:
     include-all: true
     use:
       - 多订阅链接名1
-      - 多订阅链接名2
     hidden: null
   - name: 美国节点
     filter: (?=.*(美国|US|usa))^((?!(俄罗斯|荷兰|英国|法国|GB|FR|NL|RU|TG|土|TR|机场|官网|欢迎|返利|每月|流量|到期|更新|时间|订阅|重置|ISP|com|套餐|购买)).)*$
@@ -206,15 +173,13 @@ proxy-groups:
     type: url-test
     include-all: true
     use:
-      - 多订阅链接名1
-      - 多订阅链接名2
+      - YY
     hidden: null
   - filter: (?=.*(AL|AD|AR|AM|AT|AZ|BS|BH|BD|BB|BY|BE|BA|BG|BR|BE|BA|BG|HR|CY|CZ|DK|EE|FI|FR|DE|GR|HU|IS|IE|IT|XK|LV|LI|LT|LU|MK|MT|MD|MC|ME|NL|NO|PL|PT|RO|RU|SM|RS|SK|SI|AQ|AU|阿尔巴尼亚|安道尔|阿根廷|亚美尼亚|奥地利|阿塞拜疆|巴哈马|巴林|孟加拉国|巴巴多斯|白俄罗斯|比利时|波黑|保加利亚|巴西|比利时|波黑|保加利亚|克罗地亚|塞浦路斯|捷克|丹麦|爱沙尼亚|芬兰|法国|德国|希腊|匈牙利|冰岛|爱尔兰|意大利|科索沃|拉脱维亚|列支敦士登|立陶宛|卢森堡|北马其顿|马耳他|摩尔多瓦|摩纳哥|黑山|荷兰|挪威|波兰|葡萄牙|罗马尼亚|俄罗斯|圣马力诺|塞尔维亚|斯洛伐克|斯洛文尼亚|南极洲|澳大利亚(?i)Music))^((?!(台|日|韩|新|美|香|加TG|RES|港|HK|主|SG|TW|US|JP|MP|MY|HongKong|ISP|HOME|VLESS|机场|官网|欢迎|返利|每月|流量|到期|更新|时间|订阅|重置|ISP|com|套餐|购买)).)*$
     name: 欧洲节点
     type: url-test
     use:
       - 多订阅链接名1
-      - 多订阅链接名2
     icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/mini/EU.png
     hidden: null
     interval: 3600
@@ -232,128 +197,146 @@ dns:
   nameserver:
     - https://dns.alidns.com/dns-query
     - https://doh.pub/dns-query
+    - https://cloudflare-dns.com/dns-query
+    - https://mozilla.cloudflare-dns.com/dns-query
+  fake-ip-filter:
+    - appboot.netflix.com
+    - ios.prod.cloud.netflix.com
 log-level: warning
 mode: rule
 rule-providers:
-  Direct:
-    behavior: classical
-    format: yaml
-    interval: 0
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Direct/Direct.yaml
-  Lan:
-    behavior: classical
-    format: yaml
-    interval: 0
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Lan/Lan.yaml
-  Hijacking:
+  运营劫持:
     behavior: classical
     format: yaml
     interval: 0
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Hijacking/Hijacking.list
-  Privacy:
+  隐私保护:
     behavior: classical
     format: yaml
     interval: 0
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Privacy/Privacy_Classical_No_Resolve.yaml
-  BlockHttpDNS:
+  预防泄漏:
     behavior: classical
     format: yaml
     interval: 0
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/BlockHttpDNS/BlockHttpDNS_No_Resolve.yaml
-  YouTube:
+  规则修正:
     behavior: classical
     format: yaml
     interval: 0
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/YouTube.yaml
-  GlobalMedia:
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Direct/Direct.yaml
+  内网直连:
     behavior: classical
     format: yaml
     interval: 0
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GlobalMedia/GlobalMedia.yaml
-  NetEase:
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Lan/Lan.yaml
+  贝宝支付:
     behavior: classical
     format: yaml
     interval: 0
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/NetEaseMusic/NetEaseMusic.yaml
-  IPTVMainland:
-    behavior: classical
-    format: yaml
-    interval: 0
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/IPTVMainland/IPTVMainland.yaml
-  IPTVOther:
-    behavior: classical
-    format: yaml
-    interval: 0
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/IPTVOther/IPTVOther_Classical.yaml
-  ChinaMedia:
-    behavior: classical
-    format: yaml
-    interval: 0
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMedia/ChinaMedia.yaml
-  OpenAI:
-    behavior: classical
-    format: yaml
-    interval: 0
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI.yaml
-  GitHub:
-    behavior: classical
-    format: yaml
-    interval: 0
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GitHub/GitHub.yaml
-  Google:
-    behavior: domain
-    format: yaml
-    interval: 0
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google.yaml
-  PrivateTracker:
-    behavior: classical
-    format: yaml
-    interval: 0
-    url: https://raw.githubusercontent.com/DaMauu/Gears/main/Rule/Clash/PrivateTracker.yaml
-  Telegram:
-    behavior: classical
-    format: yaml
-    interval: 0
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Telegram/Telegram.yaml
-  Global:
-    behavior: classical
-    format: yaml
-    interval: 0
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Global/Global.yaml
-  Apple:
-    behavior: classical
-    format: yaml
-    interval: 0
-    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Apple/Apple.yaml
-  ASN:
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/PayPal/PayPal.yaml
+  国内编号:
     behavior: classical
     format: yaml
     interval: 0
     url: https://raw.githubusercontent.com/missuo/ASN-China/main/ASN.China.list
-  ChinaMax:
+  直连列表:
     behavior: classical
     format: yaml
     interval: 0
     url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax.yaml
+  网易音乐:
+    behavior: classical
+    format: yaml
+    interval: 0
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/NetEaseMusic/NetEaseMusic.yaml
+  国内电视:
+    behavior: classical
+    format: yaml
+    interval: 0
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/IPTVMainland/IPTVMainland.yaml
+  国内媒体:
+    behavior: classical
+    format: yaml
+    interval: 0
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMedia/ChinaMedia.yaml
+  国外电视:
+    behavior: classical
+    format: yaml
+    interval: 0
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/IPTVOther/IPTVOther_Classical.yaml
+  油管服务:
+    behavior: classical
+    format: yaml
+    interval: 0
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/YouTube.yaml
+  国际媒体:
+    behavior: classical
+    format: yaml
+    interval: 0
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GlobalMedia/GlobalMedia.yaml
+  云耀服务:
+    behavior: classical
+    format: yaml
+    interval: 0
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Cloudflare/Cloudflare.yaml
+  开源编程:
+    behavior: classical
+    format: yaml
+    interval: 0
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GitHub/GitHub.yaml
+  谷歌服务:
+    behavior: domain
+    format: yaml
+    interval: 0
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google.yaml
+  人工智能:
+    behavior: classical
+    format: yaml
+    interval: 0
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI.yaml
+  电报服务:
+    behavior: classical
+    format: yaml
+    interval: 0
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Telegram/Telegram.yaml
+  苹果服务:
+    behavior: classical
+    format: yaml
+    interval: 0
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Apple/Apple.yaml
+  种子直连:
+    behavior: classical
+    format: yaml
+    interval: 0
+    url: https://raw.githubusercontent.com/DaMauu/Gears/main/Rule/Clash/PrivateTracker.yaml
+  全球加速:
+    behavior: classical
+    format: yaml
+    interval: 0
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Global/Global.yaml
 rules:
-  - RULE-SET,Direct,DIRECT # 国内直连
-  - RULE-SET,Lan,DIRECT # 局域直连
-  - RULE-SET,Hijacking,REJECT,no-resolve # 屏蔽劫持
-  - RULE-SET,Privacy,REJECT,no-resolve # 隐私保护
-  - RULE-SET,BlockHttpDNS,REJECT,no-resolve # 修改协议
-  - RULE-SET,IPTVOther,国际媒体 # 电视直播
-  - RULE-SET,YouTube,国际媒体 # 油管加速
-  - RULE-SET,GlobalMedia,国际媒体 # 国际媒体
-  - RULE-SET,IPTVMainland,国内媒体 # 电视直播
-  - RULE-SET,NetEase,网易音乐 # 网易音乐
-  - RULE-SET,ChinaMedia,国内媒体 # 国内媒体
-  - RULE-SET,GitHub,全球加速 # 开源网站
-  - RULE-SET,Google,谷歌服务 # 谷歌服务
-  - RULE-SET,OpenAI,谷歌服务 # 人工智能
-  - RULE-SET,PrivateTracker,种子直连 # 种子直连
-  - RULE-SET,Telegram,电报服务 # 电报服务
-  - RULE-SET,Global,全球加速 # 全球加速
-  - RULE-SET,Apple,DIRECT # 苹果服务
-  - RULE-SET,ASN,DIRECT,no-resolve # 国内编号
-  - RULE-SET,ChinaMax,DIRECT # 国内直连
+  - RULE-SET,隐私保护,REJECT,no-resolve # 隐私保护
+  - RULE-SET,预防泄漏,REJECT,no-resolve # 修改协议
+  - RULE-SET,运营劫持,REJECT,no-resolve # 屏蔽劫持
+  - RULE-SET,规则修正,DIRECT # 国内直连
+  - RULE-SET,内网直连,DIRECT # 局域直连
+  - RULE-SET,贝宝支付,DIRECT # 贝宝支付
+  - RULE-SET,国内编号,DIRECT,no-resolve # 国内编号
+  - RULE-SET,直连列表,DIRECT # 国内直连
+  - RULE-SET,网易音乐,网易音乐 # 网易音乐
+  - RULE-SET,国内电视,国内媒体 # 电视直播
+  - RULE-SET,国内媒体,国内媒体 # 国内媒体
+  - RULE-SET,油管服务,国际媒体 # 油管加速
+  - RULE-SET,国外电视,国际媒体 # 电视直播
+  - RULE-SET,国际媒体,国际媒体 # 国际媒体
+  - RULE-SET,云耀服务,全球加速 # 云耀服务
+  - RULE-SET,开源编程,全球加速 # 开源网站
+  - RULE-SET,谷歌服务,谷歌服务 # 谷歌服务
+  - RULE-SET,人工智能,谷歌服务 # 人工智能
+  - RULE-SET,电报服务,电报服务 # 电报服务
+  - RULE-SET,苹果服务,DIRECT # 苹果服务
+  - RULE-SET,种子直连,种子直连 # 种子直连
+  - RULE-SET,全球加速,全球加速 # 全球加速
   - MATCH,黑白名单
+proxies:
