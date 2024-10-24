@@ -1,4 +1,4 @@
-#PrivateTracker by 大麻友友[DaMauu] 20240204
+#PrivateTracker by 大麻友友[DaMauu] 20241024
 payload:
 # Tracker URL
   - DOMAIN-KEYWORD,announce
@@ -6,8 +6,8 @@ payload:
   - DOMAIN-KEYWORD,tracker
   - DOMAIN-SUFFIX,2f4y.me
   - DOMAIN-SUFFIX,3changtrai.com
-  - DOMAIN-SUFFIX,52pt.site
   - DOMAIN-SUFFIX,420project.org
+  - DOMAIN-SUFFIX,52pt.site
   - DOMAIN-SUFFIX,720pier.ru
   - DOMAIN-SUFFIX,abn.lol
   - DOMAIN-SUFFIX,abroad.agsvpt.com
@@ -143,6 +143,7 @@ payload:
   - DOMAIN-SUFFIX,digitalcore.club
   - DOMAIN-SUFFIX,dimeadozen.org
   - DOMAIN-SUFFIX,discfan.net
+  - DOMAIN-SUFFIX,discfan.xyz
   - DOMAIN-SUFFIX,divteam.com
   - DOMAIN-SUFFIX,dnoid.to
   - DOMAIN-SUFFIX,docspedia.world
@@ -423,7 +424,9 @@ payload:
   - DOMAIN-SUFFIX,pt.2xfree.org
   - DOMAIN-SUFFIX,pt.6a6b.com
   - DOMAIN-SUFFIX,pt.btschool.club
+  - DOMAIN-SUFFIX,pt.cdfile.org
   - DOMAIN-SUFFIX,pt.eastgame.org
+  - DOMAIN-SUFFIX,pt.ecust.pp.ua
   - DOMAIN-SUFFIX,pt.gtk.pw
   - DOMAIN-SUFFIX,pt.hd4fans.org
   - DOMAIN-SUFFIX,pt.hdarea.club
@@ -517,8 +520,8 @@ payload:
   - DOMAIN-SUFFIX,sugoimusic.me
   - DOMAIN-SUFFIX,superbits.org
   - DOMAIN-SUFFIX,swarmazon.club
-  - DOMAIN-SUFFIX,t3nnis.tv
   - DOMAIN-SUFFIX,t.ceskeforum.com
+  - DOMAIN-SUFFIX,t3nnis.tv
   - DOMAIN-SUFFIX,tapochek.net
   - DOMAIN-SUFFIX,taranis.me
   - DOMAIN-SUFFIX,tasmanit.es
@@ -604,8 +607,8 @@ payload:
   - DOMAIN-SUFFIX,ultimatewrestlingtorrents.com
   - DOMAIN-SUFFIX,ultrahd.com
   - DOMAIN-SUFFIX,ultrahd.net
-  - DOMAIN-SUFFIX,ultrahd.org
   - DOMAIN-SUFFIX,ultrahd.online
+  - DOMAIN-SUFFIX,ultrahd.org
   - DOMAIN-SUFFIX,underver.se
   - DOMAIN-SUFFIX,uni-track.org
   - DOMAIN-SUFFIX,uniongang.net
@@ -644,8 +647,10 @@ payload:
   - DOMAIN-SUFFIX,zeus.hamsters.space
   - DOMAIN-SUFFIX,zeus.hamsters.space
   - DOMAIN-SUFFIX,zhuque.in
+  - DOMAIN-SUFFIX,zimiao.icu
   - DOMAIN-SUFFIX,zmpt.cc
   - DOMAIN-SUFFIX,zmpt.club
   - DOMAIN-SUFFIX,zombtracker.the-zomb.com
   - DOMAIN-SUFFIX,zonaq.pw
+  - DOMAIN-SUFFIX,zp.m-team.io
   - DOMAIN-SUFFIX,ztracker.cc
