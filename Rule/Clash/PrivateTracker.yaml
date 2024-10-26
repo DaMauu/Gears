@@ -676,7 +676,7 @@ payload:
   - DOMAIN-SUFFIX,zonaq.pw
   - DOMAIN-SUFFIX,ztracker.cc
 
-# Tracker URL
+# Indexer URL
   - DOMAIN-SUFFIX,digitalcarnage.info
   - DOMAIN-SUFFIX,dognzb.cr
   - DOMAIN-SUFFIX,drunkenslug.com
