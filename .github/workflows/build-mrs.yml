@@ -31,7 +31,7 @@ jobs:
           gunzip mihomo.gz
           chmod +x mihomo
 
-      # 3. 智能抽取并编译（域名带 _domain 后缀，IP 带 _ip 后缀）
+      # 3. 智能抽取并编译
       - name: Build MRS files
         run: |
           mkdir -p output
@@ -48,27 +48,43 @@ jobs:
             if [ -f "$file" ]; then
               filename=$(basename "$file" | sed 's/\.[^.]*$//')
               echo "----------------------------------------"
-              echo "正在处理: ${file}"
+              echo "正在处理文件: ${file}"
 
-              # --- 1. 编译 域名 规则 (输出为: 原文件名_domain.mrs) ---
-              grep -iE "DOMAIN" "$file" | grep -vE "IP-CIDR|IP-CIDR6" | sed 's/^[[:space:]]*-[[:space:]]*/  - /' > domain_lines.txt || true
+              # --- 1. 提取与编译 域名 (Domain) 规则 ---
+              # 匹配规则：包含 DOMAIN 关键字 或 以 +./. 开头/含域名的行，且排除 IP 行与 payload 标头
+              grep -iE "DOMAIN|\+\.|^[[:space:]]*- '?[+a-zA-Z0-9_-]+\.[a-zA-Z0-9._-]+'?" "$file" \
+                | grep -vE "IP-CIDR|IP-CIDR6|payload:" \
+                | sed 's/^[[:space:]]*-[[:space:]]*/  - /' \
+                | sed "s/  - DOMAIN-SUFFIX,/  - '+./g; s/  - DOMAIN,/  - '/g; s/  - DOMAIN-KEYWORD,/  - 'keyword:/g" \
+                > domain_lines.txt || true
+
               if [ -s domain_lines.txt ]; then
                 echo "payload:" > tmp_domain.yaml
                 cat domain_lines.txt >> tmp_domain.yaml
-                echo "--> 生成域名规则: output/${filename}_domain.mrs"
+                echo "--> 正在编译域名规则: output/${filename}_domain.mrs"
                 ./mihomo convert-ruleset domain yaml tmp_domain.yaml "output/${filename}_domain.mrs" || true
                 rm -f tmp_domain.yaml
+              else
+                echo "--> 未在这个文件中找到有效域名规则"
               fi
               rm -f domain_lines.txt
 
-              # --- 2. 编译 IP-CIDR 规则 (输出为: 原文件名_ip.mrs) ---
-              grep -iE "IP-CIDR" "$file" | sed 's/^[[:space:]]*-[[:space:]]*/  - /' > ip_lines.txt || true
+              # --- 2. 提取与编译 IP (IP-CIDR) 规则 ---
+              # 匹配规则：包含 IP-CIDR 关键字 或 匹配标准的 IPv4/IPv6 CIDR 格式
+              grep -iE "IP-CIDR|([0-9]{1,3}\.){3}[0-9]{1,3}\/[0-9]+|[0-9a-fA-F:]+:[0-9a-fA-F:]*\/[0-9]+" "$file" \
+                | grep -vE "payload:" \
+                | sed -E 's/IP-CIDR6?:,//g' \
+                | sed 's/^[[:space:]]*-[[:space:]]*/  - /' \
+                > ip_lines.txt || true
+
               if [ -s ip_lines.txt ]; then
                 echo "payload:" > tmp_ip.yaml
                 cat ip_lines.txt >> tmp_ip.yaml
-                echo "--> 生成 IP 规则: output/${filename}_ip.mrs"
+                echo "--> 正在编译 IP 规则: output/${filename}_ip.mrs"
                 ./mihomo convert-ruleset ipcidr yaml tmp_ip.yaml "output/${filename}_ip.mrs" || true
                 rm -f tmp_ip.yaml
+              else
+                echo "--> 未在这个文件中找到有效 IP 规则"
               fi
               rm -f ip_lines.txt
 
