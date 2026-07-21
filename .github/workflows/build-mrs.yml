@@ -1,4 +1,4 @@
-name: 构建 Mihomo MRS 规则集 (支持混合规则)
+name: 构建 Mihomo MRS 规则集
 
 on:
   push:
@@ -31,7 +31,7 @@ jobs:
           gunzip mihomo.gz
           chmod +x mihomo
 
-      # 3. 智能拆分并编译所有 yaml/yml 文件
+      # 3. 智能抽取并正确格式化编译
       - name: Build MRS files
         run: |
           mkdir -p output
@@ -48,29 +48,32 @@ jobs:
             if [ -f "$file" ]; then
               filename=$(basename "$file" | sed 's/\.[^.]*$//')
               echo "----------------------------------------"
-              echo "正在分析文件: ${file}"
+              echo "正在处理: ${file}"
 
-              # 1. 提取并编译 DOMAIN 域名规则 (生成 xxx.mrs)
-              grep -iE "DOMAIN|DOMAIN-SUFFIX|DOMAIN-KEYWORD" "$file" > domain_tmp.txt || true
-              if [ -s domain_tmp.txt ]; then
-                echo "payload:" > domain_tmp.yaml
-                sed 's/^/  - /' domain_tmp.txt >> domain_tmp.yaml
-                echo "--> 正在编译域名规则 -> output/${filename}.mrs"
-                ./mihomo convert-ruleset domain yaml domain_tmp.yaml "output/${filename}.mrs" || true
-                rm -f domain_tmp.yaml
+              # --- 1. 编译 域名/域名后缀/域名关键字 规则 ---
+              # 提取所有包含 DOMAIN 的行，去除多余空格并规整格式
+              grep -iE "DOMAIN" "$file" | grep -vE "IP-CIDR|IP-CIDR6" | sed 's/^[[:space:]]*-[[:space:]]*/  - /' > domain_lines.txt || true
+              if [ -s domain_lines.txt ]; then
+                echo "payload:" > tmp_domain.yaml
+                cat domain_lines.txt >> tmp_domain.yaml
+                echo "--> 生成域名规则: output/${filename}.mrs"
+                ./mihomo convert-ruleset domain yaml tmp_domain.yaml "output/${filename}.mrs" || true
+                rm -f tmp_domain.yaml
               fi
-              rm -f domain_tmp.txt
+              rm -f domain_lines.txt
 
-              # 2. 提取并编译 IP-CIDR 规则 (生成 xxx_ip.mrs)
-              grep -iE "IP-CIDR|IP-CIDR6" "$file" > ip_tmp.txt || true
-              if [ -s ip_tmp.txt ]; then
-                echo "payload:" > ip_tmp.yaml
-                sed 's/^/  - /' ip_tmp.txt >> ip_tmp.yaml
-                echo "--> 正在编译 IP 规则 -> output/${filename}_ip.mrs"
-                ./mihomo convert-ruleset ipcidr yaml ip_tmp.yaml "output/${filename}_ip.mrs" || true
-                rm -f ip_tmp.yaml
+              # --- 2. 编译 IP-CIDR / IP-CIDR6 规则 ---
+              # 提取所有包含 IP-CIDR 的行，去除多余空格并规整格式
+              grep -iE "IP-CIDR" "$file" | sed 's/^[[:space:]]*-[[:space:]]*/  - /' > ip_lines.txt || true
+              if [ -s ip_lines.txt ]; then
+                echo "payload:" > tmp_ip.yaml
+                cat ip_lines.txt >> tmp_ip.yaml
+                echo "--> 生成 IP 规则: output/${filename}_ip.mrs"
+                ./mihomo convert-ruleset ipcidr yaml tmp_ip.yaml "output/${filename}_ip.mrs" || true
+                rm -f tmp_ip.yaml
               fi
-              rm -f ip_tmp.txt
+              rm -f ip_lines.txt
+
             fi
           done
 
