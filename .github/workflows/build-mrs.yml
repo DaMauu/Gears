@@ -1,4 +1,4 @@
-name: 构建 Mihomo MRS 规则集
+name: 构建 Mihomo MRS 规则集 (支持混合规则)
 
 on:
   push:
@@ -16,20 +16,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write            # 赋予发布到 release 分支的读写权限
+      contents: write            # 给予发布到 release 分支的读写权限
 
     steps:
       # 1. 拉取代码
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. 打印当前文件树（排查用）
-      - name: Debug - List Files
-        run: |
-          echo "=== 检查仓库实际文件层级 ==="
-          find . -maxdepth 4 -not -path '*/.*'
-
-      # 3. 下载最新版 Mihomo CLI
+      # 2. 下载最新版 Mihomo CLI
       - name: Download Mihomo CLI
         run: |
           MIHOMO_URL=$(curl -s https://api.github.com/repos/MetaCubeX/mihomo/releases/latest | grep "browser_download_url" | grep "linux-amd64" | grep -v "compatible" | head -n 1 | cut -d '"' -f 4)
@@ -37,15 +31,12 @@ jobs:
           gunzip mihomo.gz
           chmod +x mihomo
 
-      # 4. 扫描并编译所有 yaml/yml 文件
+      # 3. 智能拆分并编译所有 yaml/yml 文件
       - name: Build MRS files
         run: |
           mkdir -p output
-
-          # 开启 Linux 正确的忽略大小写匹配选项 (nocaseglob)
           shopt -s globstar nullglob nocaseglob
           
-          # 搜寻 Rule/Clash 或 rule/clash 下的 yaml 文件
           files=(Rule/Clash/*.yaml Rule/Clash/*.yml rule/clash/*.yaml rule/clash/*.yml)
 
           if [ ${#files[@]} -eq 0 ]; then
@@ -56,12 +47,34 @@ jobs:
           for file in "${files[@]}"; do
             if [ -f "$file" ]; then
               filename=$(basename "$file" | sed 's/\.[^.]*$//')
-              echo "正在编译: ${file} -> output/${filename}.mrs"
-              ./mihomo convert-ruleset domain yaml "$file" "output/${filename}.mrs"
+              echo "----------------------------------------"
+              echo "正在分析文件: ${file}"
+
+              # 1. 提取并编译 DOMAIN 域名规则 (生成 xxx.mrs)
+              grep -iE "DOMAIN|DOMAIN-SUFFIX|DOMAIN-KEYWORD" "$file" > domain_tmp.txt || true
+              if [ -s domain_tmp.txt ]; then
+                echo "payload:" > domain_tmp.yaml
+                sed 's/^/  - /' domain_tmp.txt >> domain_tmp.yaml
+                echo "--> 正在编译域名规则 -> output/${filename}.mrs"
+                ./mihomo convert-ruleset domain yaml domain_tmp.yaml "output/${filename}.mrs" || true
+                rm -f domain_tmp.yaml
+              fi
+              rm -f domain_tmp.txt
+
+              # 2. 提取并编译 IP-CIDR 规则 (生成 xxx_ip.mrs)
+              grep -iE "IP-CIDR|IP-CIDR6" "$file" > ip_tmp.txt || true
+              if [ -s ip_tmp.txt ]; then
+                echo "payload:" > ip_tmp.yaml
+                sed 's/^/  - /' ip_tmp.txt >> ip_tmp.yaml
+                echo "--> 正在编译 IP 规则 -> output/${filename}_ip.mrs"
+                ./mihomo convert-ruleset ipcidr yaml ip_tmp.yaml "output/${filename}_ip.mrs" || true
+                rm -f ip_tmp.yaml
+              fi
+              rm -f ip_tmp.txt
             fi
           done
 
-      # 5. 发布编译好的 .mrs 文件到 release 分支
+      # 4. 发布编译好的 .mrs 文件到 release 分支
       - name: Deploy to release branch
         uses: peaceiris/actions-gh-pages@v3
         with:
