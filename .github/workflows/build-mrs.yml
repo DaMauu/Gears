@@ -10,7 +10,7 @@ on:
       - 'rule/clash/**'
   schedule:
     - cron: '0 20 * * *'        # ⏰ 每天北京时间凌晨 04:00 自动运行
-  workflow_dispatch:             # 手动运行按钮
+  workflow_dispatch:             # 保留手动运行按钮
 
 jobs:
   build:
@@ -50,7 +50,7 @@ jobs:
               echo "----------------------------------------"
               echo "正在处理文件: ${file}"
 
-              # 避免生成 xxx-domain_domain.mrs 这种文件名
+              # 避免生成 xxx-domain_domain.mrs 这种重复名称
               if [[ "$base_name" =~ (-|_)?domain$ ]]; then
                 out_domain_name="${base_name}.mrs"
               else
@@ -112,12 +112,12 @@ jobs:
             fi
           done
 
-      # 4. 发布编译好的 .mrs 文件到 release 分支
+      # 4. 发布编译好的 .mrs 文件到 release 分支（开启增量保留）
       - name: Deploy to release branch
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./output
           publish_branch: release
-          keep_files: false
-          force_orphan: true
+          keep_files: true       # 保持增量更新，不删除 release 中的旧文件
+          force_orphan: false    # 保持分支历史连续
