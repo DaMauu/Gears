@@ -1,4 +1,4 @@
-name: Build Mihomo MRS Rulesets
+name: 构建 Mihomo MRS 规则集
 
 on:
   push:
@@ -9,24 +9,24 @@ on:
       - 'Rule/Clash/**'
       - 'rule/clash/**'
   schedule:
-    - cron: '0 20 * * *'        # ⏰ 每天北京时间凌晨 04:00 自动编译
-  workflow_dispatch:             # 👈 支持手动点击运行
+    - cron: '0 20 * * *'        # ⏰ 每天北京时间凌晨 04:00 自动运行
+  workflow_dispatch:             # 保留手动运行按钮
 
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write            # 给予部署发布写权限
+      contents: write            # 赋予发布到 release 分支的读写权限
 
     steps:
-      # 1. 拉取完整代码
+      # 1. 拉取代码
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. 打印当前仓库结构（调试用）
+      # 2. 打印当前文件树（排查用）
       - name: Debug - List Files
         run: |
-          echo "=== 正在检查仓库实际文件列表 ==="
+          echo "=== 检查仓库实际文件层级 ==="
           find . -maxdepth 4 -not -path '*/.*'
 
       # 3. 下载最新版 Mihomo CLI
@@ -42,8 +42,10 @@ jobs:
         run: |
           mkdir -p output
 
-          # 开启大小写不敏感匹配，查找所有 yaml 和 yml
-          shopt -s globstar nullglob icaseglob
+          # 开启 Linux 正确的忽略大小写匹配选项 (nocaseglob)
+          shopt -s globstar nullglob nocaseglob
+          
+          # 搜寻 Rule/Clash 或 rule/clash 下的 yaml 文件
           files=(Rule/Clash/*.yaml Rule/Clash/*.yml rule/clash/*.yaml rule/clash/*.yml)
 
           if [ ${#files[@]} -eq 0 ]; then
@@ -59,7 +61,7 @@ jobs:
             fi
           done
 
-      # 5. 发布到 release 分支
+      # 5. 发布编译好的 .mrs 文件到 release 分支
       - name: Deploy to release branch
         uses: peaceiris/actions-gh-pages@v3
         with:
