@@ -31,7 +31,7 @@ jobs:
           gunzip mihomo.gz
           chmod +x mihomo
 
-      # 3. 智能抽取并正确格式化编译
+      # 3. 智能抽取并编译（域名带 _domain 后缀，IP 带 _ip 后缀）
       - name: Build MRS files
         run: |
           mkdir -p output
@@ -50,20 +50,18 @@ jobs:
               echo "----------------------------------------"
               echo "正在处理: ${file}"
 
-              # --- 1. 编译 域名/域名后缀/域名关键字 规则 ---
-              # 提取所有包含 DOMAIN 的行，去除多余空格并规整格式
+              # --- 1. 编译 域名 规则 (输出为: 原文件名_domain.mrs) ---
               grep -iE "DOMAIN" "$file" | grep -vE "IP-CIDR|IP-CIDR6" | sed 's/^[[:space:]]*-[[:space:]]*/  - /' > domain_lines.txt || true
               if [ -s domain_lines.txt ]; then
                 echo "payload:" > tmp_domain.yaml
                 cat domain_lines.txt >> tmp_domain.yaml
-                echo "--> 生成域名规则: output/${filename}.mrs"
-                ./mihomo convert-ruleset domain yaml tmp_domain.yaml "output/${filename}.mrs" || true
+                echo "--> 生成域名规则: output/${filename}_domain.mrs"
+                ./mihomo convert-ruleset domain yaml tmp_domain.yaml "output/${filename}_domain.mrs" || true
                 rm -f tmp_domain.yaml
               fi
               rm -f domain_lines.txt
 
-              # --- 2. 编译 IP-CIDR / IP-CIDR6 规则 ---
-              # 提取所有包含 IP-CIDR 的行，去除多余空格并规整格式
+              # --- 2. 编译 IP-CIDR 规则 (输出为: 原文件名_ip.mrs) ---
               grep -iE "IP-CIDR" "$file" | sed 's/^[[:space:]]*-[[:space:]]*/  - /' > ip_lines.txt || true
               if [ -s ip_lines.txt ]; then
                 echo "payload:" > tmp_ip.yaml
