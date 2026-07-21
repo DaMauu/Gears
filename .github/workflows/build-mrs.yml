@@ -6,8 +6,8 @@ on:
       - main
       - master
     paths:
-      - 'Rule/Clash/**'
-      - 'rule/clash/**'
+      - 'Rule/**'
+      - 'rule/**'
   schedule:
     - cron: '0 20 * * *'        # ⏰ 每天北京时间凌晨 04:00 自动运行
   workflow_dispatch:             # 保留手动运行按钮
@@ -31,16 +31,16 @@ jobs:
           gunzip mihomo.gz
           chmod +x mihomo
 
-      # 3. 智能抽取并编译 MRS
+      # 3. 全局递归扫描并智能编译 MRS
       - name: Build MRS files
         run: |
           mkdir -p output
-          shopt -s globstar nullglob nocaseglob
           
-          files=(Rule/Clash/*.yaml Rule/Clash/*.yml rule/clash/*.yaml rule/clash/*.yml)
+          # 使用 find 命令递归查找 Rule 或 rule 文件夹下所有的 .yaml 和 .yml 文件（忽略大小写和深层目录）
+          mapfile -t files < <(find . -type f \( -ipath "./Rule/*" -o -ipath "./rule/*" \) \( -iname "*.yaml" -o -iname "*.yml" \))
 
           if [ ${#files[@]} -eq 0 ]; then
-            echo "❌ 错误：未在 Rule/Clash 路径下找到任何 .yaml 或 .yml 文件！"
+            echo "❌ 错误：未在 Rule/rule 路径下找到任何 .yaml 或 .yml 文件！"
             exit 1
           fi
 
@@ -50,7 +50,7 @@ jobs:
               echo "----------------------------------------"
               echo "正在处理文件: ${file}"
 
-              # 避免生成 xxx-domain_domain.mrs 这种重复名称
+              # 动态命名，防止出现 xx_domain_domain.mrs 重复后缀
               if [[ "$base_name" =~ (-|_)?domain$ ]]; then
                 out_domain_name="${base_name}.mrs"
               else
@@ -74,7 +74,7 @@ jobs:
                 echo "payload:" > tmp_domain.yaml
                 cat domain_lines.txt >> tmp_domain.yaml
                 
-                # 尝试编译，仅当非空时才保存到 output
+                # 编译到临时文件，验证成功且非空才移动到 output 目录
                 ./mihomo convert-ruleset domain yaml tmp_domain.yaml "tmp_out.mrs" || true
                 if [ -s tmp_out.mrs ]; then
                   mv tmp_out.mrs "output/${out_domain_name}"
@@ -97,7 +97,7 @@ jobs:
                 echo "payload:" > tmp_ip.yaml
                 cat ip_lines.txt >> tmp_ip.yaml
                 
-                # 尝试编译，仅当非空时才保存到 output
+                # 编译到临时文件，验证成功且非空才移动到 output 目录
                 ./mihomo convert-ruleset ipcidr yaml tmp_ip.yaml "tmp_out.mrs" || true
                 if [ -s tmp_out.mrs ]; then
                   mv tmp_out.mrs "output/${out_ip_name}"
@@ -119,5 +119,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./output
           publish_branch: release
-          keep_files: true       # 保持增量更新，不删除 release 中的旧文件
-          force_orphan: false    # 保持分支历史连续
+          keep_files: true       # 增量更新，保留 release 分支里的已有文件
+          force_orphan: false    # 保持分支历史，防止全清空
