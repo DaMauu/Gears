@@ -3,23 +3,33 @@ name: Build Mihomo MRS Rulesets
 on:
   push:
     branches:
-      - main                     # 提交到 main 分支时自动触发
+      - main
+      - master
     paths:
-      - 'Rule/Clash/**'         # 匹配路径：只有修改 Rule/Clash 文件夹内的 yaml 才触发
-  workflow_dispatch:             # 支持在 GitHub 界面手动点击运行
+      - 'Rule/Clash/**'
+      - 'rule/clash/**'
+  schedule:
+    - cron: '0 20 * * *'        # ⏰ 每天北京时间凌晨 04:00 自动编译
+  workflow_dispatch:             # 👈 支持手动点击运行
 
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write            # 给予写权限，用于发布编译好的 mrs 到 release 分支
+      contents: write            # 给予部署发布写权限
 
     steps:
-      # 1. 拉取当前代码
+      # 1. 拉取完整代码
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. 下载最新版 Mihomo CLI
+      # 2. 打印当前仓库结构（调试用）
+      - name: Debug - List Files
+        run: |
+          echo "=== 正在检查仓库实际文件列表 ==="
+          find . -maxdepth 4 -not -path '*/.*'
+
+      # 3. 下载最新版 Mihomo CLI
       - name: Download Mihomo CLI
         run: |
           MIHOMO_URL=$(curl -s https://api.github.com/repos/MetaCubeX/mihomo/releases/latest | grep "browser_download_url" | grep "linux-amd64" | grep -v "compatible" | head -n 1 | cut -d '"' -f 4)
@@ -27,18 +37,29 @@ jobs:
           gunzip mihomo.gz
           chmod +x mihomo
 
-      # 3. 递归扫描 Rule/Clash/ 目录下的所有 yaml 并编译为 .mrs
+      # 4. 扫描并编译所有 yaml/yml 文件
       - name: Build MRS files
         run: |
           mkdir -p output
-          # 遍历 Rule/Clash/ 目录下的所有 yaml 文件
-          find Rule/Clash/ -type f \( -name "*.yaml" -o -name "*.yml" \) | while read -r file; do
-            filename=$(basename "$file" | sed 's/\.[^.]*$//')
-            echo "Building ${filename}.mrs from ${file}..."
-            ./mihomo convert-ruleset domain yaml "$file" "output/${filename}.mrs"
+
+          # 开启大小写不敏感匹配，查找所有 yaml 和 yml
+          shopt -s globstar nullglob icaseglob
+          files=(Rule/Clash/*.yaml Rule/Clash/*.yml rule/clash/*.yaml rule/clash/*.yml)
+
+          if [ ${#files[@]} -eq 0 ]; then
+            echo "❌ 错误：未在 Rule/Clash 路径下找到任何 .yaml 或 .yml 文件！"
+            exit 1
+          fi
+
+          for file in "${files[@]}"; do
+            if [ -f "$file" ]; then
+              filename=$(basename "$file" | sed 's/\.[^.]*$//')
+              echo "正在编译: ${file} -> output/${filename}.mrs"
+              ./mihomo convert-ruleset domain yaml "$file" "output/${filename}.mrs"
+            fi
           done
 
-      # 4. 发布到 release 分支
+      # 5. 发布到 release 分支
       - name: Deploy to release branch
         uses: peaceiris/actions-gh-pages@v3
         with:
