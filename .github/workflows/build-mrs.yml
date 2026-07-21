@@ -1,0 +1,49 @@
+name: Build Mihomo MRS Rulesets
+
+on:
+  push:
+    branches:
+      - main                     # 提交到 main 分支时自动触发
+    paths:
+      - 'Rule/Clash/**'         # 匹配路径：只有修改 Rule/Clash 文件夹内的 yaml 才触发
+  workflow_dispatch:             # 支持在 GitHub 界面手动点击运行
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write            # 给予写权限，用于发布编译好的 mrs 到 release 分支
+
+    steps:
+      # 1. 拉取当前代码
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. 下载最新版 Mihomo CLI
+      - name: Download Mihomo CLI
+        run: |
+          MIHOMO_URL=$(curl -s https://api.github.com/repos/MetaCubeX/mihomo/releases/latest | grep "browser_download_url" | grep "linux-amd64" | grep -v "compatible" | head -n 1 | cut -d '"' -f 4)
+          curl -L $MIHOMO_URL -o mihomo.gz
+          gunzip mihomo.gz
+          chmod +x mihomo
+
+      # 3. 递归扫描 Rule/Clash/ 目录下的所有 yaml 并编译为 .mrs
+      - name: Build MRS files
+        run: |
+          mkdir -p output
+          # 遍历 Rule/Clash/ 目录下的所有 yaml 文件
+          find Rule/Clash/ -type f \( -name "*.yaml" -o -name "*.yml" \) | while read -r file; do
+            filename=$(basename "$file" | sed 's/\.[^.]*$//')
+            echo "Building ${filename}.mrs from ${file}..."
+            ./mihomo convert-ruleset domain yaml "$file" "output/${filename}.mrs"
+          done
+
+      # 4. 发布到 release 分支
+      - name: Deploy to release branch
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./output
+          publish_branch: release
+          keep_files: false
+          force_orphan: true
