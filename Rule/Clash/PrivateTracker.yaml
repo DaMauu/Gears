@@ -680,6 +680,14 @@ payload:
   - DOMAIN-SUFFIX,zombtracker.the-zomb.com
   - DOMAIN-SUFFIX,zonaq.pw
   - DOMAIN-SUFFIX,ztracker.cc
+  - DOMAIN-SUFFIX,novahd.top
+  - DOMAIN-SUFFIX,dstudio.me
+  - DOMAIN-SUFFIX,xzt.me
+  - DOMAIN-SUFFIX,luckpt.de
+  - DOMAIN-SUFFIX,cangbao
+  - DOMAIN-SUFFIX,si-qi.xyz
+  
+
   
 # Indexer URL
   - DOMAIN-SUFFIX,digitalcarnage.info
