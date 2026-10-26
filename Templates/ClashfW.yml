@@ -1,198 +1,252 @@
-#Clash for windows by 大麻友友[DaMauu] 20240202
-#log：
-#1/排序策略 & 分流应对默认优先级....Done
+anchors:
+  # >>> 节点引用
+  hc: &hc {enable: true, url: 'https://www.gstatic.com/generate_204', interval: 600, timeout: 5000}
+  p: &p {type: http, interval: 86400, proxy: DIRECT, health-check: *hc}
 
-#port: 7890                                 # HTTP 代理端口
-#socks-port: 7890                           # Socks 端口
-#redir-port: 7890                           # Redir 端口
-mixed-port: 7890                            # 混合端口（HTTP、SOCKS5共用
-allow-lan: true                             # 允许局域网的连接（可用来共享代理）
-bind-address: "*"                           # 地址绑定（仅在将allow-lan设置为true时适用）
-mode: rule                                  # 规则模式
-log-level: info                             # 日志级别
-find-process-mode: strict                   #匹配所有进程（always/strict/off）
-ipv6: true                                  # IPV6开关
-external-controller: 0.0.0.0:9090           #外部控制器,可以使用 RESTful API控制clash 内核
-secret:  # RESTful API的密钥（可选）
-profile:
-  store-selected: true                      # 存储 select 选择记录
-  store-fake-ip: true                       # 持久化 fake-ip
-  
-sniffer:                                    # 嗅探域名 可选配置
+  # >>> 远程订阅
+  sub_exclude: &sub_exclude '群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author'
+
+  # >>> 策略选择
+  region_list: &region_list [DIRECT, 手动切换, 港澳台广, 美国入口, 狮城入口, 日本入口, 其他地区]
+  base: &base {interval: 600, lazy: true, url: 'https://www.gstatic.com/generate_204', timeout: 4000, max-failed-times: 3, use: [XMRTH, NANO]}
+  pg: &pg {type: select, proxies: *region_list}
+  sub: &sub {<<: *p, exclude-filter: *sub_exclude}
+  url-test: &url-test {<<: *base, type: url-test, tolerance: 50}
+  fallback: &fallback {<<: *base, type: fallback}
+  load-balance: &load-balance {<<: *base, type: load-balance, strategy: consistent-hashing, include-all: true}
+  select: &select {type: select, include-all: true}
+  base_no_use: &base_no_use {interval: 600, lazy: true, url: 'https://www.gstatic.com/generate_204', timeout: 4000, max-failed-times: 3}
+  exclude_all: &exclude_all "(?i)(中移|打机|高倍率|5x|10x|不想要的在这里排除)"
+
+  # >>> 图标
+  ic_manual:   &ic_manual   'https://cdn.jsdmirror.com/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/adjust.svg'
+  ic_direct:   &ic_direct   'https://cdn.jsdmirror.com/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/guard.svg'
+  ic_cnmedia:  &ic_cnmedia  'https://cdn.jsdmirror.com/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/tiktok.svg'
+  ic_intl:     &ic_intl     'https://cdn.jsdmirror.com/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/youtube.svg'
+  ic_google:   &ic_google   'https://cdn.jsdmirror.com/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/google.svg'
+  ic_telegram: &ic_telegram 'https://cdn.jsdmirror.com/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/telegram.svg'
+  ic_apple:    &ic_apple    'https://cdn.jsdmirror.com/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/apple.svg'
+  ic_ai:       &ic_ai       'https://cdn.jsdmirror.com/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/chatgpt.svg'
+  ic_global:   &ic_global   'https://cdn.jsdmirror.com/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/link.svg'
+  ic_hk:       &ic_hk       'https://cdn.jsdmirror.com/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/hk.svg'
+  ic_us:       &ic_us       'https://cdn.jsdmirror.com/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/us.svg'
+  ic_sg:       &ic_sg       'https://cdn.jsdmirror.com/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/sg.svg'
+  ic_jp:       &ic_jp       'https://cdn.jsdmirror.com/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/jp.svg'
+  ic_world:    &ic_world    'https://cdn.jsdmirror.com/gh/clash-verge-rev/clash-verge-rev.github.io@main/docs/assets/icons/flags/un.svg'
+
+  # >>> 地区关键词
+  filter_other_regions: &filter_other_regions "(?i)((?<![A-Za-z])(?:UK|DE|FR|NL|IT|ES|SE|NO|FI|DK|AT|CH|BE|CZ|PL|RO|IE|HU|GR|LU|BG|HR|SK|EE|LV|LT|KR|RU|MY)(?![A-Za-z])|意大利|澳大利亚|澳洲|法国|德国|英国|奥地利|比利时|保加利亚|克罗地亚|塞浦路斯|捷克|丹麦|爱沙尼亚|芬兰|希腊|匈牙利|爱尔兰|拉脱维亚|立陶宛|卢森堡|马耳他|荷兰|波兰|葡萄牙|罗马尼亚|斯洛伐克|斯洛文尼亚|西班牙|瑞典|瑞士|摩多瓦尔|摩尔多瓦|CDG|FRA|AMS|MAD|BCN|FCO|MUC|BRU|韩国|俄罗斯|马来)"
+
+  # >>> 规则集合
+  DomainMrs: &DomainMrs {type: http, interval: 86400, behavior: domain, format: mrs, proxy: 全球加速}
+  DomainText: &DomainText {type: http, interval: 86400, behavior: domain, format: text, proxy: 全球加速}
+  domainYaml: &domainYaml {type: http, interval: 86400, behavior: domain, format: yaml, proxy: 全球加速}
+  IPcidrMrs: &IPcidrMrs {type: http, interval: 86400, behavior: ipcidr, format: mrs, proxy: 全球加速}
+  IPcidrText: &IPcidrText {type: http, interval: 86400, behavior: ipcidr, format: text, proxy: 全球加速}
+  ClassicalText: &ClassicalText {type: http, interval: 86400, behavior: classical, format: text, proxy: 全球加速}
+  ClassicalYaml: &ClassicalYaml {type: http, interval: 86400, behavior: classical, format: yaml, proxy: 全球加速}
+
+proxy-providers: {
+  XMRTH: {url: '***, <<: *sub},
+  # DM:   {url: '***', <<: *sub},
+  # YY:   {url: '***', <<: *sub},
+  # WL:   {url: '***', <<: *sub},
+  NANO: {url: '***', <<: *sub},
+}
+
+# ============================================================
+# >>> 端口
+# ============================================================
+mixed-port: 4399
+socks-port: 4398
+port: 4397
+
+# >>> 局域网
+allow-lan: true
+bind-address: "*"
+lan-allowed-ips: [127.0.0.1/32, 192.168.0.0/16, 10.0.0.0/8, 172.16.0.0/12]
+lan-disallowed-ips: []
+authentication: []
+skip-auth-prefixes: [127.0.0.1/32]
+
+# >>> 内核
+mode: rule
+log-level: info
+ipv6: true
+tcp-concurrent: true
+unified-delay: true
+global-ua: clash.meta
+find-process-mode: strict
+enable-process: true
+disable-keep-alive: false
+keep-alive-interval: 15
+keep-alive-idle: 15
+profile: {store-selected: true, store-fake-ip: true}
+
+# >>> 控制面板
+external-controller: 127.0.0.1:9090
+external-controller-cors: {allow-origins: [https://metacubex.github.io, https://board.zash.run.place], allow-private-network: false}
+secret: f38a3a3e-da82-446b-8282-3099ad76de76
+
+# >>> GeoIP 数据
+geodata-mode: true
+geodata-loader: standard
+geo-auto-update: true
+geo-update-interval: 24
+geox-url: {geoip: 'https://cdn.jsdmirror.com/gh/MetaCubeX/meta-rules-dat@release/geoip-lite.dat', geosite: 'https://cdn.jsdmirror.com/gh/MetaCubeX/meta-rules-dat@release/geosite.dat', mmdb: 'https://cdn.jsdmirror.com/gh/MetaCubeX/meta-rules-dat@release/geoip.metadb', asn: 'https://cdn.jsdmirror.com/gh/MetaCubeX/meta-rules-dat@release/GeoLite2-ASN.mmdb'}
+
+# >>> DNS
+dns:
   enable: true
-  parse-pure-ip: true                       # 是否使用嗅探结果作为实际访问，默认 true
+  listen: 127.0.0.1:1053
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter-mode: blacklist
+  ipv6: false
+  ipv6-timeout: 600
+  prefer-h3: false
+  cache-algorithm: arc
+  respect-rules: false
+  use-hosts: false
+  use-system-hosts: false
+  default-nameserver: [223.5.5.5, 119.29.29.29]
+  nameserver: ['https://doh.pub/dns-query', 'https://dns.alidns.com/dns-query']
+  proxy-server-nameserver: ['https://doh.pub/dns-query', 'https://dns.alidns.com/dns-query']
+  direct-nameserver: [223.5.5.5, 119.29.29.29]
+  fake-ip-filter: ['*.lan', '*.local', '+.msftconnecttest.com', '+.msftncsi.com', 'time.*.com', 'ntp.*.com', '+.market.xiaomi.com', 'stun.*.*']
+  nameserver-policy:
+    'geosite:cn,private': ['https://doh.pub/dns-query', 'https://dns.alidns.com/dns-query']
+    'geosite:category-ads-all': 'rcode://success'
+
+# >>> 域名嗅探
+sniffer:
+  enable: true
+  parse-pure-ip: true
+  force-dns-mapping: true
+  override-destination: true
   sniff:
-    TLS:                                    # TLS 默认嗅探 443
-      ports: [443, 8443]
-    HTTP:
-      ports: [80, 8080-8880]
-      override-destination: true
-    QUIC:
-      ports: [443, 8443]
-      
-tun:                                        # Tun 配置
-  enable: false
-  stack: system                             # 可选： system/gvisor/mixed；tun 模式堆栈,如无使用问题,建议使用 system 栈;MacOS 用户推荐 gvisor栈
-                                            # system 使用系统协议栈,可以提供更稳定/全面的 tun 体验,且占用相对其他堆栈更低。 
-                                            # gvisor 通过在用户空间中实现网络协议栈,可以提供更高的安全性和隔离性,同时可以避免操作系统内核和用户空间之间的切换,从而在特定情况下具有更好的网络处理性能
-                                            # mixed 混合堆栈,tcp使用 system栈,udp使用 gvisor栈,使用体验可能相对更好
-  dns-hijack: [any:53]                      # dns劫持,一般设置为 any:53 即可, 即劫持所有53端口的udp流量
-# strict_route: true                        # 将所有连接路由到tun来防止泄漏，但你的设备将无法其他设备被访问
-  auto-route: false                         # 自动设置全局路由，可以自动将全局流量路由进入tun网卡。
-  auto-detect-interface: false              # 自动识别出口网卡
+    HTTP: {ports: [80, 443], override-destination: true}
+    TLS: {ports: [443]}
+    QUIC: {ports: [443]}
+  skip-domain: ['+.push.apple.com', '+.apple.com', '+.bilibili.com']
+  skip-dst-address: [91.105.192.0/23, 91.108.4.0/22, 91.108.8.0/21, 91.108.16.0/21, 91.108.56.0/22, 95.161.64.0/20, 149.154.160.0/20, 185.76.151.0/24, 2001:67c:4e8::/48, 2001:b28:f23c::/47, 2001:b28:f23f::/48, 2a0a:f280:203::/48, 127.0.0.0/8, 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16]
 
-dns:                                        # DNS 配置
-  enable: true                              # 关闭将使用系统 DNS
-  ipv6: true                                # IPV6解析开关；如果为false，将返回ipv6结果为空
-  listen: 0.0.0.0:53                        # DNS监听地址
-  enhanced-mode: fake-ip                    # 模式：redir-host或fake-ip
-  fake-ip-range: 198.18.0.1/16              # Fake IP 地址池 CIDR
-  fake-ip-filter:                           # 此列表中的主机名将不会使用 Fake IP 解析 即, 对这些域名的请求将始终使用其真实 IP 地址进行响应
-    - "*.lan"
-    - localhost.ptlogin2.qq.com
-    - +.srv.nintendo.net
-    - +.stun.playstation.net
-    - +.msftconnecttest.com
-    - +.msftncsi.com
-    - +.xboxlive.com
-    - msftconnecttest.com
-    - xbox.*.microsoft.com
-    - "*.battlenet.com.cn"
-    - "*.battlenet.com"
-    - "*.blzstatic.cn"
-    - "*.battle.net"
-  default-nameserver:                       # 这些域名服务器用于解析下面的DNS域名服务器主机名
-    - 1.1.1.1
-    - 119.29.29.29
-    - 223.5.5.5
-  nameserver:                               # 使用第一个收到的响应作为 DNS 查询的结果.所有查询都直接发送到名称服务器无需代理，支持指定端口
-    - https://doh.pub/dns-query
-    - https://120.53.53.53/dns-query
-    - https://dns.alidns.com/dns-query
-#  fallback:                                # 当存在fallback时DNS服务器将向fallback和nameserver并发请求，当GEOIP国家不是CN时将使用回退服务器的答案。
-#    - https://doh.pub/dns-query
-#    - https://120.53.53.53/dns-query
-#  fallback-filter:                         # 当`fallback-filter.geoip`为true，并且IP地址的GEOIP为`CN`时，使用`nameserver`中的服务器解析的IP地址。
-#    geoip: true
-#    geoip-code: CN
-#    ipcidr:
-#      - 240.0.0.0/4
+# >>> TUN 虚拟网卡
+tun: {enable: false, device: mihomo, stack: mixed, auto-route: true, auto-redirect: false, auto-detect-interface: true, dns-hijack: [any:53], route-exclude-address: [], mtu: 1500}
 
-# 通过特定的名称服务器查找域名
-# nameserver-policy:
-#   'www.baidu.com': '114.114.114.114'
-#   '+.internal.crop.com': '10.0.0.1'
-#========= 建立锚点 =========#
+proxy-groups: [
+  {name: 手动切换, type: select, proxies: [全球加速, 港澳台广, 美国入口, 狮城入口, 日本入口, 其他地区, DIRECT], icon: *ic_manual},
+  {name: 种子直连, <<: *pg, icon: *ic_direct},
+  {name: 国内媒体, <<: *pg, icon: *ic_cnmedia},
+  {name: 国际媒体, type: select, proxies: [港澳台广, 美国入口, 日本入口], icon: *ic_intl},
+  {name: 谷歌服务, <<: *url-test, filter: "(?i)((?<![A-Za-z])US(?![A-Za-z])|🇺🇸|🇨🇦|美西|美国|洛杉矶|圣何塞|United States|Canada|CaliforniaUS|ATT|DMIT|Toronto|Montreal|Halifax|山姆孙)", exclude-filter: *exclude_all, icon: *ic_google},
+  {name: 电报消息, <<: *url-test, url: 'https://cp.cloudflare.com/generate_204', timeout: 3000, filter: "(?i)((?<![A-Za-z])(?:HK|JP|SG)(?![A-Za-z])|香港|日本|新加坡|狮城)", exclude-filter: *exclude_all, icon: *ic_telegram},
+  {name: 苹果服务, <<: *pg, icon: *ic_apple},
+  {name: 人工智能, type: select, proxies: [美国入口, 日本入口, 狮城入口, 港澳台广], icon: *ic_ai},
+  {name: 全球加速, <<: *url-test, filter: "(?i)((?<![A-Za-z])(?:HK|TW|JP|SG|US)(?![A-Za-z])|🇭🇰|🇹🇼|🇯🇵|🇸🇬|🇺🇸|香港|台湾|日本|新加坡|美国)", exclude-filter: *exclude_all, icon: *ic_global},
+  {name: 港澳台广, <<: *url-test, filter: "(?i)((?<![A-Za-z])(?:HK|MO|TW)(?![A-Za-z])|🇭🇰|🇲🇴|🇹🇼|香港|澳门|台湾|广州|广东|Hong|Macau|Taipei|国内UHDNOW)", exclude-filter: *exclude_all, icon: *ic_hk},
+  {name: 美国入口, <<: *url-test, filter: "(?i)((?<![A-Za-z])US(?![A-Za-z])|🇺🇸|🇨🇦|美西|美国|洛杉矶|圣何塞|United States|Canada|CaliforniaUS|ATT|DMIT|Toronto|Montreal|Halifax|山姆孙)", exclude-filter: *exclude_all, icon: *ic_us},
+  {name: 狮城入口, <<: *url-test, filter: "(?i)((?<![A-Za-z])SG(?![A-Za-z])|🇸🇬|新加坡|狮城|Singapore)", exclude-filter: *exclude_all, icon: *ic_sg},
+  {name: 日本入口, <<: *url-test, filter: "(?i)((?<![A-Za-z])JP(?![A-Za-z])|🇯🇵|日本|东京|Japan|天皇|皇室)", exclude-filter: *exclude_all, icon: *ic_jp},
+  {name: 其他地区, <<: *url-test, filter: *filter_other_regions, exclude-filter: *exclude_all, icon: *ic_world},
+]
 
-# 策略组引用
-pr:   &a3 {type: select,   proxies: [DIRECT, 香港节点, 日本节点, 台湾节点, 美国节点, 狮城节点, 欧洲节点] }
-p:    &a1 {type: http,     interval: 86400,  health-check: {enable: true, url: http://www.gstatic.com/generate_204, interval: 3600} 
-auto: &a4 {type: url-test, lazy: true,  url: http://www.gstatic.com/generate_204, interval: 900, use: [订阅名字1, 订阅名字2, 订阅名字3] }
-use:  &a2 {type: select,   use: [订阅名字1, 订阅名字2, 订阅名字3, wyy] }
-c:    &a6 {type: http,     behavior: classical, interval: 86400}
-d:    &a5 {type: http,     behavior: domain,    interval: 86400}
-i:    &a7 {type: http,     behavior: ipcidr,    interval: 86400}
+rule-providers: {
+  PrivateTracker: {<<: *DomainMrs, url: 'https://cdn.jsdmirror.com/gh/DaMauu/Gears@release/PrivateTracker_domain.mrs'},
+  Download:       {<<: *DomainMrs, url: 'https://cdn.jsdmirror.com/gh/666OS/rules@release/mihomo/domain/Download.mrs'},
+  LocationDKS:    {<<: *DomainMrs, url: 'https://cdn.jsdmirror.com/gh/666OS/rules@release/mihomo/domain/LocationDKS.mrs'},
+  XPTV:           {<<: *DomainMrs, url: 'https://cdn.jsdmirror.com/gh/666OS/rules@release/mihomo/domain/XPTV.mrs'},
+  Direct:         {<<: *DomainMrs, url: 'https://cdn.jsdmirror.com/gh/666OS/rules@release/mihomo/domain/Direct.mrs'},
+  Emby:           {<<: *DomainMrs, url: 'https://cdn.jsdmirror.com/gh/666OS/rules@release/mihomo/domain/Emby.mrs'},
+  Speedtest:      {<<: *DomainMrs, url: 'https://cdn.jsdmirror.com/gh/666OS/rules@release/mihomo/domain/Speedtest.mrs'},
+  OpenAI:         {<<: *DomainMrs, url: 'https://cdn.jsdmirror.com/gh/666OS/rules@release/mihomo/domain/OpenAI.mrs'},
+  Telegram:       {<<: *DomainMrs, url: 'https://cdn.jsdmirror.com/gh/666OS/rules@release/mihomo/domain/Telegram.mrs'},
+  Telegram_ip:    {<<: *IPcidrMrs, url: 'https://cdn.jsdmirror.com/gh/666OS/rules@release/mihomo/ip/Telegram.mrs'},
+  Twitter:        {<<: *DomainMrs, url: 'https://cdn.jsdmirror.com/gh/666OS/rules@release/mihomo/domain/Twitter.mrs'},
+  Instagram:      {<<: *DomainMrs, url: 'https://cdn.jsdmirror.com/gh/666OS/rules@release/mihomo/domain/Instagram.mrs'},
+  YouTube:        {<<: *DomainMrs, url: 'https://cdn.jsdmirror.com/gh/666OS/rules@release/mihomo/domain/YouTube.mrs'},
+  Spotify:        {<<: *DomainMrs, url: 'https://cdn.jsdmirror.com/gh/666OS/rules@release/mihomo/domain/Spotify.mrs'},
+  Netflix:        {<<: *DomainMrs, url: 'https://cdn.jsdmirror.com/gh/666OS/rules@release/mihomo/domain/Netflix.mrs'},
+  Disney:         {<<: *DomainMrs, url: 'https://cdn.jsdmirror.com/gh/666OS/rules@release/mihomo/domain/Disney.mrs'},
+  HBO:            {<<: *DomainMrs, url: 'https://cdn.jsdmirror.com/gh/666OS/rules@release/mihomo/domain/HBO.mrs'},
+  TikTok:         {<<: *DomainMrs, url: 'https://cdn.jsdmirror.com/gh/666OS/rules@release/mihomo/domain/TikTok.mrs'},
+  GitHub:         {<<: *DomainMrs, url: 'https://cdn.jsdmirror.com/gh/666OS/rules@release/mihomo/domain/GitHub.mrs'},
+  OneDrive:       {<<: *DomainMrs, url: 'https://cdn.jsdmirror.com/gh/666OS/rules@release/mihomo/domain/OneDrive.mrs'},
+  Microsoft:      {<<: *DomainMrs, url: 'https://cdn.jsdmirror.com/gh/666OS/rules@release/mihomo/domain/Microsoft.mrs'},
+  Facebook:       {<<: *DomainMrs, url: 'https://cdn.jsdmirror.com/gh/666OS/rules@release/mihomo/domain/Facebook.mrs'},
+  Google:         {<<: *DomainMrs, url: 'https://cdn.jsdmirror.com/gh/666OS/rules@release/mihomo/domain/Google.mrs'},
+  AppleCN:        {<<: *DomainMrs, url: 'https://cdn.jsdmirror.com/gh/666OS/rules@release/mihomo/domain/AppleCN.mrs'},
+  Apple:          {<<: *DomainMrs, url: 'https://cdn.jsdmirror.com/gh/666OS/rules@release/mihomo/domain/Apple.mrs'},
+  PayPal:         {<<: *DomainMrs, url: 'https://cdn.jsdmirror.com/gh/666OS/rules@release/mihomo/domain/PayPal.mrs'},
+  ChinaMedia:     {<<: *ClassicalText, url: 'https://cdn.jsdmirror.com/gh/blackmatrix7/ios_rule_script@master/rule/Clash/ChinaMedia/ChinaMedia.list'},
+  China:          {<<: *DomainMrs, url: 'https://cdn.jsdmirror.com/gh/666OS/rules@release/mihomo/domain/China.mrs'},
+  ASN.China:      {<<: *ClassicalYaml, url: 'https://cdn.jsdmirror.com/gh/VirgilClyne/GetSomeFries@main/ruleset/ASN.China.yaml'},
+}
 
-proxy-providers:
-  订阅名字1:
-    <<: *a1
-    url: 订阅链接1
-    # URL后面填写格式1[单一订阅]: 直接填写你的机场Clash订阅[推荐此种方式，避免订阅泄露]
-    # URL后面填写格式2[多个订阅]：https://api.nexconvert.com/sub?target=clash&url=请手动填入你的订阅(多机场订阅用|分割即可)&emoji=true&list=true&new_name=true&udp=false
-    path: ./proxy_providers/订阅名字1.yaml
-    
-#  订阅名字2:
-#    <<: *a1
-#    url: 订阅链接2
-#    path: ./proxy_providers/订阅名字2.yaml
-    
-#  订阅名字3:
-#    <<: *a1
-#    url: 订阅链接3
-#    path: ./proxy_providers/订阅名字3.yaml
-
-  wyy:
-    <<: *a1
-    url: https://cdn.jsdelivr.net/gh/DaMauu/Gears@main/Package/Unblock/Node.txt
-    path: ./proxy_providers/wyy.yaml
-    
-proxies:
-
-proxy-groups:
-#节点分组
-  - {name: 网易音乐, <<: *a2, filter: "网易|音|(?i)乐"               	}
-  - {name: 国内媒体, <<: *a3}
-  - {name: 国际媒体, <<: *a3}
-  - {name: 谷歌服务, <<: *a2, filter: "^(?=.*(US|CA|MX|GL|BM|PR|KY|TC|AI|AG|AW|BS|BB|BZ|DM|DO|SV|GD|GT|HT|HN|JM|NI|PA|KN|LC|VC|PM|TT|SX|VG|VI|MQ|MS|PR|BL|MF|TC|AI|AW|美国|加拿大|墨西哥|格陵兰|百慕大|波多黎各|开曼群岛|特克斯和凯科斯群岛|安圭拉|安提瓜和巴布达|阿鲁巴|巴哈马|巴巴多斯|伯利兹|多米尼克|多米尼加共和国|萨尔瓦多|格林纳达|危地马拉|海地|洪都拉斯|牙买加|尼加拉瓜|巴拿马|圣基茨和尼维斯|圣卢西亚|圣文森特和格林纳丁斯|圣皮埃尔和密克隆群岛|特立尼达和多巴哥|荷属圣马丁|英属维尔京群岛|美属维尔京群岛|马提尼克|蒙塞拉特|波多黎各|圣巴泰勒米|圣马丁|特克斯和凯科斯群岛|安圭拉|阿鲁巴(?i)Music))^((?!(台|日|韩|新|香|TG|lL|ISP|HOME|VLESS)).)*$"           }
-  - {name: 种子直连, <<: *a3, filter: "^(?=.*(AL|AD|AR|AM|AT|AZ|BS|BH|BD|BB|BY|BE|BA|BG|BR|BE|BA|BG|HR|CY|CZ|DK|EE|FI|FR|DE|GR|HU|IS|IE|IT|XK|LV|LI|LT|LU|MK|MT|MD|MC|ME|NL|NO|PL|PT|RO|RU|SM|RS|SK|SI|AQ|AU|阿尔巴尼亚|安道尔|阿根廷|亚美尼亚|奥地利|阿塞拜疆|巴哈马|巴林|孟加拉国|巴巴多斯|白俄罗斯|比利时|波黑|保加利亚|巴西|比利时|波黑|保加利亚|克罗地亚|塞浦路斯|捷克|丹麦|爱沙尼亚|芬兰|法国|德国|希腊|匈牙利|冰岛|爱尔兰|意大利|科索沃|拉脱维亚|列支敦士登|立陶宛|卢森堡|北马其顿|马耳他|摩尔多瓦|摩纳哥|黑山|荷兰|挪威|波兰|葡萄牙|罗马尼亚|俄罗斯|圣马力诺|塞尔维亚|斯洛伐克|斯洛文尼亚|南极洲|澳大利亚(?i)Music))^((?!(台|日|韩|新|美|香|加TG|RES|港|HK|主|SG|TW|US|JP|MP|MY|HongKong|ISP|HOME|VLESS)).)*$"           }
-  - {name: 电报服务, <<: *a3, filter: "^(?=.*(CN|JP|KR|KP|MN|VN|LA|KH|MM|TH|MY|SG|ID|BN|PH|TL|AF|BH|BD|BT|IN|IR|IQ|IL|JO|KW|LB|OM|PK|PS|QA|SA|SY|AE|YE|中国|日本|韩国|朝鲜|蒙古|越南|老挝|柬埔寨|缅甸|泰国|马来西亚|新加坡|印尼|文莱|菲律宾|东帝汶|阿富汗|巴林|孟加拉国|不丹|印度|伊朗|伊拉克|以色列|约旦|科威特|黎巴嫩|阿曼|巴基斯坦|巴勒斯坦|卡塔尔|沙特阿拉伯|叙利亚|阿联酋|也门|(?i)Music))^((?!(俄罗斯|荷兰|英国|法国|GB|FR|NL|RU|TG|土|TR)).)*$"           }
-  - {name: 全球加速, <<: *a3, filter: "^(?=.*(香港|香|港|主|GG|MM|HK|hk(?i)HongKong))^((?!(俄罗斯|荷兰|英国|法国|GB|FR|NL|RU|TG|土|TR)).)*$"           }
-  - {name: 苹果服务, <<: *a3}
-  - {name: 黑白名单, <<: *a3}
-#节点分组
-  - {name: 香港节点, <<: *a4, filter: "港|HK|(?i)Hong"           }             # a4更改为a2，即为手动选择  
-  - {name: 台湾节点, <<: *a4, filter: "台|湾|TW|(?i)Taiwan"      }             # a4更改为a2，即为手动选择
-  - {name: 日本节点, <<: *a4, filter: "日|东京|JP|(?i)Japan"     }             # a4更改为a2，即为手动选择   
-  - {name: 狮城节点, <<: *a4, filter: "新|坡|SG|(?i)Singapore"    }            # a4更改为a2，即为手动选择
-  - {name: 美国节点, <<: *a4, filter: "美|US|(?i)States|American"}             # a4更改为a2，即为手动选择
-  - {name: 欧洲节点, <<: *a4, filter: "^(?=.*(AL|AD|AR|AM|AT|AZ|BS|BH|BD|BB|BY|BE|BA|BG|BR|BE|BA|BG|HR|CY|CZ|DK|EE|FI|FR|DE|GR|HU|IS|IE|IT|XK|LV|LI|LT|LU|MK|MT|MD|MC|ME|NL|NO|PL|PT|RO|RU|SM|RS|SK|SI|AQ|AU|阿尔巴尼亚|安道尔|阿根廷|亚美尼亚|奥地利|阿塞拜疆|巴哈马|巴林|孟加拉国|巴巴多斯|白俄罗斯|比利时|波黑|保加利亚|巴西|比利时|波黑|保加利亚|克罗地亚|塞浦路斯|捷克|丹麦|爱沙尼亚|芬兰|法国|德国|希腊|匈牙利|冰岛|爱尔兰|意大利|科索沃|拉脱维亚|列支敦士登|立陶宛|卢森堡|北马其顿|马耳他|摩尔多瓦|摩纳哥|黑山|荷兰|挪威|波兰|葡萄牙|罗马尼亚|俄罗斯|圣马力诺|塞尔维亚|斯洛伐克|斯洛文尼亚|南极洲|澳大利亚(?i)Music))^((?!(台|日|韩|新|美|香|加TG|RES|港|HK|主|SG|TW|US|JP|MP|MY|HongKong|ISP|HOME|VLESS)).)*$"    }            # a4更改为a2，即为手动选择
-  
-# 分流规则 
-rule-providers:
-#直连服务
-  Direct:			{<<: *a5, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Direct/Direct.yaml,						path: ./ruleset/Direct.yaml					}
-  Lan:				{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Lan/Lan.yaml,								path: ./ruleset/Lan.yaml					}
-  Download:			{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Download/Download.yaml,					path: ./ruleset/Download.yaml				}
-#屏蔽垃圾
-  Advertising:		{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Advertising/Advertising_Classical.yaml,	path: ./ruleset/Advertising_Classical.yaml	}
-#娱乐服务
-  NetEaseMusic:		{<<: *a6, url: https://raw.githubusercontent.com/DaMauu/Gears/main/Rule/Clash/NeteaseMusic.yaml,									path: ./ruleset/NetEaseMusic.yaml		    }
-  BiliBili:         {<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/BiliBili/BiliBili.yaml,                   path: ./ruleset/BiliBili.yaml               }
-  Bahamut:          {<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Bahamut/Bahamut.yaml,                     path: ./ruleset/Bahamut.yaml                } 
-  Spotify:			{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Spotify/Spotify.yaml,						path: ./ruleset/Spotify.yaml				}
-  GlobalMedia:		{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GlobalMedia/GlobalMedia_Classical.yaml,	path: ./ruleset/GlobalMedia.yaml			}
-#网络服务
-  Github:			{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GitHub/GitHub.yaml,						path: ./ruleset/Github.yaml					}
-  Google:			{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Google/Google.yaml,						path: ./ruleset/Google.yaml					}
-  Microsoft:		{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Microsoft/Microsoft.yaml,					path: ./ruleset/Microsoft.yaml				}
-  OpenAi:			{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/OpenAI/OpenAI.yaml,						path: ./ruleset/OpenAi.yaml					}
-  PayPal:           {<<: *a6, url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/PayPal/PayPal.yaml,                 path: ./ruleset/PayPal.yaml		        	}
-  PrivateTracker:	{<<: *a6, url: https://cdn.jsdelivr.net/gh/DaMauu/Gears@main/Rule/Clash/PrivateTracker.yaml,										path: ./ruleset/PrivateTracker.yaml		    }
-  Telegram:			{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Telegram/Telegram.yaml,					path: ./ruleset/Telegram.yaml				}
-  Twitter:			{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Twitter/Twitter.yaml,						path: ./ruleset/Twitter.yaml				}
-#加速服务
-  Global:			{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Global/Global_Classical.yaml,				path: ./ruleset/Global_Classical.yaml		}
-#基础服务
-  Apple:			{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Apple/Apple_Classical.yaml,				path: ./ruleset/Apple.yaml					}
-  ChinaMax:			{<<: *a6, url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/ChinaMax/ChinaMax_Classical.yaml,			path: ./ruleset/ChinaMax_Classical.yaml		}
-
- # 分流Policy 
-rules:
-  - RULE-SET,Direct,DIRECT
-  - RULE-SET,Lan,DIRECT
-  - RULE-SET,Download,DIRECT
-  - RULE-SET,Advertising,REJECT
-  - RULE-SET,NetEaseMusic,网易音乐
-  - RULE-SET,BiliBili,国内媒体
-  - RULE-SET,Bahamut,国内媒体
-  - RULE-SET,Spotify,国际媒体
-  - RULE-SET,GlobalMedia,国际媒体
-  - RULE-SET,Github,香港节点
-  - RULE-SET,Google,谷歌服务
-  - RULE-SET,Microsoft,香港节点
-  - RULE-SET,OpenAi,谷歌服务
-  - RULE-SET,PayPal,DIRECT
-  - RULE-SET,PrivateTracker,种子直连
-  - RULE-SET,Telegram,电报服务
-  - RULE-SET,Twitter,全球加速
-  - RULE-SET,Global,全球加速
-  - RULE-SET,Apple,DIRECT
-  - RULE-SET,ChinaMax,DIRECT
-  - GEOIP,CN,DIRECT
-  - MATCH,黑白名单
-
-# TUN模式是通过在操作系统上安装一个虚拟网卡来实现的，它可以接管所有的网络流量，并将流量转发至Clash，然后由Clash发出请求
-# Windows 系统中如何启用TUN模式
-# 1、运行 Clash For Windows, 确保使用规则模式，并可以联网
-# 2、点击 General中的Service Mode右侧的Manage按钮，在弹出窗口中选择schtasks，安装服务模式。安装完成后，应用程序会自动重启，Service Mode右侧的地球图标变为绿色表示安装成功
-# 3、点击 General中的TUN Mode右侧的开关以启动TUN模式
+rules: [
+  "DOMAIN-SUFFIX,developers.anghami.com,手动切换",
+  "DOMAIN-SUFFIX,vw.oidm.de,DIRECT",
+  "DOMAIN-SUFFIX,chatgpt.com,人工智能",
+  "DOMAIN-SUFFIX,avistaz.to,日本入口",
+  "DOMAIN-SUFFIX,star-space.net,日本入口",
+  "DOMAIN-SUFFIX,dmm.com,日本入口",
+  "DOMAIN-SUFFIX,reddit.com,日本入口",
+  "DOMAIN-SUFFIX,crabpt.vip,日本入口",
+  "DOMAIN-SUFFIX,agsvpt.com,其他地区",
+  "DOMAIN-SUFFIX,byr.pt,其他地区",
+  "DOMAIN-SUFFIX,club.tgfcer.com,其他地区",
+  "DOMAIN-SUFFIX,empornium.is,其他地区",
+  "DOMAIN-SUFFIX,empornium.sx,其他地区",
+  "DOMAIN-SUFFIX,hudbt.hust.edu.cn,其他地区",
+  "DOMAIN-SUFFIX,oaiusercontent.com,人工智能",
+  "DOMAIN-SUFFIX,pwtorrents.net,其他地区",
+  "DOMAIN-SUFFIX,rutracker.org,其他地区",
+  "DOMAIN-SUFFIX,shadowflow.org,其他地区",
+  "DOMAIN-SUFFIX,sharkpt.net,其他地区",
+  "DOMAIN-SUFFIX,xtremewrestlingtorrents.net,其他地区",
+  "DOMAIN-SUFFIX,xwt-classics.net,其他地区",
+  "DOMAIN-SUFFIX,zhuque.in,其他地区",
+  "DOMAIN-SUFFIX,fsm.name,港澳台广",
+  "DOMAIN-SUFFIX,u2.dmhy.org,港澳台广",
+  "DOMAIN-SUFFIX,idama.top,港澳台广",
+  "DOMAIN-SUFFIX,qobuz.com,手动切换",
+  "DOMAIN-SUFFIX,streaming-qobuz-std.akamaized.net,手动切换",
+  "DOMAIN-SUFFIX,oaistatic.com,人工智能",
+  "DOMAIN-SUFFIX,binance.com,全球加速",
+  "DOMAIN-SUFFIX,bnbstatic.com,全球加速",
+  "DST-PORT,123,DIRECT",
+  "DOMAIN-SUFFIX,imee.me,DIRECT",
+  "RULE-SET,Direct,DIRECT",
+  "RULE-SET,PrivateTracker,种子直连",
+  "RULE-SET,ChinaMedia,国内媒体",
+  "RULE-SET,XPTV,DIRECT",
+  "RULE-SET,LocationDKS,REJECT",
+  "RULE-SET,Speedtest,DIRECT",
+  "RULE-SET,OpenAI,人工智能",
+  "RULE-SET,Telegram,电报消息",
+  "RULE-SET,Telegram_ip,电报消息",
+  "RULE-SET,Twitter,美国入口",
+  "RULE-SET,Emby,国际媒体",
+  "RULE-SET,YouTube,国际媒体",
+  "RULE-SET,Spotify,国际媒体",
+  "RULE-SET,Netflix,国际媒体",
+  "RULE-SET,Disney,国际媒体",
+  "RULE-SET,HBO,国际媒体",
+  "RULE-SET,TikTok,国际媒体",
+  "RULE-SET,GitHub,全球加速",
+  "RULE-SET,OneDrive,美国入口",
+  "RULE-SET,Microsoft,美国入口",
+  "RULE-SET,Instagram,美国入口",
+  "RULE-SET,Facebook,美国入口",
+  "RULE-SET,Google,谷歌服务",
+  "RULE-SET,AppleCN,DIRECT",
+  "RULE-SET,Apple,苹果服务",
+  "RULE-SET,PayPal,美国入口",
+  "RULE-SET,Download,DIRECT",
+  "RULE-SET,China,DIRECT",
+  "IP-CIDR,223.5.5.5/32,DIRECT,no-resolve",
+  "IP-CIDR,119.29.29.29/32,DIRECT,no-resolve",
+  "IP-CIDR,180.76.76.76/32,DIRECT,no-resolve",
+  "RULE-SET,ASN.China,DIRECT",
+  "MATCH,手动切换",
+]
